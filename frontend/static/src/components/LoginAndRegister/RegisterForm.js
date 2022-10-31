@@ -24,7 +24,7 @@ function RegisterForm({ superState, setSuperState }) {
   };
 
   const checkSamePass = (e) => {
-    if (user.password1 !== user.password2) {
+    if (state.password1 !== state.password2) {
       alert("Please enter matching passwords.");
       return;
     } else {
@@ -63,7 +63,7 @@ function RegisterForm({ superState, setSuperState }) {
             type="text"
             placeholder="Enter username"
             name="username"
-            value={user.username}
+            value={state.username}
             onChange={handleInput}
           />
         </Form.Group>
@@ -73,7 +73,7 @@ function RegisterForm({ superState, setSuperState }) {
             type="email"
             placeholder="Enter email"
             name="email"
-            value={user.email}
+            value={state.email}
             onChange={handleInput}
           />
         </Form.Group>
@@ -83,7 +83,7 @@ function RegisterForm({ superState, setSuperState }) {
             type="password"
             placeholder="Enter password"
             name="password1"
-            value={user.password1}
+            value={state.password1}
             onChange={handleInput}
           />
         </Form.Group>
@@ -92,7 +92,7 @@ function RegisterForm({ superState, setSuperState }) {
             type="password"
             placeholder="Enter password again"
             name="password2"
-            value={user.password2}
+            value={state.password2}
             onChange={handleInput}
           />
         </Form.Group>

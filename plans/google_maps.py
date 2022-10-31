@@ -7,8 +7,7 @@ import urllib.parse
 import requests
 
 
-# api_key = os.environ['GOOGLE_KEY']
-api_key = 'AIzaSyB2QnviN7Mkr0OtmCd7TPrqy38DMiniWUA'
+api_key = os.environ['GOOGLE_API_KEY']
 
 origin = '29687'
 destinations = ['Charlotte, NC', '101 Woodruff Industrial Lane Greenville, SC 29607',
