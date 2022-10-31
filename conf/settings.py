@@ -200,3 +200,9 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#email-backend
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Token Serializer
+
+REST_AUTH_SERIALIZERS = {
+    'TOKEN_SERIALIZER': 'accounts.serializers.TokenSerializer',
+}
