@@ -1,0 +1,45 @@
+View Trainers
+'As an user (auth or no) I should be able to browse trainers without loging in'
+
+View Profiles
+'As a user (auth or no) I can view a trainers profile in detail and see info about them and posts they make to their account'
+
+Create Account 
+'As both a trainer and client I should be able to create an account and specify whether or not I am a trainer or client'
+
+Create Profile 
+'After creating account I should be taken to create my profile depending on whether or not I am a Client or Trainer'
+    Client:
+        - profile picture
+        - first / last name
+    Trainer:
+        - profile picture
+        - first / last name
+        - credentials
+        - about 
+        - training type
+        - offerings
+        - ? answer questions to provide more personalized training ? - differentiate from others
+
+Log In
+'As a trainer or client I can log in to my created account using my username and password'
+
+View and Edit my Account
+'As a user (specifically trainer) I can view my profile and edit information as needed'
+
+Make posts to be seen on my account
+'As a trainer I can make update or offering posts on my account to be seen by users when they view my account'
+
+Delete posts
+'As a trainer I can delete posts as needed'
+
+Leave reviews on Trainers
+'As a client I should be able to leave a review on specific trainers accounts'
+
+View and Remove reviews
+'As a client I should be able to see all my reviews in one place and delete them if i want'
+
+Bookmark a trainer 
+'As a client I should be able to save a trainer to bookmarks if I want to come back to them later and view all those bookmarks in one place'
+
+
