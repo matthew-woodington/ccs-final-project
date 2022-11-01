@@ -13,6 +13,8 @@ class TokenSerializer(serializers.ModelSerializer):
 
 
 class TrainerProfileSerializer(serializers.ModelSerializer):
+    date_joined = serializers.ReadOnlyField(source='user.date_joined')
+
     class Meta:
         model = TrainerProfile
         fields = '__all__'

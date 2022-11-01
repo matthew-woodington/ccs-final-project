@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
 
-function Header({ appState, logoutUser }) {
+function Header({ userState, logoutUser }) {
   const navigate = useNavigate();
 
   const logout = (e) => {
@@ -18,12 +18,12 @@ function Header({ appState, logoutUser }) {
           <Navbar.Brand href="/">App Logo</Navbar.Brand>
           <div id="basic-navbar-nav">
             <Nav className="me-auto">
-              {!appState.auth && (
+              {!userState.auth && (
                 <>
                   <Nav.Link href="/login">Login</Nav.Link>
                 </>
               )}
-              {appState.auth && (
+              {userState.auth && (
                 <>
                   <Nav.Link href="/" onClick={(e) => logout(e)}>
                     Logout

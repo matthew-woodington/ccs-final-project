@@ -17,22 +17,22 @@ const INITIAL_STATE = {
 };
 
 function App() {
-  const [appState, setAppState] = useState(INITIAL_STATE);
+  const [userState, setUserState] = useState(INITIAL_STATE);
 
   const newState = JSON.parse(window.localStorage.getItem("superState"));
 
   useEffect(() => {
-    window.localStorage.setItem("superState", JSON.stringify(appState));
-  }, [appState]);
+    window.localStorage.setItem("superState", JSON.stringify(userState));
+  }, [userState]);
 
   useEffect(() => {
     const checkAuth = async () => {
       const response = await fetch("/dj-rest-auth/user/");
       if (!response.ok) {
         console.log("this", response.ok);
-        // setAppState(INITIAL_STATE);
+        // setUserState(INITIAL_STATE);
       } else {
-        setAppState(newState);
+        setUserState(newState);
       }
     };
     checkAuth();
@@ -54,7 +54,7 @@ function App() {
     } else {
       Cookies.remove("Authorization");
       window.localStorage.removeItem("superState");
-      setAppState(INITIAL_STATE);
+      setUserState(INITIAL_STATE);
     }
   };
 
@@ -62,18 +62,18 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout appState={appState} logoutUser={logoutUser} />}>
+          <Route path="/" element={<Layout userState={userState} logoutUser={logoutUser} />}>
             <Route index element={<Home />} />
             <Route path="create-trainer-profile" element={<TrainerProfileCreate />} />
             <Route path="create-client-profile" element={<ClientProfileCreate />} />
           </Route>
           <Route
             path="login"
-            element={<LoginForm appState={appState} setAppState={setAppState} />}
+            element={<LoginForm userState={userState} setUserState={setUserState} />}
           />
           <Route
             path="register"
-            element={<RegisterForm appState={appState} setAppState={setAppState} />}
+            element={<RegisterForm userState={userState} setUserState={setUserState} />}
           />
         </Routes>
       </BrowserRouter>

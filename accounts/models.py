@@ -18,13 +18,13 @@ class TrainerProfile(models.Model):
     last_name = models.CharField(max_length=225, null=True)
     certs = models.CharField(max_length=225, null=True)
     specialties = models.CharField(max_length=225, null=True)
+    location = models.CharField(max_length=225, null=True)
     bio = models.TextField(null=True)
     email = models.EmailField(max_length=225, null=True)
     instagram = models.CharField(max_length=225, null=True)
     twitter = models.CharField(max_length=225, null=True)
     facebook = models.CharField(max_length=225, null=True)
     personal_site = models.URLField(max_length=225, null=True)
-    joined_on = models.DateTimeField(auto_now_add=True, null=True)
 
 
 class ClientProfile(models.Model):
