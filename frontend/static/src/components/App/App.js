@@ -7,6 +7,8 @@ import Home from "../Home/Home";
 import RegisterForm from "../LoginAndRegister/RegisterForm";
 import Cookies from "js-cookie";
 import { handleError } from "../../re-usable-func";
+import TrainerProfileCreate from "../Profiles/TrainerProfileCreate";
+import ClientProfileCreate from "../Profiles/ClientProfileCreate";
 
 const INITIAL_STATE = {
   auth: false,
@@ -15,22 +17,22 @@ const INITIAL_STATE = {
 };
 
 function App() {
-  const [superState, setSuperState] = useState(INITIAL_STATE);
+  const [appState, setAppState] = useState(INITIAL_STATE);
 
   const newState = JSON.parse(window.localStorage.getItem("superState"));
 
   useEffect(() => {
-    window.localStorage.setItem("superState", JSON.stringify(superState));
-  }, [superState]);
+    window.localStorage.setItem("superState", JSON.stringify(appState));
+  }, [appState]);
 
   useEffect(() => {
     const checkAuth = async () => {
       const response = await fetch("/dj-rest-auth/user/");
       if (!response.ok) {
         console.log("this", response.ok);
-        setSuperState(INITIAL_STATE);
+        // setAppState(INITIAL_STATE);
       } else {
-        setSuperState(newState);
+        setAppState(newState);
       }
     };
     checkAuth();
@@ -52,7 +54,7 @@ function App() {
     } else {
       Cookies.remove("Authorization");
       window.localStorage.removeItem("superState");
-      setSuperState(INITIAL_STATE);
+      setAppState(INITIAL_STATE);
     }
   };
 
@@ -60,16 +62,18 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout superState={superState} logoutUser={logoutUser} />}>
+          <Route path="/" element={<Layout appState={appState} logoutUser={logoutUser} />}>
             <Route index element={<Home />} />
+            <Route path="create-trainer-profile" element={<TrainerProfileCreate />} />
+            <Route path="create-client-profile" element={<ClientProfileCreate />} />
           </Route>
           <Route
             path="login"
-            element={<LoginForm superState={superState} setSuperState={setSuperState} />}
+            element={<LoginForm appState={appState} setAppState={setAppState} />}
           />
           <Route
             path="register"
-            element={<RegisterForm superState={superState} setSuperState={setSuperState} />}
+            element={<RegisterForm appState={appState} setAppState={setAppState} />}
           />
         </Routes>
       </BrowserRouter>

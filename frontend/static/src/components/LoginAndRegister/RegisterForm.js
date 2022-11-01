@@ -5,13 +5,14 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { handleError } from "../../re-usable-func";
 
-function RegisterForm({ superState, setSuperState }) {
+function RegisterForm({ appState, setAppState }) {
   const [state, setState] = useState({
     username: "",
     email: "",
     password1: "",
     password2: "",
   });
+  const [userType, setUserType] = useState();
 
   const navigate = useNavigate();
 
@@ -48,8 +49,13 @@ function RegisterForm({ superState, setSuperState }) {
     } else {
       const data = await response.json();
       Cookies.set("Authorization", `Token ${data.key}`);
-      navigate("/");
-      setSuperState({ ...superState, auth: true, admin: data.is_superuser, userID: data.id });
+      // navigate("/");
+      setAppState({ ...appState, auth: true, admin: data.is_superuser, userID: data.id });
+      if (userType === "trainer") {
+        navigate("/create-trainer-profile");
+      } else if (userType === "client") {
+        navigate("/create-client-profile");
+      }
     }
   };
 
@@ -94,6 +100,27 @@ function RegisterForm({ superState, setSuperState }) {
             name="password2"
             value={state.password2}
             onChange={handleInput}
+          />
+        </Form.Group>
+        <p>Are you registering as a Trainer or Client?</p>
+        <Form.Group className="mb-3" controlId="trainer-check">
+          <Form.Check
+            required
+            type="radio"
+            name="user-type"
+            value="trainer"
+            label="Trainer"
+            onChange={(e) => setUserType(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="client-check">
+          <Form.Check
+            required
+            type="radio"
+            name="user-type"
+            value="client"
+            label="Client"
+            onChange={(e) => setUserType(e.target.value)}
           />
         </Form.Group>
         <div>

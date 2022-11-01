@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
 import Header from "../Header/Header";
 
-function Layout({ superState, logoutUser }) {
+function Layout({ appState, logoutUser }) {
   return (
     <>
-      <Header superState={superState} logoutUser={logoutUser} />
+      <Header appState={appState} logoutUser={logoutUser} />
       <Outlet />
     </>
   );

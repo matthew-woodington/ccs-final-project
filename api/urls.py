@@ -3,6 +3,5 @@ from django.urls import path, include
 app_name = 'api_v1'
 
 urlpatterns = [
-    # path('', include('accounts.urls'), namespace='accounts'),
-    path('', include('profiles.urls', namespace='profiles')),
+    path('', include('accounts.urls', namespace='accounts')),
 ]
