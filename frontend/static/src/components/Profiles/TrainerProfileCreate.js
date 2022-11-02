@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import { handleError } from "../../re-usable-func";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import defaultProfileImage from "../../Images/default-profile.jpg";
 
 const INITIAL_TRAINER_PROFILE_STATE = {
   avatar: null,
@@ -12,6 +13,7 @@ const INITIAL_TRAINER_PROFILE_STATE = {
   last_name: "",
   certs: "",
   specialties: "",
+  business: "",
   location: "",
   bio: "",
   email: "",
@@ -23,7 +25,7 @@ const INITIAL_TRAINER_PROFILE_STATE = {
 
 function TrainerProfileCreate() {
   const [state, setState] = useState(INITIAL_TRAINER_PROFILE_STATE);
-  const [preview, setPreview] = useState();
+  const [preview, setPreview] = useState(defaultProfileImage);
 
   const navigate = useNavigate();
 
@@ -59,6 +61,7 @@ function TrainerProfileCreate() {
     formData.append("last_name", state.last_name);
     formData.append("certs", state.certs);
     formData.append("specialties", state.specialties);
+    formData.append("business", state.business);
     formData.append("location", state.location);
     formData.append("bio", state.bio);
     formData.append("email", state.email);
@@ -90,7 +93,8 @@ function TrainerProfileCreate() {
       <Form onSubmit={handleSubmit}>
         <h1>Create Profile</h1>
         <div className="image-container">
-          {state.avatar && <img className="form-image" src={preview} alt="" />}
+          <img className="form-image" src={preview} alt="" />
+          {/* {state.avatar && <img className="form-image" src={preview} alt="" />} */}
         </div>
         <Form.Group className="mb-3" controlId="image">
           <Form.Label>Choose a profile picture</Form.Label>
@@ -141,6 +145,18 @@ function TrainerProfileCreate() {
             type="text"
             name="specialties"
             value={state.specialties}
+            onChange={handleInput}
+          />
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label>Business affiliation or private</Form.Label>
+          <Form.Control
+            required
+            placeholder="e.g. private OR company name..."
+            type="text"
+            name="business"
+            value={state.business}
             onChange={handleInput}
           />
         </Form.Group>

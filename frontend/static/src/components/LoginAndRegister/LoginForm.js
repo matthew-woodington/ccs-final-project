@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import { handleError } from "../../re-usable-func";
 import { useNavigate, Link } from "react-router-dom";
 
-function LoginForm({ appState, setAppState }) {
+function LoginForm({ userState, setUserState }) {
   const [state, setState] = useState({
     username: "",
     password: "",
@@ -39,8 +39,8 @@ function LoginForm({ appState, setAppState }) {
       Cookies.set("Authorization", `Token ${data.key}`);
       // console.log(data);
       navigate("/");
-      setAppState({
-        ...appState,
+      setUserState({
+        ...userState,
         auth: true,
         admin: data.is_superuser,
         userID: data.id,

@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { handleError } from "../../re-usable-func";
 
-function RegisterForm({ appState, setAppState }) {
+function RegisterForm({ userState, setUserState }) {
   const [state, setState] = useState({
     username: "",
     email: "",
@@ -50,7 +50,7 @@ function RegisterForm({ appState, setAppState }) {
       const data = await response.json();
       Cookies.set("Authorization", `Token ${data.key}`);
       // navigate("/");
-      setAppState({ ...appState, auth: true, admin: data.is_superuser, userID: data.id });
+      setUserState({ ...userState, auth: true, admin: data.is_superuser, userID: data.id });
       if (userType === "trainer") {
         navigate("/create-trainer-profile");
       } else if (userType === "client") {

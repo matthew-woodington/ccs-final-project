@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import { handleError } from "../../re-usable-func";
 import TrainerProfileCreate from "../Profiles/TrainerProfileCreate";
 import ClientProfileCreate from "../Profiles/ClientProfileCreate";
+import TrainerDetailView from "../Home/TrainerDetailView";
 
 const INITIAL_STATE = {
   auth: false,
@@ -19,10 +20,10 @@ const INITIAL_STATE = {
 function App() {
   const [userState, setUserState] = useState(INITIAL_STATE);
 
-  const newState = JSON.parse(window.localStorage.getItem("superState"));
+  const newState = JSON.parse(window.localStorage.getItem("userState"));
 
   useEffect(() => {
-    window.localStorage.setItem("superState", JSON.stringify(userState));
+    window.localStorage.setItem("userState", JSON.stringify(userState));
   }, [userState]);
 
   useEffect(() => {
@@ -53,7 +54,7 @@ function App() {
       throw new Error("Network response was not OK");
     } else {
       Cookies.remove("Authorization");
-      window.localStorage.removeItem("superState");
+      window.localStorage.removeItem("userState");
       setUserState(INITIAL_STATE);
     }
   };
@@ -64,6 +65,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout userState={userState} logoutUser={logoutUser} />}>
             <Route index element={<Home />} />
+            <Route path="trainer/:id/*" element={<TrainerDetailView />} />
             <Route path="create-trainer-profile" element={<TrainerProfileCreate />} />
             <Route path="create-client-profile" element={<ClientProfileCreate />} />
           </Route>

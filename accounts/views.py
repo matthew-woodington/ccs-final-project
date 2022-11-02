@@ -9,8 +9,14 @@ from .permissions import IsUserOrReadOnly
 
 class TrainerProfileListAPIView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = TrainerProfile.objects.all()
+    # queryset = TrainerProfile.objects.all()
     serializer_class = TrainerProfileSerializer
+
+    def get_queryset(self):
+        return TrainerProfile.objects.filter(is_verified=True)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 class TrainerProfileDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
