@@ -27,7 +27,7 @@ function Home() {
   return (
     <>
       <div>
-        <ul>{trainerProfileList}</ul>
+        <ul className="list">{trainerProfileList}</ul>
       </div>
     </>
   );

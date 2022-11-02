@@ -1,0 +1,21 @@
+.profile-image-container {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 1px solid #212529;
+    overflow: hidden;
+    background-color: #bbb;
+}
+
+.profile-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+.profile-view {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
