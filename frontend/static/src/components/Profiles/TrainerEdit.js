@@ -52,20 +52,6 @@ function TrainerEdit({ myProfile }) {
       }
     }
 
-    // formData.append("first_name", state.first_name);
-    // formData.append("last_name", state.last_name);
-    // formData.append("certs", state.certs);
-    // formData.append("specialties", state.specialties);
-    // formData.append("training_type", state.training_type);
-    // formData.append("business", state.business);
-    // formData.append("location", state.location);
-    // formData.append("bio", state.bio);
-    // formData.append("email", state.email);
-    // formData.append("instagram", state.instagram);
-    // formData.append("twitter", state.twitter);
-    // formData.append("facebook", state.facebook);
-    // formData.append("personal_site", state.personal_site);
-
     const options = {
       method: "PATCH",
       headers: {

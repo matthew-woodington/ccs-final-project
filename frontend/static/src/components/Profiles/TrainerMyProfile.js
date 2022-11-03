@@ -7,7 +7,6 @@ function TrainerMyProfile({ userState }) {
 
   useEffect(() => {
     const getMyProfile = async (id) => {
-      console.log("id", userState);
       const response = await fetch(`/api/v1/profiles/trainers/${id}/`).catch(handleError);
       if (!response.ok) {
         throw new Error("Network response was not ok!");

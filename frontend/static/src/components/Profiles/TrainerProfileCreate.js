@@ -1,12 +1,15 @@
 import "../../styles/Form.css";
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
+// import Button from "react-bootstrap/Button";
+// import Form from "react-bootstrap/Form";
+// import InputGroup from "react-bootstrap/InputGroup";
 import { handleError } from "../../re-usable-func";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import defaultProfileImage from "../../Images/default-profile.jpg";
+import PersonalInfoForm from "./ProfileForm/Personalnfo";
+import ProfessionalInfoForm from "./ProfileForm/ProfessionalInfo";
+import SocialsForm from "./ProfileForm/Socials";
 
 const INITIAL_TRAINER_PROFILE_STATE = {
   avatar: null,
@@ -25,9 +28,10 @@ const INITIAL_TRAINER_PROFILE_STATE = {
   personal_site: "",
 };
 
-function TrainerProfileCreate() {
+function TrainerProfileCreate({ userState, setUserState }) {
   const [state, setState] = useState(INITIAL_TRAINER_PROFILE_STATE);
   const [preview, setPreview] = useState(defaultProfileImage);
+  const [step, setStep] = useState(1);
 
   const navigate = useNavigate();
 
@@ -64,21 +68,6 @@ function TrainerProfileCreate() {
       }
     }
 
-    // formData.append("avatar", state.avatar);
-    // formData.append("first_name", state.first_name);
-    // formData.append("last_name", state.last_name);
-    // formData.append("certs", state.certs);
-    // formData.append("specialties", state.specialties);
-    // formData.append("training_type", state.training_type);
-    // formData.append("business", state.business);
-    // formData.append("location", state.location);
-    // formData.append("bio", state.bio);
-    // formData.append("email", state.email);
-    // formData.append("instagram", state.instagram);
-    // formData.append("twitter", state.twitter);
-    // formData.append("facebook", state.facebook);
-    // formData.append("personal_site", state.personal_site);
-
     const options = {
       method: "POST",
       headers: {
@@ -93,203 +82,247 @@ function TrainerProfileCreate() {
       const data = await response.json();
       console.log(data);
       setState(INITIAL_TRAINER_PROFILE_STATE);
+      setUserState({
+        ...userState,
+        trainer_avatar: data.avatar,
+        trainer_profile: data.id,
+      });
       navigate("/");
     }
   };
 
-  return (
-    <>
-      <Form onSubmit={handleSubmit}>
-        <h1>Create Profile</h1>
-        <div className="image-container">
-          <img className="form-image" src={preview} alt="" />
-          {/* {state.avatar && <img className="form-image" src={preview} alt="" />} */}
-        </div>
-        <Form.Group className="mb-3" controlId="image">
-          <Form.Label>Choose a profile picture</Form.Label>
-          <Form.Control required type="file" name="avatar" onChange={handleImage} />
-        </Form.Group>
+  const nextStep = () => {
+    setStep(step + 1);
+  };
 
-        <Form.Group className="mb-3" controlId="first-name">
-          <Form.Label>First name</Form.Label>
-          <Form.Control
-            required
-            placeholder="First name..."
-            type="text"
-            name="first_name"
-            value={state.first_name}
-            onChange={handleInput}
-          />
-        </Form.Group>
+  const lastStep = () => {
+    setStep(step - 1);
+  };
 
-        <Form.Group className="mb-3" controlId="last-name">
-          <Form.Label>Last name</Form.Label>
-          <Form.Control
-            required
-            placeholder="Last name..."
-            type="text"
-            name="last_name"
-            value={state.last_name}
-            onChange={handleInput}
-          />
-        </Form.Group>
+  switch (step) {
+    case 1:
+      return (
+        <PersonalInfoForm
+          state={state}
+          preview={preview}
+          handleInput={handleInput}
+          handleImage={handleImage}
+          nextStep={nextStep}
+        />
+      );
+    case 2:
+      return (
+        <ProfessionalInfoForm
+          state={state}
+          handleInput={handleInput}
+          nextStep={nextStep}
+          lastStep={lastStep}
+        />
+      );
+    case 3:
+      return (
+        <SocialsForm
+          state={state}
+          handleInput={handleInput}
+          handleSubmit={handleSubmit}
+          lastStep={lastStep}
+        />
+      );
+  }
 
-        <Form.Group className="mb-3" controlId="certs">
-          <Form.Label>Enter all certifications</Form.Label>
-          <Form.Control
-            required
-            placeholder="e.g. CSCS, NASM..."
-            type="text"
-            name="certs"
-            value={state.certs}
-            onChange={handleInput}
-          />
-        </Form.Group>
+  // return (
+  //   <>
+  //     <Form onSubmit={handleSubmit}>
+  //       <h1>Create Profile</h1>
+  //       <div className="image-container">
+  //         <img className="form-image" src={preview} alt="" />
+  //         {/* {state.avatar && <img className="form-image" src={preview} alt="" />} */}
+  //       </div>
+  //       <Form.Group className="mb-3" controlId="image">
+  //         <Form.Label>Choose a profile picture</Form.Label>
+  //         <Form.Control required type="file" name="avatar" onChange={handleImage} />
+  //       </Form.Group>
 
-        <Form.Group className="mb-3" controlId="specialties">
-          <Form.Label>Enter training specializations</Form.Label>
-          <Form.Control
-            required
-            placeholder="e.g. sports, weight loss, nutrition..."
-            type="text"
-            name="specialties"
-            value={state.specialties}
-            onChange={handleInput}
-          />
-        </Form.Group>
+  //       <Form.Group className="mb-3" controlId="first-name">
+  //         <Form.Label>First name</Form.Label>
+  //         <Form.Control
+  //           required
+  //           placeholder="First name..."
+  //           type="text"
+  //           name="first_name"
+  //           value={state.first_name}
+  //           onChange={handleInput}
+  //         />
+  //       </Form.Group>
 
-        <Form.Group className="mb-3" controlId="training-type">
-          <Form.Label>Availablity</Form.Label>
-          <Form.Select
-            required
-            name="training_type"
-            placeholder="Select an Option"
-            value={state.training_type}
-            onChange={handleInput}
-          >
-            <option>Select an Option</option>
-            <option value="In Person">In Person</option>
-            <option value="Online">Online</option>
-            <option value="In Person & Online">In Person & Online</option>
-          </Form.Select>
-        </Form.Group>
+  //       <Form.Group className="mb-3" controlId="last-name">
+  //         <Form.Label>Last name</Form.Label>
+  //         <Form.Control
+  //           required
+  //           placeholder="Last name..."
+  //           type="text"
+  //           name="last_name"
+  //           value={state.last_name}
+  //           onChange={handleInput}
+  //         />
+  //       </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Business affiliation or private</Form.Label>
-          <Form.Control
-            required
-            placeholder="e.g. private OR company name..."
-            type="text"
-            name="business"
-            value={state.business}
-            onChange={handleInput}
-          />
-        </Form.Group>
+  //       <Form.Group className="mb-3" controlId="certs">
+  //         <Form.Label>Enter all certifications</Form.Label>
+  //         <Form.Control
+  //           required
+  //           placeholder="e.g. CSCS, NASM..."
+  //           type="text"
+  //           name="certs"
+  //           value={state.certs}
+  //           onChange={handleInput}
+  //         />
+  //       </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Business address or loaction</Form.Label>
-          <Form.Control
-            required
-            placeholder="e.g. street city, state and zip..."
-            type="text"
-            name="location"
-            value={state.location}
-            onChange={handleInput}
-          />
-        </Form.Group>
+  //       <Form.Group className="mb-3" controlId="specialties">
+  //         <Form.Label>Enter training specializations</Form.Label>
+  //         <Form.Control
+  //           required
+  //           placeholder="e.g. sports, weight loss, nutrition..."
+  //           type="text"
+  //           name="specialties"
+  //           value={state.specialties}
+  //           onChange={handleInput}
+  //         />
+  //       </Form.Group>
 
-        <Form.Group className="mb-3" controlId="bio">
-          <Form.Label>About you</Form.Label>
-          <textarea
-            required
-            placeholder="Bio..."
-            rows="3"
-            className="form-control"
-            name="bio"
-            value={state.bio}
-            onChange={handleInput}
-          />
-        </Form.Group>
+  //       <Form.Group className="mb-3" controlId="training-type">
+  //         <Form.Label>Availablity</Form.Label>
+  //         <Form.Select
+  //           required
+  //           name="training_type"
+  //           placeholder="Select an Option"
+  //           value={state.training_type}
+  //           onChange={handleInput}
+  //         >
+  //           <option>Select an Option</option>
+  //           <option value="In Person">In Person</option>
+  //           <option value="Online">Online</option>
+  //           <option value="In Person & Online">In Person & Online</option>
+  //         </Form.Select>
+  //       </Form.Group>
 
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Label>Preferred email</Form.Label>
-          <Form.Control
-            required
-            placeholder="email@example.com..."
-            type="email"
-            name="email"
-            value={state.email}
-            onChange={handleInput}
-          />
-        </Form.Group>
+  //       <Form.Group>
+  //         <Form.Label>Business affiliation or private</Form.Label>
+  //         <Form.Control
+  //           required
+  //           placeholder="e.g. private OR company name..."
+  //           type="text"
+  //           name="business"
+  //           value={state.business}
+  //           onChange={handleInput}
+  //         />
+  //       </Form.Group>
 
-        <Form.Group className="mb-3" controlId="instagram">
-          <Form.Label>Instagram</Form.Label>
-          <InputGroup className="mb-3">
-            <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-            <Form.Control
-              placeholder="Instagram username..."
-              aria-label="Username"
-              aria-describedby="basic-addon1"
-              type="text"
-              name="instagram"
-              value={state.instagram}
-              onChange={handleInput}
-            />
-          </InputGroup>
-        </Form.Group>
+  //       <Form.Group>
+  //         <Form.Label>Business address or loaction</Form.Label>
+  //         <Form.Control
+  //           required
+  //           placeholder="e.g. street city, state and zip..."
+  //           type="text"
+  //           name="location"
+  //           value={state.location}
+  //           onChange={handleInput}
+  //         />
+  //       </Form.Group>
 
-        <Form.Group className="mb-3" controlId="twitter">
-          <Form.Label>Twitter</Form.Label>
-          <InputGroup className="mb-3">
-            <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-            <Form.Control
-              placeholder="Twitter username..."
-              aria-label="Username"
-              aria-describedby="basic-addon1"
-              type="text"
-              name="twitter"
-              value={state.twitter}
-              onChange={handleInput}
-            />
-          </InputGroup>
-        </Form.Group>
+  //       <Form.Group className="mb-3" controlId="bio">
+  //         <Form.Label>About you</Form.Label>
+  //         <textarea
+  //           required
+  //           placeholder="Bio..."
+  //           rows="3"
+  //           className="form-control"
+  //           name="bio"
+  //           value={state.bio}
+  //           onChange={handleInput}
+  //         />
+  //       </Form.Group>
 
-        <Form.Group className="mb-3" controlId="facebook">
-          <Form.Label>Facebook</Form.Label>
-          <InputGroup className="mb-3">
-            <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-            <Form.Control
-              placeholder="Facebook username..."
-              aria-label="Username"
-              aria-describedby="basic-addon1"
-              type="text"
-              name="facebook"
-              value={state.facebook}
-              onChange={handleInput}
-            />
-          </InputGroup>
-        </Form.Group>
+  //       <Form.Group className="mb-3" controlId="email">
+  //         <Form.Label>Preferred email</Form.Label>
+  //         <Form.Control
+  //           required
+  //           placeholder="email@example.com..."
+  //           type="email"
+  //           name="email"
+  //           value={state.email}
+  //           onChange={handleInput}
+  //         />
+  //       </Form.Group>
 
-        <Form.Group className="mb-3" controlId="personal-site">
-          <Form.Label>Personal web-site</Form.Label>
-          <Form.Control
-            placeholder="https://www.yoursite.com..."
-            type="url"
-            name="personal_site"
-            value={state.personal_site}
-            onChange={handleInput}
-          />
-        </Form.Group>
+  //       <Form.Group className="mb-3" controlId="instagram">
+  //         <Form.Label>Instagram</Form.Label>
+  //         <InputGroup className="mb-3">
+  //           <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+  //           <Form.Control
+  //             placeholder="Instagram username..."
+  //             aria-label="Username"
+  //             aria-describedby="basic-addon1"
+  //             type="text"
+  //             name="instagram"
+  //             value={state.instagram}
+  //             onChange={handleInput}
+  //           />
+  //         </InputGroup>
+  //       </Form.Group>
 
-        <div>
-          <Button className="form-button" type="submit" variant="dark">
-            Save
-          </Button>
-        </div>
-      </Form>
-    </>
-  );
+  //       <Form.Group className="mb-3" controlId="twitter">
+  //         <Form.Label>Twitter</Form.Label>
+  //         <InputGroup className="mb-3">
+  //           <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+  //           <Form.Control
+  //             placeholder="Twitter username..."
+  //             aria-label="Username"
+  //             aria-describedby="basic-addon1"
+  //             type="text"
+  //             name="twitter"
+  //             value={state.twitter}
+  //             onChange={handleInput}
+  //           />
+  //         </InputGroup>
+  //       </Form.Group>
+
+  //       <Form.Group className="mb-3" controlId="facebook">
+  //         <Form.Label>Facebook</Form.Label>
+  //         <InputGroup className="mb-3">
+  //           <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+  //           <Form.Control
+  //             placeholder="Facebook username..."
+  //             aria-label="Username"
+  //             aria-describedby="basic-addon1"
+  //             type="text"
+  //             name="facebook"
+  //             value={state.facebook}
+  //             onChange={handleInput}
+  //           />
+  //         </InputGroup>
+  //       </Form.Group>
+
+  //       <Form.Group className="mb-3" controlId="personal-site">
+  //         <Form.Label>Personal web-site</Form.Label>
+  //         <Form.Control
+  //           placeholder="https://www.yoursite.com..."
+  //           type="url"
+  //           name="personal_site"
+  //           value={state.personal_site}
+  //           onChange={handleInput}
+  //         />
+  //       </Form.Group>
+
+  //       <div>
+  //         <Button className="form-button" type="submit" variant="dark">
+  //           Save
+  //         </Button>
+  //       </div>
+  //     </Form>
+  //   </>
+  // );
 }
 
 export default TrainerProfileCreate;
