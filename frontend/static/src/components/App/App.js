@@ -10,11 +10,17 @@ import { handleError } from "../../re-usable-func";
 import TrainerProfileCreate from "../Profiles/TrainerProfileCreate";
 import ClientProfileCreate from "../Profiles/ClientProfileCreate";
 import TrainerDetailView from "../Home/TrainerDetailView";
+import TrainerMyProfile from "../Profiles/TrainerMyProfile";
 
 const INITIAL_STATE = {
   auth: false,
   admin: false,
   userID: null,
+  is_trainer: false,
+  is_client: false,
+  trainer_avatar: null,
+  client_avatar: null,
+  trainer_profile: null,
 };
 
 function App() {
@@ -68,6 +74,7 @@ function App() {
             <Route path="trainer/:id/*" element={<TrainerDetailView />} />
             <Route path="create-trainer-profile" element={<TrainerProfileCreate />} />
             <Route path="create-client-profile" element={<ClientProfileCreate />} />
+            <Route path="trainer/my-profile" element={<TrainerMyProfile userState={userState} />} />
           </Route>
           <Route
             path="login"

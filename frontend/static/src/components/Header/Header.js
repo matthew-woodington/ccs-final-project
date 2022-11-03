@@ -1,3 +1,4 @@
+import "../../styles/Header.css";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -16,7 +17,7 @@ function Header({ userState, logoutUser }) {
       <Navbar bg="light" expand="lg">
         <Container>
           <Navbar.Brand href="/">App Logo</Navbar.Brand>
-          <div id="basic-navbar-nav">
+          <div className="desk-nav">
             <Nav className="me-auto">
               {!userState.auth && (
                 <>
@@ -25,12 +26,27 @@ function Header({ userState, logoutUser }) {
               )}
               {userState.auth && (
                 <>
+                  <Nav.Link href="/trainer/my-profile">My Profile</Nav.Link>
                   <Nav.Link href="/" onClick={(e) => logout(e)}>
                     Logout
                   </Nav.Link>
                 </>
               )}
             </Nav>
+            {userState.trainer_avatar && (
+              <img
+                className="profile-picture"
+                src={userState.trainer_avatar}
+                alt="profile picture"
+              />
+            )}
+            {userState.client_avatar && (
+              <img
+                className="profile-picture"
+                src={userState.client_avatar}
+                alt="profile picture"
+              />
+            )}
           </div>
         </Container>
       </Navbar>

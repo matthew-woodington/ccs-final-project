@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -11,8 +11,26 @@ function RegisterForm({ userState, setUserState }) {
     email: "",
     password1: "",
     password2: "",
+    is_trainer: false,
+    is_client: false,
   });
   const [userType, setUserType] = useState();
+
+  useEffect(() => {
+    if (userType === "trainer") {
+      setState({
+        ...state,
+        is_trainer: true,
+        is_client: false,
+      });
+    } else if (userType === "client") {
+      setState({
+        ...state,
+        is_trainer: false,
+        is_client: true,
+      });
+    }
+  }, [userType]);
 
   const navigate = useNavigate();
 
@@ -50,7 +68,17 @@ function RegisterForm({ userState, setUserState }) {
       const data = await response.json();
       Cookies.set("Authorization", `Token ${data.key}`);
       // navigate("/");
-      setUserState({ ...userState, auth: true, admin: data.is_superuser, userID: data.id });
+      setUserState({
+        ...userState,
+        auth: true,
+        admin: data.is_superuser,
+        userID: data.id,
+        is_trainer: data.is_trainer,
+        is_client: data.is_client,
+        trainer_avatar: data.trainer_avatar,
+        client_avatar: data.client_avatar,
+        trainer_profile: data.trainer_profile,
+      });
       if (userType === "trainer") {
         navigate("/create-trainer-profile");
       } else if (userType === "client") {

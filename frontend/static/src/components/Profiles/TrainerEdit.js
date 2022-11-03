@@ -1,35 +1,18 @@
-import "../../styles/Form.css";
+import "../../styles/ProfileDetail.css";
 import { useState } from "react";
+import { handleError } from "../../re-usable-func";
+import { AiFillInstagram } from "react-icons/ai";
+import { AiOutlineTwitter } from "react-icons/ai";
+import { BsFacebook } from "react-icons/bs";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import { handleError } from "../../re-usable-func";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
-import defaultProfileImage from "../../Images/default-profile.jpg";
 
-const INITIAL_TRAINER_PROFILE_STATE = {
-  avatar: null,
-  first_name: "",
-  last_name: "",
-  certs: "",
-  specialties: "",
-  training_type: "",
-  business: "",
-  location: "",
-  bio: "",
-  email: "",
-  instagram: "",
-  twitter: "",
-  facebook: "",
-  personal_site: "",
-};
-
-function TrainerProfileCreate() {
-  const [state, setState] = useState(INITIAL_TRAINER_PROFILE_STATE);
-  const [preview, setPreview] = useState(defaultProfileImage);
-
-  const navigate = useNavigate();
+function TrainerEdit({ myProfile }) {
+  const [state, setState] = useState(myProfile);
+  const [isEdit, setIsEdit] = useState(false);
+  const [preview, setPreview] = useState(state.avatar);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -58,13 +41,17 @@ function TrainerProfileCreate() {
     e.preventDefault();
     const formData = new FormData();
 
-    for (const key in state) {
-      if (state[key]) {
-        formData.append(key, state[key]);
+    const user = { ...state };
+    if (!(user.avatar instanceof File)) {
+      delete user.avatar;
+    }
+
+    for (const key in user) {
+      if (user[key]) {
+        formData.append(key, user[key]);
       }
     }
 
-    // formData.append("avatar", state.avatar);
     // formData.append("first_name", state.first_name);
     // formData.append("last_name", state.last_name);
     // formData.append("certs", state.certs);
@@ -80,34 +67,88 @@ function TrainerProfileCreate() {
     // formData.append("personal_site", state.personal_site);
 
     const options = {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "X-CSRFToken": Cookies.get("csrftoken"),
       },
       body: formData,
     };
-    const response = await fetch("/api/v1/profiles/trainers/", options).catch(handleError);
+
+    const response = await fetch(`/api/v1/profiles/trainers/${state.id}/`, options).catch(
+      handleError
+    );
     if (!response.ok) {
       throw new Error("Network response was not OK");
     } else {
       const data = await response.json();
       console.log(data);
-      setState(INITIAL_TRAINER_PROFILE_STATE);
-      navigate("/");
+      setIsEdit(false);
     }
   };
 
-  return (
+  const previewHTML = (
+    <>
+      <aside>
+        <div className="profile-image-container">
+          <img className="profile-image" src={state.avatar} alt="" />
+        </div>
+        <h1>
+          {state.first_name} {state.last_name}
+        </h1>
+        <span>{state.certs}</span>
+        <h4>Specialties:</h4>
+        <p>{state.specialties}</p>
+        <h4>Contact me:</h4>
+        <p>{state.email}</p>
+        <ul className="list">
+          {state.instagram && (
+            <li>
+              <a href={`https://www.instagram.com/${state.instagram}/`}>
+                <AiFillInstagram />
+              </a>
+            </li>
+          )}
+          {state.twitter && (
+            <li>
+              <a href={`https://www.twitter.com/${state.twitter}/`}>
+                <AiOutlineTwitter />
+              </a>
+            </li>
+          )}
+          {state.facebook && (
+            <li>
+              <a href={`https://www.facebook.com/${state.facebook}/`}>
+                <BsFacebook />
+              </a>
+            </li>
+          )}
+        </ul>
+        {state.personal_site && <a href={state.personal_site}>Personal Website</a>}
+      </aside>
+      <article>
+        <h2>About {state.first_name}</h2>
+        <p>{state.bio}</p>
+        <p>Business: {state.business}</p>
+        <p>Location: {state.location}</p>
+        <p>Offered training: {state.training_type}</p>
+      </article>
+      <Button type="button" variant="dark" onClick={() => setIsEdit(true)}>
+        Edit
+      </Button>
+    </>
+  );
+
+  const editHTML = (
     <>
       <Form onSubmit={handleSubmit}>
-        <h1>Create Profile</h1>
+        <h1>Edit Profile</h1>
         <div className="image-container">
-          <img className="form-image" src={preview} alt="" />
+          <img className="form-image" src={state.avatar} alt="" />
           {/* {state.avatar && <img className="form-image" src={preview} alt="" />} */}
         </div>
         <Form.Group className="mb-3" controlId="image">
           <Form.Label>Choose a profile picture</Form.Label>
-          <Form.Control required type="file" name="avatar" onChange={handleImage} />
+          <Form.Control type="file" name="avatar" onChange={handleImage} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="first-name">
@@ -290,6 +331,7 @@ function TrainerProfileCreate() {
       </Form>
     </>
   );
+  return <>{isEdit ? editHTML : previewHTML}</>;
 }
 
-export default TrainerProfileCreate;
+export default TrainerEdit;

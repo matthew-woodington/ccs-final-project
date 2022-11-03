@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ClientProfileDetailAPIView, ClientProfileListAPIView, TrainerProfileDetailAPIView, TrainerProfileListAPIView, UserListAPIView
+from .views import ClientProfileDetailAPIView, ClientProfileListAPIView, TrainerProfileDetailAPIView, TrainerProfileListAPIView, UserListAPIView, verify_trainer
 
 app_name = 'accounts'
 
@@ -12,4 +12,5 @@ urlpatterns = [
     path('profiles/clients/', ClientProfileListAPIView.as_view(), name='client_list'),
     path('profiles/clients/<int:pk>/', ClientProfileDetailAPIView.as_view(),
          name='client_profile'),
+    path('profiles/trainers/<int:pk>/verify/', verify_trainer)
 ]

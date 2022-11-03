@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.2.2",
     "dotenv": "^16.0.3",
+    "fuse.js": "^6.6.2",
     "js-cookie": "^3.0.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",

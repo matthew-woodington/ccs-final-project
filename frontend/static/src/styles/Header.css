@@ -1,0 +1,13 @@
+.desk-nav {
+    display: flex;
+    align-items: center;
+} 
+
+.profile-picture {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+}

@@ -1,4 +1,5 @@
 from rest_framework import generics
+from rest_framework.decorators import api_view, permission_classes
 from .models import TrainerProfile, ClientProfile, User
 from .serializers import TrainerProfileSerializer, ClientProfileSerializer, CustomUserDetailsSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser
@@ -41,3 +42,9 @@ class ClientProfileDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsUserOrReadOnly,)
     queryset = ClientProfile.objects.all()
     serializer_class = ClientProfileSerializer
+
+
+@api_view(['POST'])
+@permission_classes([IsAdminUser, ])
+def verify_trainer(self):
+    pass

@@ -44,6 +44,11 @@ function LoginForm({ userState, setUserState }) {
         auth: true,
         admin: data.is_superuser,
         userID: data.id,
+        is_trainer: data.is_trainer,
+        is_client: data.is_client,
+        trainer_avatar: data.trainer_avatar,
+        client_avatar: data.client_avatar,
+        trainer_profile: data.trainer_profile,
       });
     }
   };

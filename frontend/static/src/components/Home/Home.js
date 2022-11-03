@@ -1,13 +1,15 @@
 import "../../styles/Home.css";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { handleError } from "../../re-usable-func";
 import Search from "../Search/Search";
 import TrainerProfileCard from "./TrainerProfileCard";
+import Fuse from "fuse.js";
 
 function Home() {
-  // const [savedProfiles, setSavedProfiles] = useState([]);
   const [trainerProfiles, setTrainerProfiles] = useState([]);
+  const [filteredProfiles, setFilteredProfiles] = useState([]);
   const [queryPhrase, setQueryPhrase] = useState("");
+  const [distance, setDistance] = useState(50);
 
   useEffect(() => {
     const getTrainerProfiles = async () => {
@@ -18,30 +20,47 @@ function Home() {
 
       const data = await response.json();
       setTrainerProfiles(data);
-      // setSavedProfiles(data);
+      setFilteredProfiles(data);
     };
 
     getTrainerProfiles();
   }, []);
 
-  // useEffect(() => {
-  //   window.localStorage.setItem("queryPhrase", JSON.stringify(queryPhrase));
-  // }, [queryPhrase]);
+  useEffect(() => {
+    if (!trainerProfiles) {
+      return;
+    } else if (queryPhrase.length === 0) {
+      setFilteredProfiles(trainerProfiles);
+      return;
+    }
 
-  const keys = ["first_name", "last_name", "specialties"];
+    const searchAndFilter = () => {
+      const options = {
+        ignoreLocation: true,
+        threshold: 0.3,
+        keys: ["first_name", "last_name", "specialties"],
+      };
+      const fuse = new Fuse(trainerProfiles, options);
+      const search = fuse.search(queryPhrase);
+      const filteredTrainers = search.map((profile) => profile.item);
+      return filteredTrainers;
+    };
+    setFilteredProfiles(searchAndFilter());
+  }, [queryPhrase, trainerProfiles]);
 
-  const filtered = trainerProfiles.filter((profile) =>
-    keys.some((key) => profile[key].toLowerCase().includes(queryPhrase.toLocaleLowerCase()))
-  );
-
-  const trainerProfileList = filtered.map((profile) => (
+  const trainerProfileList = filteredProfiles.map((profile) => (
     <TrainerProfileCard key={profile.id} profile={profile} />
   ));
 
   return (
     <section className="display-area">
       <aside>
-        <Search setQueryPhrase={setQueryPhrase} />
+        <Search
+          setDistance={setDistance}
+          distance={distance}
+          queryPhrase={queryPhrase}
+          setQueryPhrase={setQueryPhrase}
+        />
       </aside>
       <div>
         <ul className="list">{trainerProfileList}</ul>
