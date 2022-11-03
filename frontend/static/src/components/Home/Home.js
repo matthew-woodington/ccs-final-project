@@ -41,7 +41,7 @@ function Home() {
   return (
     <section className="display-area">
       <aside>
-        <Search queryPhrase={queryPhrase} setQueryPhrase={setQueryPhrase} />
+        <Search setQueryPhrase={setQueryPhrase} />
       </aside>
       <div>
         <ul className="list">{trainerProfileList}</ul>

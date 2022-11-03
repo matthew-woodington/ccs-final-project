@@ -1,10 +1,16 @@
 from rest_framework import generics
-from .models import TrainerProfile, ClientProfile
-from .serializers import TrainerProfileSerializer, ClientProfileSerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from .models import TrainerProfile, ClientProfile, User
+from .serializers import TrainerProfileSerializer, ClientProfileSerializer, CustomUserDetailsSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser
 from .permissions import IsUserOrReadOnly
 
 # Create your views here.
+
+
+class UserListAPIView(generics.ListAPIView):
+    permission_classes = (IsAdminUser,)
+    queryset = User.objects.all()
+    serializer_class = CustomUserDetailsSerializer
 
 
 class TrainerProfileListAPIView(generics.ListCreateAPIView):

@@ -6,7 +6,8 @@ from django.conf import settings
 
 
 class User(AbstractUser):
-    pass
+    is_trainer = models.BooleanField(default=False)
+    is_client = models.BooleanField(default=False) 
 
 
 class TrainerProfile(models.Model):

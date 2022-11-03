@@ -13,6 +13,7 @@ const INITIAL_TRAINER_PROFILE_STATE = {
   last_name: "",
   certs: "",
   specialties: "",
+  training_type: "",
   business: "",
   location: "",
   bio: "",
@@ -147,6 +148,22 @@ function TrainerProfileCreate() {
             value={state.specialties}
             onChange={handleInput}
           />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="training-type">
+          <Form.Label>Availablity</Form.Label>
+          <Form.Select
+            required
+            name="training_type"
+            placeholder="Select an Option"
+            value={state.training_type}
+            onChange={handleInput}
+          >
+            <option selected>Select an Option</option>
+            <option value="In Person">In Person</option>
+            <option value="Online">Online</option>
+            <option value="In Person & Online">In Person & Online</option>
+          </Form.Select>
         </Form.Group>
 
         <Form.Group>
