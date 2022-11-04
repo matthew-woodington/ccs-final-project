@@ -131,13 +131,15 @@ function TrainerProfileCreate({ userState, setUserState }) {
   };
 
   return (
-    <>
-      <div>
-        <h1>Create Profile</h1>
+    <section className="form-display">
+      <div className="form-box">
+        <div className="form-head">
+          <h1>Create Profile</h1>
+        </div>
         <ProgressBar now={step * (100 / 3)} />
         <div>{html()}</div>
       </div>
-    </>
+    </section>
   );
 }
 

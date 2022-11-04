@@ -11,3 +11,9 @@
     object-fit: cover;
     object-position: top;
 }
+
+.noti {
+    position: relative;
+    transform: translate(0px, -10px);
+    font-size: 10px;
+}

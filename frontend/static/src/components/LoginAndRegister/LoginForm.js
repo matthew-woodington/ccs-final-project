@@ -54,9 +54,11 @@ function LoginForm({ userState, setUserState }) {
   };
 
   return (
-    <div>
-      <Form onSubmit={handleSubmit}>
-        <h1>Login</h1>
+    <div className="form-display">
+      <Form className="form-box" onSubmit={handleSubmit}>
+        <div className="form-head">
+          <h1>Login</h1>
+        </div>
         <Form.Group className="mb-3" controlId="username">
           <Form.Label>Username</Form.Label>
           <Form.Control
@@ -77,7 +79,7 @@ function LoginForm({ userState, setUserState }) {
             onChange={handleInput}
           />
         </Form.Group>
-        <div>
+        <div className="form-footer">
           <Button variant="dark" type="submit">
             Login
           </Button>

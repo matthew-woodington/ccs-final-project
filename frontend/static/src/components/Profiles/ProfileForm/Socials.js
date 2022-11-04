@@ -5,7 +5,9 @@ import Button from "react-bootstrap/Button";
 function SocialsForm({ state, handleInput, lastStep, handleSubmit }) {
   return (
     <>
-      <h3>Contact Information</h3>
+      <div className="form-head">
+        <h3>Contact Information</h3>
+      </div>
       <Form.Group className="mb-3" controlId="email">
         <Form.Label>Preferred email</Form.Label>
         <Form.Control
@@ -77,7 +79,7 @@ function SocialsForm({ state, handleInput, lastStep, handleSubmit }) {
         />
       </Form.Group>
 
-      <div>
+      <div className="form-footer">
         <Button className="form-button" type="button" variant="dark" onClick={() => lastStep()}>
           Back
         </Button>

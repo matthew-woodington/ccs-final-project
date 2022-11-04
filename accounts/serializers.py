@@ -1,4 +1,3 @@
-from pyexpat import model
 from rest_framework import serializers
 from dj_rest_auth.models import TokenModel
 from dj_rest_auth.serializers import UserDetailsSerializer

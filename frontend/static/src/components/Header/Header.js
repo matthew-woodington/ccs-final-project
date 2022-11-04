@@ -3,8 +3,9 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
+import Badge from "react-bootstrap/Badge";
 
-function Header({ userState, logoutUser }) {
+function Header({ userState, logoutUser, requests }) {
   const navigate = useNavigate();
 
   const logout = (e) => {
@@ -24,9 +25,21 @@ function Header({ userState, logoutUser }) {
                   <Nav.Link href="/login">Login</Nav.Link>
                 </>
               )}
+              {userState.is_trainer && (
+                <>
+                  <Nav.Link href="/">
+                    Messages
+                    {requests && (
+                      <Badge className="noti" pill>
+                        {requests.length}
+                      </Badge>
+                    )}
+                  </Nav.Link>
+                  <Nav.Link href="/trainer/my-profile">My Profile</Nav.Link>
+                </>
+              )}
               {userState.auth && (
                 <>
-                  <Nav.Link href="/trainer/my-profile">My Profile</Nav.Link>
                   <Nav.Link href="/" onClick={(e) => logout(e)}>
                     Logout
                   </Nav.Link>

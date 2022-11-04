@@ -25,6 +25,7 @@ const INITIAL_STATE = {
 
 function App() {
   const [userState, setUserState] = useState(INITIAL_STATE);
+  const [requests, setRequests] = useState();
 
   const newState = JSON.parse(window.localStorage.getItem("userState"));
 
@@ -65,11 +66,31 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    console.count("effect");
+    const getRequests = async () => {
+      const response = await fetch(`/api/v1/requests/${userState.trainer_profile}/`).catch(
+        handleError
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok!");
+      }
+
+      const data = await response.json();
+      setRequests(data);
+    };
+
+    getRequests();
+  }, [userState.trainer_profile]);
+
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout userState={userState} logoutUser={logoutUser} />}>
+          <Route
+            path="/"
+            element={<Layout userState={userState} logoutUser={logoutUser} requests={requests} />}
+          >
             <Route index element={<Home />} />
             <Route path="trainer/:id/*" element={<TrainerDetailView userState={userState} />} />
             <Route

@@ -1,6 +1,32 @@
+.form-display {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.form-box {
+    width: 60%;
+}
+
+.form-head {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-footer {
+    text-align: center;
+}
+
+.form-button {
+    margin: 5px;
+}
+
 .image-container {
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     border: 1px solid #212529;
     overflow: hidden;

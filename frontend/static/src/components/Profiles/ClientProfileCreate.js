@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import { handleError } from "../../re-usable-func";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import defaultProfileImage from "../../Images/default-profile.jpg";
 
 const INITIAL_CLIENT_PROFILE_STATE = {
   avatar: null,
@@ -14,7 +15,7 @@ const INITIAL_CLIENT_PROFILE_STATE = {
 
 function ClientProfileCreate() {
   const [state, setState] = useState(INITIAL_CLIENT_PROFILE_STATE);
-  const [preview, setPreview] = useState();
+  const [preview, setPreview] = useState(defaultProfileImage);
 
   const navigate = useNavigate();
 
@@ -68,11 +69,14 @@ function ClientProfileCreate() {
   };
 
   return (
-    <>
-      <Form onSubmit={handleSubmit}>
-        <h1>Create Profile</h1>
-        <div className="image-container">
-          {state.avatar && <img className="form-image" src={preview} alt="" />}
+    <section className="form-display">
+      <Form className="form-box" onSubmit={handleSubmit}>
+        <div className="form-head">
+          <h1>Create Profile</h1>
+          <div className="image-container">
+            <img className="form-image" src={preview} alt="" />
+            {/* {state.avatar && <img className="form-image" src={preview} alt="" />} */}
+          </div>
         </div>
         <Form.Group className="mb-3" controlId="image">
           <Form.Label>Choose a profile picture</Form.Label>
@@ -109,7 +113,7 @@ function ClientProfileCreate() {
           </Button>
         </div>
       </Form>
-    </>
+    </section>
   );
 }
 

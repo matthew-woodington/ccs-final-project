@@ -88,9 +88,11 @@ function RegisterForm({ userState, setUserState }) {
   };
 
   return (
-    <div>
-      <Form onSubmit={checkSamePass}>
-        <h1>Register</h1>
+    <div className="form-display">
+      <Form className="form-box" onSubmit={checkSamePass}>
+        <div className="form-head">
+          <h1>Register</h1>
+        </div>
         <Form.Group className="mb-3" controlId="username">
           <Form.Label>Username</Form.Label>
           <Form.Control
@@ -151,7 +153,7 @@ function RegisterForm({ userState, setUserState }) {
             onChange={(e) => setUserType(e.target.value)}
           />
         </Form.Group>
-        <div>
+        <div className="form-footer">
           <Button variant="dark" type="submit">
             Register
           </Button>

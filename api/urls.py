@@ -4,4 +4,5 @@ app_name = 'api_v1'
 
 urlpatterns = [
     path('', include('accounts.urls', namespace='accounts')),
+    path('', include('clientlists.urls', namespace='client_lists'))
 ]

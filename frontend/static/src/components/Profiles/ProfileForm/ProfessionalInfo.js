@@ -4,7 +4,9 @@ import Button from "react-bootstrap/Button";
 function ProfessionalInfoForm({ state, handleInput, nextStep, lastStep }) {
   return (
     <>
-      <h3>Professional Information</h3>
+      <div className="form-head">
+        <h3>Professional Information</h3>
+      </div>
       <Form.Group className="mb-3" controlId="certs">
         <Form.Label>Enter all certifications</Form.Label>
         <Form.Control
@@ -81,12 +83,14 @@ function ProfessionalInfoForm({ state, handleInput, nextStep, lastStep }) {
           onChange={handleInput}
         />
       </Form.Group>
-      <Button className="form-button" type="button" variant="dark" onClick={() => lastStep()}>
-        Back
-      </Button>
-      <Button className="form-button" type="button" variant="dark" onClick={() => nextStep()}>
-        Next
-      </Button>
+      <div className="form-footer">
+        <Button className="form-button" type="button" variant="dark" onClick={() => lastStep()}>
+          Back
+        </Button>
+        <Button className="form-button" type="button" variant="dark" onClick={() => nextStep()}>
+          Next
+        </Button>
+      </div>
     </>
   );
 }

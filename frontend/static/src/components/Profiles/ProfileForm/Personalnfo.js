@@ -3,11 +3,13 @@ import Button from "react-bootstrap/Button";
 
 function PersonalInfoForm({ state, preview, handleImage, handleInput, nextStep }) {
   return (
-    <>
-      <h3>Personal Information</h3>
-      <div className="image-container">
-        <img className="form-image" src={preview} alt="" />
-        {/* {state.avatar && <img className="form-image" src={preview} alt="" />} */}
+    <div>
+      <div className="form-head">
+        <h3>Personal Information</h3>
+        <div className="image-container">
+          <img className="form-image" src={preview} alt="" />
+          {/* {state.avatar && <img className="form-image" src={preview} alt="" />} */}
+        </div>
       </div>
       <Form.Group className="mb-3" controlId="image">
         <Form.Label>Choose a profile picture</Form.Label>
@@ -37,10 +39,12 @@ function PersonalInfoForm({ state, preview, handleImage, handleInput, nextStep }
           onChange={handleInput}
         />
       </Form.Group>
-      <Button className="form-button" type="button" variant="dark" onClick={() => nextStep()}>
-        Next
-      </Button>
-    </>
+      <div className="form-footer">
+        <Button className="form-button" type="button" variant="dark" onClick={() => nextStep()}>
+          Next
+        </Button>
+      </div>
+    </div>
   );
 }
 
