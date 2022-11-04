@@ -48,9 +48,9 @@ function Home() {
     setFilteredProfiles(searchAndFilter());
   }, [queryPhrase, trainerProfiles]);
 
-  const trainerProfileList = filteredProfiles.map((profile) => (
-    <TrainerProfileCard key={profile.id} profile={profile} />
-  ));
+  // const trainerProfileList = filteredProfiles.map((profile) => (
+  //   <TrainerProfileCard key={profile.id} profile={profile} />
+  // ));
 
   return (
     <section className="display-area">
@@ -62,9 +62,18 @@ function Home() {
           setQueryPhrase={setQueryPhrase}
         />
       </aside>
-      <div>
-        <ul className="list">{trainerProfileList}</ul>
-      </div>
+      <article>
+        {/* <ul className="list">{trainerProfileList}</ul> */}
+        {filteredProfiles.length === 0 ? (
+          <p>Oops! No profiles match that search, try again.</p>
+        ) : (
+          <div className="list">
+            {filteredProfiles.map((profile) => (
+              <TrainerProfileCard key={profile.id} profile={profile} />
+            ))}
+          </div>
+        )}
+      </article>
     </section>
   );
 }

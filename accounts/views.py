@@ -1,7 +1,7 @@
 from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes
-from .models import TrainerProfile, ClientProfile, User
-from .serializers import TrainerProfileSerializer, ClientProfileSerializer, CustomUserDetailsSerializer
+from .models import TrainerProfile, ClientProfile, User, Review
+from .serializers import TrainerProfileSerializer, ClientProfileSerializer, CustomUserDetailsSerializer, ReviewSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser
 from .permissions import IsUserOrReadOnly
 
@@ -37,11 +37,26 @@ class ClientProfileListAPIView(generics.ListCreateAPIView):
     queryset = ClientProfile.objects.all()
     serializer_class = ClientProfileSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 class ClientProfileDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsUserOrReadOnly,)
     queryset = ClientProfile.objects.all()
     serializer_class = ClientProfileSerializer
+
+
+class TrainerReviewsListAPIView(generics.ListCreateAPIView):
+    permission_classes = (IsUserOrReadOnly,)
+    serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        trainerprofile = self.kwargs['trainerprofile']
+        return Review.objects.filter(trainerprofile=trainerprofile)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 @api_view(['POST'])

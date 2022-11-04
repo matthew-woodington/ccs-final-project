@@ -7,7 +7,7 @@ from django.conf import settings
 
 class User(AbstractUser):
     is_trainer = models.BooleanField(default=False)
-    is_client = models.BooleanField(default=False) 
+    is_client = models.BooleanField(default=False)
 
 
 class TrainerProfile(models.Model):
@@ -52,3 +52,13 @@ class ClientProfile(models.Model):
     avatar = models.ImageField(upload_to='profiles/', null=True)
     first_name = models.CharField(max_length=225, null=True)
     last_name = models.CharField(max_length=225, null=True)
+
+
+class Review(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE, blank=True)
+    text = models.TextField(null=True)
+    trainerprofile = models.ForeignKey(
+        TrainerProfile, on_delete=models.CASCADE, blank=True)
+    rating = models.IntegerField()
+    created_on = models.DateTimeField(auto_now_add=True, null=True)

@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import { handleError } from "../../re-usable-func";
 import TrainerProfileCreate from "../Profiles/TrainerProfileCreate";
 import ClientProfileCreate from "../Profiles/ClientProfileCreate";
-import TrainerDetailView from "../Home/TrainerDetailView";
+import TrainerDetailView from "../Home/ProfileDetail/TrainerDetailView";
 import TrainerMyProfile from "../Profiles/TrainerMyProfile";
 
 const INITIAL_STATE = {
