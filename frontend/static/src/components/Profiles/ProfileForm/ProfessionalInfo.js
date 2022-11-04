@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 function ProfessionalInfoForm({ state, handleInput, nextStep, lastStep }) {
   return (
     <>
+      <h3>Professional Information</h3>
       <Form.Group className="mb-3" controlId="certs">
         <Form.Label>Enter all certifications</Form.Label>
         <Form.Control

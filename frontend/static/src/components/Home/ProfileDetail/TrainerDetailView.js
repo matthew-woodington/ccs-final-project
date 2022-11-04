@@ -5,7 +5,7 @@ import { handleError } from "../../../re-usable-func";
 import ProfileInfo from "./ProfileInfo";
 import Reviews from "./Reviews";
 
-function TrainerDetailView() {
+function TrainerDetailView({ userState }) {
   const [state, setState] = useState();
   const [reviews, setReviews] = useState();
 
@@ -38,7 +38,11 @@ function TrainerDetailView() {
   return (
     <>
       <section className="profile-view">{state && <ProfileInfo state={state} />}</section>
-      <section>{reviews && <Reviews reviews={reviews} setReviews={setReviews} id={id} />}</section>
+      <section>
+        {reviews && (
+          <Reviews reviews={reviews} setReviews={setReviews} id={id} userState={userState} />
+        )}
+      </section>
     </>
   );
 }

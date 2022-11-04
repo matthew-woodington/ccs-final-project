@@ -71,7 +71,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout userState={userState} logoutUser={logoutUser} />}>
             <Route index element={<Home />} />
-            <Route path="trainer/:id/*" element={<TrainerDetailView />} />
+            <Route path="trainer/:id/*" element={<TrainerDetailView userState={userState} />} />
             <Route
               path="create-trainer-profile"
               element={<TrainerProfileCreate userState={userState} setUserState={setUserState} />}

@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 function PersonalInfoForm({ state, preview, handleImage, handleInput, nextStep }) {
   return (
     <>
-      <h1>Create Profile</h1>
+      <h3>Personal Information</h3>
       <div className="image-container">
         <img className="form-image" src={preview} alt="" />
         {/* {state.avatar && <img className="form-image" src={preview} alt="" />} */}

@@ -58,6 +58,8 @@ class ClientProfileSerializer(serializers.ModelSerializer):
 
 class ReviewSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
+    author_avatar = serializers.ImageField(
+        source='user.clientprofile.avatar', read_only=True)
 
     class Meta:
         model = Review

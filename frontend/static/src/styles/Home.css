@@ -3,3 +3,24 @@
     justify-content: center;
     align-items: flex-start;
 }
+
+.profile-card {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.image-cont {
+    height: 200px;
+    width: 200px;
+    overflow: hidden;
+    border-bottom-left-radius: calc(0.375rem - 1px);
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.profile-card-img {
+    object-fit: contain;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}

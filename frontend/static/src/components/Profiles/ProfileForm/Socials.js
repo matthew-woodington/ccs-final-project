@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 function SocialsForm({ state, handleInput, lastStep, handleSubmit }) {
   return (
     <>
+      <h3>Contact Information</h3>
       <Form.Group className="mb-3" controlId="email">
         <Form.Label>Preferred email</Form.Label>
         <Form.Control
