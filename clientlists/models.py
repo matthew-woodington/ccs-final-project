@@ -11,6 +11,7 @@ class Request(models.Model):
     text = models.TextField(null=True)
     trainerprofile = models.ForeignKey(
         TrainerProfile, on_delete=models.CASCADE, blank=True)
+    created_on = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.user.username

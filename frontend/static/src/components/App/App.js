@@ -11,6 +11,7 @@ import TrainerProfileCreate from "../Profiles/TrainerProfileCreate";
 import ClientProfileCreate from "../Profiles/ClientProfileCreate";
 import TrainerDetailView from "../Home/ProfileDetail/TrainerDetailView";
 import TrainerMyProfile from "../Profiles/TrainerMyProfile";
+import TrainerRequests from "../Requests/TrainerRequests";
 
 const INITIAL_STATE = {
   auth: false,
@@ -69,7 +70,7 @@ function App() {
   useEffect(() => {
     console.count("effect");
     const getRequests = async () => {
-      const response = await fetch(`/api/v1/requests/${userState.trainer_profile}/`).catch(
+      const response = await fetch(`/api/v1/requests/trainer/${userState.trainer_profile}/`).catch(
         handleError
       );
       if (!response.ok) {
@@ -99,6 +100,7 @@ function App() {
             />
             <Route path="create-client-profile" element={<ClientProfileCreate />} />
             <Route path="trainer/my-profile" element={<TrainerMyProfile userState={userState} />} />
+            <Route path="trainer/requests" element={<TrainerRequests requests={requests} />} />
           </Route>
           <Route
             path="login"

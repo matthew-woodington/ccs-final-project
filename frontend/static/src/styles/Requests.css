@@ -1,0 +1,24 @@
+.request-head {
+    display: flex;
+    align-items: center;
+}
+
+.client-profile-img {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    margin-right: 5px;
+}
+
+.request-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.request-button {
+    margin: 0px 5px;
+}

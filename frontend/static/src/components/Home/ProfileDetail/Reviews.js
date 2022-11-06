@@ -3,9 +3,9 @@ import Rating from "@mui/material/Rating";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import moment from 'moment'
+import moment from "moment";
 import Cookies from "js-cookie";
-import {handleError} from '../../../re-usable-func';
+import { handleError } from "../../../re-usable-func";
 
 function Reviews({ reviews, setReviews, id, userState }) {
   const [newReview, setNewReview] = useState({
@@ -41,14 +41,6 @@ function Reviews({ reviews, setReviews, id, userState }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const formData = new FormData();
-
-    // for (const key in newReview) {
-    //   if (newReview[key]) {
-    //     formData.append(key, newReview[key]);
-    //   }
-    // }
-
     const options = {
       method: "POST",
       headers: {
@@ -57,13 +49,15 @@ function Reviews({ reviews, setReviews, id, userState }) {
       },
       body: JSON.stringify(newReview),
     };
-    const response = await fetch(`/api/v1/profiles/trainers/${id}/reviews/`, options).catch(handleError);
+    const response = await fetch(`/api/v1/profiles/trainers/${id}/reviews/`, options).catch(
+      handleError
+    );
     if (!response.ok) {
       throw new Error("Network response was not OK");
     } else {
       const data = await response.json();
-      setReviews([...reviews, data])
-      handleClose()
+      setReviews([...reviews, data]);
+      handleClose();
     }
   };
 
@@ -91,7 +85,7 @@ function Reviews({ reviews, setReviews, id, userState }) {
           <textarea
             required
             placeholder="Review..."
-            rows="3"
+            rows="2"
             className="form-control"
             name="text"
             value={newReview.text}
@@ -113,9 +107,7 @@ function Reviews({ reviews, setReviews, id, userState }) {
               <Card.Title className="review-user">{review.username}</Card.Title>
             </div>
             <Rating name="rating" value={review.rating} readOnly />
-            <Card.Text>
-              {review.text}
-            </Card.Text>
+            <Card.Text>{review.text}</Card.Text>
             <span>{moment(review.created_on).fromNow()}</span>
           </Card.Body>
         </Card>

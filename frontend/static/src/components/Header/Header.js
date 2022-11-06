@@ -17,7 +17,7 @@ function Header({ userState, logoutUser, requests }) {
     <>
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="/">App Logo</Navbar.Brand>
+          <Navbar.Brand href="/">REPS </Navbar.Brand>
           <div className="desk-nav">
             <Nav className="me-auto">
               {!userState.auth && (
@@ -27,7 +27,7 @@ function Header({ userState, logoutUser, requests }) {
               )}
               {userState.is_trainer && (
                 <>
-                  <Nav.Link href="/">
+                  <Nav.Link href="/trainer/requests">
                     Messages
                     {requests && (
                       <Badge className="noti" pill>
