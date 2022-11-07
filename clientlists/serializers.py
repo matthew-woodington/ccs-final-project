@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Request, ClientList
+from accounts.serializers import ClientProfileSerializer
 
 
 class RequestSerializer(serializers.ModelSerializer):
@@ -16,11 +17,30 @@ class RequestSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ClientListSerializer(serializers.ModelSerializer):
-    # trainerprofile = serializers.ReadOnlyField(source='user.trainerprofile.id')
+class ClientListWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClientList
+        exclude = ('user',)
+
+
+class ClientListReadSerializer(serializers.ModelSerializer):
+    clientprofile = ClientProfileSerializer()
 
     class Meta:
         model = ClientList
-        # fields = '__all__'
         exclude = ('user',)
         # depth = 1
+
+
+class ClientListDetailWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClientList
+        exclude = ('user',)
+
+
+class ClientListDetailReadSerializer(serializers.ModelSerializer):
+    clientprofile = ClientProfileSerializer()
+
+    class Meta:
+        model = ClientList
+        exclude = ('user',)

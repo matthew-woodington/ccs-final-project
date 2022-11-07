@@ -1,4 +1,4 @@
-import "../../styles/Requests.css";
+import "../../styles/TrainerPortal.css";
 import Card from "react-bootstrap/Card";
 import moment from "moment";
 import Button from "react-bootstrap/Button";

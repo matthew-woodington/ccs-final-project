@@ -32,8 +32,8 @@ function Header({ userState, logoutUser, requests }) {
               )}
               {userState.is_trainer && (
                 <>
-                  <Nav.Link className="nav-link" href="/trainer/requests">
-                    Messages
+                  <Nav.Link className="nav-link" href="/trainer/portal">
+                    Trainer Portal
                     {requests && (
                       <Badge className="noti" pill>
                         {requests.length}

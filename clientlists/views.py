@@ -1,6 +1,6 @@
 from rest_framework import generics
 from .models import Request, ClientList
-from .serializers import RequestSerializer, ClientListSerializer
+from .serializers import RequestSerializer, ClientListReadSerializer, ClientListWriteSerializer, ClientListDetailReadSerializer, ClientListDetailWriteSerializer
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsAuthorOrTrainer, IsTrainer
 
@@ -27,7 +27,13 @@ class RequestDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 class ClientListAPIView(generics.ListCreateAPIView):
     permission_classes = (IsTrainer,)
-    serializer_class = ClientListSerializer
+
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == 'PUT' or method == 'POST':
+            return ClientListWriteSerializer
+        else:
+            return ClientListReadSerializer
 
     def get_queryset(self):
         trainerprofile = self.kwargs['trainerprofile']
@@ -35,3 +41,16 @@ class ClientListAPIView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+class ClientListDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsTrainer,)
+    queryset = ClientList.objects.all()
+    serializer_class = ClientListDetailReadSerializer
+
+    # def get_serializer_class(self):
+    #     method = self.request.method
+    #     if method == 'PUT' or method == 'PATCH':
+    #         return ClientListDetailWriteSerializer
+    #     else:
+    #         return ClientListDetailReadSerializer

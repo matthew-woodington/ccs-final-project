@@ -1,3 +1,8 @@
+.note-head {
+    display: flex;
+    justify-content: space-between;
+}
+
 .request-head {
     display: flex;
     align-items: center;

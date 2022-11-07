@@ -50,6 +50,8 @@ class TrainerProfileSerializer(serializers.ModelSerializer):
 
 
 class ClientProfileSerializer(serializers.ModelSerializer):
+    email = serializers.ReadOnlyField(source='user.email')
+
     class Meta:
         model = ClientProfile
         fields = '__all__'

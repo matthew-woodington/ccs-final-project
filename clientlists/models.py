@@ -24,6 +24,7 @@ class ClientList(models.Model):
         TrainerProfile, on_delete=models.CASCADE, blank=True)
     clientprofile = models.ForeignKey(
         ClientProfile, on_delete=models.CASCADE, blank=True)
+    note = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.user.username

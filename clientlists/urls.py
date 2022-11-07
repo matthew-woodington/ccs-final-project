@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RequestListAPIView, RequestDetailAPIView, ClientListAPIView
+from .views import RequestListAPIView, RequestDetailAPIView, ClientListAPIView, ClientListDetailAPIView
 
 app_name = 'client_lists'
 
@@ -9,4 +9,6 @@ urlpatterns = [
     path('requests/<int:pk>/', RequestDetailAPIView.as_view(), name='request'),
     path('clientlists/trainer/<int:trainerprofile>/',
          ClientListAPIView.as_view(), name='client_list'),
+    path('clientlists/<int:pk>/', ClientListDetailAPIView.as_view(),
+         name='client_list_detail'),
 ]
