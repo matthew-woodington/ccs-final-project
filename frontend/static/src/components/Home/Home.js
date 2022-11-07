@@ -4,12 +4,33 @@ import { handleError } from "../../re-usable-func";
 import Search from "../Search/Search";
 import TrainerProfileCard from "./TrainerProfileCard";
 import Fuse from "fuse.js";
+import { geocodeByLatLng } from "react-google-places-autocomplete";
 
 function Home() {
   const [trainerProfiles, setTrainerProfiles] = useState([]);
   const [filteredProfiles, setFilteredProfiles] = useState([]);
   const [queryPhrase, setQueryPhrase] = useState("");
   const [distance, setDistance] = useState(50);
+  const [currentLocation, setCurrentLocation] = useState("");
+
+  const noEnteredLocation = [null, undefined, ""].includes(currentLocation);
+
+  useEffect(() => {
+    const getPosition = async () => {
+      window.navigator.geolocation.getCurrentPosition((position) =>
+        geocodeByLatLng({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        }).then((results) => {
+          const address = results.find((result) =>
+            result.types.includes("postal_code")
+          ).formatted_address;
+          setCurrentLocation(address);
+        })
+      );
+    };
+    getPosition();
+  }, []);
 
   useEffect(() => {
     const getTrainerProfiles = async () => {
@@ -60,6 +81,7 @@ function Home() {
           distance={distance}
           queryPhrase={queryPhrase}
           setQueryPhrase={setQueryPhrase}
+          setCurrentLocation={setCurrentLocation}
         />
       </aside>
       <article>

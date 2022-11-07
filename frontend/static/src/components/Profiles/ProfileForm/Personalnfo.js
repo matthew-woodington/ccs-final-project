@@ -13,7 +13,7 @@ function PersonalInfoForm({ state, preview, handleImage, handleInput, nextStep }
       </div>
       <Form.Group className="mb-3" controlId="image">
         <Form.Label>Choose a profile picture</Form.Label>
-        <Form.Control required type="file" name="avatar" onChange={handleImage} />
+        <Form.Control className="file" required type="file" name="avatar" onChange={handleImage} />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="first-name">

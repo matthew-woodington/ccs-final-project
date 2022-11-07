@@ -4,8 +4,9 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { IoClose } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5";
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 
-function Search({ distance, setDistance, queryPhrase, setQueryPhrase }) {
+function Search({ distance, setDistance, queryPhrase, setQueryPhrase, setCurrentLocation }) {
   const clearText = (e) => {
     e.preventDefault();
     setQueryPhrase("");
@@ -27,6 +28,14 @@ function Search({ distance, setDistance, queryPhrase, setQueryPhrase }) {
           {queryPhrase.length > 0 && <IoClose onClick={(e) => clearText(e)} />}
         </Button>
       </InputGroup>
+
+      <GooglePlacesAutocomplete
+        apiKey={process.env.REACT_APP_GOOGLE_API_KEY}
+        selectProps={{
+          placeholder: "Select a location...",
+          onChange: (e) => setCurrentLocation(e.label),
+        }}
+      />
 
       <Form.Group>
         <Form.Select value={distance} onChange={(e) => setDistance(e.target.value)}>
