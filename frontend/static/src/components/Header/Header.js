@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
 import Badge from "react-bootstrap/Badge";
+import appLogo from "../../Images/reps-logo.png";
 
 function Header({ userState, logoutUser, requests }) {
   const navigate = useNavigate();
@@ -15,19 +16,23 @@ function Header({ userState, logoutUser, requests }) {
 
   return (
     <>
-      <Navbar bg="light" expand="lg">
+      <Navbar className="navbar" expand="lg">
         <Container>
-          <Navbar.Brand href="/">REPS </Navbar.Brand>
+          <Navbar.Brand href="/">
+            <img className="app-logo" src={appLogo}></img>
+          </Navbar.Brand>
           <div className="desk-nav">
             <Nav className="me-auto">
               {!userState.auth && (
                 <>
-                  <Nav.Link href="/login">Login</Nav.Link>
+                  <Nav.Link className="nav-link" href="/login">
+                    Login
+                  </Nav.Link>
                 </>
               )}
               {userState.is_trainer && (
                 <>
-                  <Nav.Link href="/trainer/requests">
+                  <Nav.Link className="nav-link" href="/trainer/requests">
                     Messages
                     {requests && (
                       <Badge className="noti" pill>
@@ -35,12 +40,14 @@ function Header({ userState, logoutUser, requests }) {
                       </Badge>
                     )}
                   </Nav.Link>
-                  <Nav.Link href="/trainer/my-profile">My Profile</Nav.Link>
+                  <Nav.Link className="nav-link" href="/trainer/my-profile">
+                    My Profile
+                  </Nav.Link>
                 </>
               )}
               {userState.auth && (
                 <>
-                  <Nav.Link href="/" onClick={(e) => logout(e)}>
+                  <Nav.Link className="nav-link" href="/" onClick={(e) => logout(e)}>
                     Logout
                   </Nav.Link>
                 </>

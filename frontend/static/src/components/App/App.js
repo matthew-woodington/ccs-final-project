@@ -100,7 +100,16 @@ function App() {
             />
             <Route path="create-client-profile" element={<ClientProfileCreate />} />
             <Route path="trainer/my-profile" element={<TrainerMyProfile userState={userState} />} />
-            <Route path="trainer/requests" element={<TrainerRequests requests={requests} />} />
+            <Route
+              path="trainer/requests"
+              element={
+                <TrainerRequests
+                  userState={userState}
+                  requests={requests}
+                  setRequests={setRequests}
+                />
+              }
+            />
           </Route>
           <Route
             path="login"

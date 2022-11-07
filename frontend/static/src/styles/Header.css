@@ -1,7 +1,21 @@
+.navbar {
+    background-color: #0C1A2D;
+}
+
+.app-logo {
+    height: 60px;
+    width: auto;
+}
+
 .desk-nav {
     display: flex;
     align-items: center;
+    color: #FFFAFF;
 } 
+
+.nav-link {
+    color: #FFFAFF;
+}
 
 .profile-picture {
     position: relative;
