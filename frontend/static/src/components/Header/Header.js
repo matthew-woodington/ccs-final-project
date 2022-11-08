@@ -19,20 +19,20 @@ function Header({ userState, logoutUser, requests }) {
       <Navbar className="navbar" expand="lg">
         <Container>
           <Navbar.Brand href="/">
-            <img className="app-logo" src={appLogo}></img>
+            <img className="app-logo" src={appLogo} alt="app logo"></img>
           </Navbar.Brand>
           <div className="desk-nav">
             <Nav className="me-auto">
               {!userState.auth && (
                 <>
-                  <Nav.Link className="nav-link" href="/login">
+                  <Nav.Link className="nav-bar-link" href="/login">
                     Login
                   </Nav.Link>
                 </>
               )}
               {userState.is_trainer && (
                 <>
-                  <Nav.Link className="nav-link" href="/trainer/portal">
+                  <Nav.Link className="nav-bar-link" href="/trainer/portal">
                     Trainer Portal
                     {requests && (
                       <Badge className="noti" pill>
@@ -40,32 +40,31 @@ function Header({ userState, logoutUser, requests }) {
                       </Badge>
                     )}
                   </Nav.Link>
-                  <Nav.Link className="nav-link" href="/trainer/my-profile">
+                  <Nav.Link className="nav-bar-link" href="/trainer/my-profile">
                     My Profile
+                  </Nav.Link>
+                </>
+              )}
+              {userState.is_client && (
+                <>
+                  <Nav.Link className="nav-bar-link" href="/client/my-sessions">
+                    My Sessions
                   </Nav.Link>
                 </>
               )}
               {userState.auth && (
                 <>
-                  <Nav.Link className="nav-link" href="/" onClick={(e) => logout(e)}>
+                  <Nav.Link className="nav-bar-link" href="/" onClick={(e) => logout(e)}>
                     Logout
                   </Nav.Link>
                 </>
               )}
             </Nav>
             {userState.trainer_avatar && (
-              <img
-                className="profile-picture"
-                src={userState.trainer_avatar}
-                alt="profile picture"
-              />
+              <img className="profile-picture" src={userState.trainer_avatar} alt="profile" />
             )}
             {userState.client_avatar && (
-              <img
-                className="profile-picture"
-                src={userState.client_avatar}
-                alt="profile picture"
-              />
+              <img className="profile-picture" src={userState.client_avatar} alt="profile" />
             )}
           </div>
         </Container>

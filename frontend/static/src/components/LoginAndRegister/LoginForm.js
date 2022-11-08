@@ -50,6 +50,7 @@ function LoginForm({ userState, setUserState }) {
         trainer_avatar: data.trainer_avatar,
         client_avatar: data.client_avatar,
         trainer_profile: data.trainer_profile,
+        client_profile: data.client_profile,
       });
     }
   };

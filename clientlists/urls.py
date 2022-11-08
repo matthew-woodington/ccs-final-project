@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RequestListAPIView, RequestDetailAPIView, ClientListAPIView, ClientListDetailAPIView, SessionListAPIView, ClientSessionListAPIView
+from .views import RequestListAPIView, RequestDetailAPIView, ClientListAPIView, ClientListDetailAPIView, SessionListAPIView, ClientSessionListAPIView, SessionListFilteredAPIView, SessionDetailAPIView
 
 app_name = 'client_lists'
 
@@ -15,4 +15,7 @@ urlpatterns = [
          SessionListAPIView.as_view(), name='trainer_session_view'),
     path('sessions/client/<int:clientprofile>/',
          ClientSessionListAPIView.as_view(), name='client_session_view'),
+    path('sessions/trainer/<int:trainerprofile>/client/<int:clientprofile>/',
+         SessionListFilteredAPIView.as_view()),
+    path('sessions/<int:pk>/', SessionDetailAPIView.as_view(), name='session_detail')
 ]

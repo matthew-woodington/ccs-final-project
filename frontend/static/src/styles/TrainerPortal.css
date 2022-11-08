@@ -32,3 +32,14 @@
     display: flex;
     align-items: center;
 }
+
+.session-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.session-action {
+    margin-left: 10px;
+    cursor: pointer;
+}

@@ -12,6 +12,7 @@ import ClientProfileCreate from "../Profiles/ClientProfileCreate";
 import TrainerDetailView from "../Home/ProfileDetail/TrainerDetailView";
 import TrainerMyProfile from "../Profiles/TrainerMyProfile";
 import TrainerPortal from "../TrainerPortal/TrainerPortal";
+import ClientSessions from "../ClientPortal/ClientSessions";
 
 const INITIAL_STATE = {
   auth: false,
@@ -22,6 +23,7 @@ const INITIAL_STATE = {
   trainer_avatar: null,
   client_avatar: null,
   trainer_profile: null,
+  client_profile: null,
 };
 
 function App() {
@@ -113,6 +115,7 @@ function App() {
                 />
               }
             />
+            <Route path="client/my-sessions" element={<ClientSessions userState={userState} />} />
           </Route>
           <Route
             path="login"

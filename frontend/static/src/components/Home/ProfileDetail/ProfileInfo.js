@@ -48,6 +48,7 @@ function ProfileInfo({ state, userState }) {
       throw new Error("Network response was not OK");
     } else {
       const data = await response.json();
+      console.log(data);
       handleClose();
     }
   };

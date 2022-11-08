@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Request, ClientList, Session
-from accounts.serializers import ClientProfileSerializer
+from accounts.serializers import ClientProfileSerializer, TrainerClientViewSerializer
 
 
 class RequestSerializer(serializers.ModelSerializer):
@@ -48,6 +48,15 @@ class ClientListDetailReadSerializer(serializers.ModelSerializer):
 
 class SessionReadSerializer(serializers.ModelSerializer):
     clientprofile = ClientProfileSerializer()
+
+    class Meta:
+        model = Session
+        fields = '__all__'
+
+
+class ClientSessionReadSerializer(serializers.ModelSerializer):
+    clientprofile = ClientProfileSerializer()
+    trainerprofile = TrainerClientViewSerializer()
 
     class Meta:
         model = Session

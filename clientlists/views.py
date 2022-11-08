@@ -1,6 +1,7 @@
 from rest_framework import generics
+from django.db.models import Q
 from .models import Request, ClientList, Session
-from .serializers import RequestSerializer, ClientListReadSerializer, ClientListWriteSerializer, ClientListDetailReadSerializer, SessionReadSerializer, SessionWriteSerializer
+from .serializers import RequestSerializer, ClientListReadSerializer, ClientListWriteSerializer, ClientListDetailReadSerializer, SessionReadSerializer, SessionWriteSerializer, ClientSessionReadSerializer
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsAuthorOrTrainer, IsTrainer, IsTrainerOrReadOnly
 
@@ -61,7 +62,7 @@ class SessionListAPIView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         trainerprofile = self.kwargs['trainerprofile']
-        return Session.objects.filter(trainerprofile=trainerprofile).order_by('date')
+        return Session.objects.filter(trainerprofile=trainerprofile).order_by('date', 'time')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -69,8 +70,33 @@ class SessionListAPIView(generics.ListCreateAPIView):
 
 class ClientSessionListAPIView(generics.ListAPIView):
     permission_classes = (IsTrainerOrReadOnly,)
-    serializer_class = SessionReadSerializer
+    serializer_class = ClientSessionReadSerializer
 
     def get_queryset(self):
         clientprofile = self.kwargs['clientprofile']
-        return Session.objects.filter(clientprofile=clientprofile).order_by('date')
+        return Session.objects.filter(clientprofile=clientprofile).order_by('date', 'time')
+
+
+class SessionListFilteredAPIView(generics.ListCreateAPIView):
+    permission_classes = (IsTrainer,)
+
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == 'PUT' or method == 'POST':
+            return SessionWriteSerializer
+        else:
+            return SessionReadSerializer
+
+    def get_queryset(self):
+        trainerprofile = self.kwargs['trainerprofile']
+        clientprofile = self.kwargs['clientprofile']
+        return Session.objects.filter(Q(trainerprofile=trainerprofile) & Q(clientprofile=clientprofile)).order_by('date', 'time')
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class SessionDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsTrainer,)
+    queryset = Session.objects.all()
+    serializer_class = SessionReadSerializer

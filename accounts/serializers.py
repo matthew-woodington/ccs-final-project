@@ -21,11 +21,13 @@ class TokenSerializer(serializers.ModelSerializer):
     client_avatar = serializers.ImageField(source='user.clientprofile.avatar')
     trainer_profile = serializers.ReadOnlyField(
         source='user.trainerprofile.id')
+    client_profile = serializers.ReadOnlyField(
+        source='user.clientprofile.id')
 
     class Meta:
         model = TokenModel
         fields = ('key', 'is_superuser', 'id',
-                  'is_trainer', 'is_client', 'trainer_avatar', 'client_avatar', 'trainer_profile')
+                  'is_trainer', 'is_client', 'trainer_avatar', 'client_avatar', 'trainer_profile', 'client_profile')
 
 
 class CustomRegisterSerializer(RegisterSerializer):
@@ -65,3 +67,9 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = '__all__'
+
+
+class TrainerClientViewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TrainerProfile
+        fields = ('avatar', 'first_name', 'last_name',)

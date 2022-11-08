@@ -7,7 +7,6 @@ import Modal from "react-bootstrap/Modal";
 import Cookies from "js-cookie";
 
 function TrainerClientList({ userState, clients, setClients }) {
-  // const [clients, setClients] = useState();
   const [modalData, setModalData] = useState({
     trainer_profile: "",
     clientprofile: "",
@@ -24,22 +23,6 @@ function TrainerClientList({ userState, clients, setClients }) {
       [name]: value,
     }));
   };
-
-  // useEffect(() => {
-  //   const getClients = async () => {
-  //     const response = await fetch(
-  //       `/api/v1/clientlists/trainer/${userState.trainer_profile}/`
-  //     ).catch(handleError);
-  //     if (!response.ok) {
-  //       throw new Error("Network response was not ok!");
-  //     }
-
-  //     const data = await response.json();
-  //     setClients(data);
-  //   };
-
-  //   getClients();
-  // }, [userState]);
 
   const setActive = (id) => {
     const index = clients.findIndex((client) => client.id === id);
@@ -94,7 +77,7 @@ function TrainerClientList({ userState, clients, setClients }) {
                     <FiEdit onClick={() => setActive(client.id)} />
                   </div>
                   {modalData && (
-                    <Modal show={show} onHide={handleClose} animation={false}>
+                    <Modal show={show} onHide={handleClose}>
                       <Modal.Header closeButton>
                         <Modal.Title>{modalData.clientprofile.first_name} Note</Modal.Title>
                       </Modal.Header>

@@ -13,7 +13,7 @@ function Home() {
   const [distance, setDistance] = useState(50);
   const [currentLocation, setCurrentLocation] = useState("");
 
-  const noEnteredLocation = [null, undefined, ""].includes(currentLocation);
+  // const noEnteredLocation = [null, undefined, ""].includes(currentLocation);
 
   useEffect(() => {
     const getPosition = async () => {
