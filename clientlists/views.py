@@ -1,8 +1,8 @@
 from rest_framework import generics
-from .models import Request, ClientList
-from .serializers import RequestSerializer, ClientListReadSerializer, ClientListWriteSerializer, ClientListDetailReadSerializer, ClientListDetailWriteSerializer
+from .models import Request, ClientList, Session
+from .serializers import RequestSerializer, ClientListReadSerializer, ClientListWriteSerializer, ClientListDetailReadSerializer, SessionReadSerializer, SessionWriteSerializer
 from rest_framework.permissions import IsAuthenticated
-from .permissions import IsAuthorOrTrainer, IsTrainer
+from .permissions import IsAuthorOrTrainer, IsTrainer, IsTrainerOrReadOnly
 
 # Create your views here.
 
@@ -47,3 +47,30 @@ class ClientListDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsTrainer,)
     queryset = ClientList.objects.all()
     serializer_class = ClientListDetailReadSerializer
+
+
+class SessionListAPIView(generics.ListCreateAPIView):
+    permission_classes = (IsTrainer,)
+
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == 'PUT' or method == 'POST':
+            return SessionWriteSerializer
+        else:
+            return SessionReadSerializer
+
+    def get_queryset(self):
+        trainerprofile = self.kwargs['trainerprofile']
+        return Session.objects.filter(trainerprofile=trainerprofile).order_by('date')
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class ClientSessionListAPIView(generics.ListAPIView):
+    permission_classes = (IsTrainerOrReadOnly,)
+    serializer_class = SessionReadSerializer
+
+    def get_queryset(self):
+        clientprofile = self.kwargs['clientprofile']
+        return Session.objects.filter(clientprofile=clientprofile).order_by('date')

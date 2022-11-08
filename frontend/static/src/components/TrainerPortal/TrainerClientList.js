@@ -2,17 +2,17 @@ import { useState, useEffect } from "react";
 import { handleError } from "../../re-usable-func";
 import Accordion from "react-bootstrap/Accordion";
 import { FiEdit } from "react-icons/fi";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import Cookies from "js-cookie";
 
-function TrainerClientList({ userState }) {
-  const [clients, setClients] = useState();
+function TrainerClientList({ userState, clients, setClients }) {
+  // const [clients, setClients] = useState();
   const [modalData, setModalData] = useState({
-    trainer_profile: '',
-    clientprofile: '',
-    note: '',
-  })
+    trainer_profile: "",
+    clientprofile: "",
+    note: "",
+  });
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -25,27 +25,27 @@ function TrainerClientList({ userState }) {
     }));
   };
 
-  useEffect(() => {
-    const getClients = async () => {
-      const response = await fetch(
-        `/api/v1/clientlists/trainer/${userState.trainer_profile}/`
-      ).catch(handleError);
-      if (!response.ok) {
-        throw new Error("Network response was not ok!");
-      }
+  // useEffect(() => {
+  //   const getClients = async () => {
+  //     const response = await fetch(
+  //       `/api/v1/clientlists/trainer/${userState.trainer_profile}/`
+  //     ).catch(handleError);
+  //     if (!response.ok) {
+  //       throw new Error("Network response was not ok!");
+  //     }
 
-      const data = await response.json();
-      setClients(data);
-    };
+  //     const data = await response.json();
+  //     setClients(data);
+  //   };
 
-    getClients();
-  }, [userState]);
+  //   getClients();
+  // }, [userState]);
 
   const setActive = (id) => {
     const index = clients.findIndex((client) => client.id === id);
-    setModalData(clients[index])
-    setShow(true)
-  }
+    setModalData(clients[index]);
+    setShow(true);
+  };
 
   const editNote = async () => {
     const note = {
@@ -60,23 +60,21 @@ function TrainerClientList({ userState }) {
       },
       body: JSON.stringify(note),
     };
-    const response = await fetch(
-      `/api/v1/clientlists/${modalData.id}/`,
-      options
-    ).catch(handleError);
+    const response = await fetch(`/api/v1/clientlists/${modalData.id}/`, options).catch(
+      handleError
+    );
     if (!response.ok) {
       throw new Error("Network response was not OK");
     } else {
       const data = await response.json();
       console.log(data);
       const index = clients.findIndex((client) => client.id === data.id);
-      const updatedClients = [...clients]
-      updatedClients.splice(index, 1, data)
-      setClients(updatedClients)
-      setShow(false)
+      const updatedClients = [...clients];
+      updatedClients.splice(index, 1, data);
+      setClients(updatedClients);
+      setShow(false);
     }
   };
-
 
   return (
     <>
@@ -92,7 +90,8 @@ function TrainerClientList({ userState }) {
                 <Accordion.Body>
                   <p>Contact: {client.clientprofile.email}</p>
                   <div className="note-head">
-                    <p>Note:</p><FiEdit onClick={() => setActive(client.id)}/>
+                    <p>Note:</p>
+                    <FiEdit onClick={() => setActive(client.id)} />
                   </div>
                   {modalData && (
                     <Modal show={show} onHide={handleClose} animation={false}>
@@ -117,7 +116,7 @@ function TrainerClientList({ userState }) {
                       </Modal.Footer>
                     </Modal>
                   )}
-                  {client.note && (client.note)}
+                  {client.note && client.note}
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>

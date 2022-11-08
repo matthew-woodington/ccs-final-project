@@ -55,6 +55,15 @@
     border-color: #df8a00 !important;
 }
 
+.form-button:disabled {
+    background-color: #df8a00 !important;
+    border-color: #df8a00 !important;
+}
+
+.login-button {
+    margin-bottom: 10px;
+}
+
 .image-container {
     width: 200px;
     height: 200px;

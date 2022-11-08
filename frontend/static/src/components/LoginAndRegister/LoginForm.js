@@ -82,7 +82,7 @@ function LoginForm({ userState, setUserState }) {
           />
         </Form.Group>
         <div className="form-footer">
-          <Button className="form-button" type="submit">
+          <Button className="form-button login-button" type="submit">
             Login
           </Button>
           <p>

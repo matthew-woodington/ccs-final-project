@@ -27,3 +27,8 @@
 .request-button {
     margin: 0px 5px;
 }
+
+.new-session {
+    display: flex;
+    align-items: center;
+}

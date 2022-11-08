@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Request, ClientList
+from .models import Request, ClientList, Session
 from accounts.serializers import ClientProfileSerializer
 
 
@@ -32,10 +32,10 @@ class ClientListReadSerializer(serializers.ModelSerializer):
         # depth = 1
 
 
-class ClientListDetailWriteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ClientList
-        exclude = ('user',)
+# class ClientListDetailWriteSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = ClientList
+#         exclude = ('user',)
 
 
 class ClientListDetailReadSerializer(serializers.ModelSerializer):
@@ -44,3 +44,17 @@ class ClientListDetailReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClientList
         exclude = ('user',)
+
+
+class SessionReadSerializer(serializers.ModelSerializer):
+    clientprofile = ClientProfileSerializer()
+
+    class Meta:
+        model = Session
+        fields = '__all__'
+
+
+class SessionWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Session
+        fields = '__all__'
