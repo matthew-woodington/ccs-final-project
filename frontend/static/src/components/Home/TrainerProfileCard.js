@@ -1,6 +1,6 @@
 import "../../styles/Home.css";
 import Card from "react-bootstrap/Card";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function TrainerProfileCard({ profile }) {
   const navigate = useNavigate();
@@ -12,12 +12,12 @@ function TrainerProfileCard({ profile }) {
           <Card.Img className="profile-card-img" src={profile.avatar} />
         </div>
         <Card.Body>
-          <Card.Title>
+          <Card.Title className="card-title">
             {profile.first_name} {profile.last_name}
           </Card.Title>
           <span>{profile.training_type}</span>
           <Card.Text>{profile.specialties}</Card.Text>
-          {/* <Link to={`/trainer/${profile.id}`}>View Profile</Link> */}
+          <Card.Text>{profile.location}</Card.Text>
         </Card.Body>
       </Card>
     </li>

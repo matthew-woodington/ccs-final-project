@@ -1,4 +1,4 @@
-import "../../styles/Search.css";
+import "../../styles/Home.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -13,7 +13,7 @@ function Search({ distance, setDistance, queryPhrase, setQueryPhrase, setCurrent
   };
 
   return (
-    <section>
+    <section className="search-section">
       <InputGroup className="mb-3">
         <Form.Control
           aria-label="Search"
@@ -28,7 +28,7 @@ function Search({ distance, setDistance, queryPhrase, setQueryPhrase, setCurrent
           {queryPhrase.length > 0 && <IoClose onClick={(e) => clearText(e)} />}
         </Button>
       </InputGroup>
-
+      <p>Enable location services or choose a location below:</p>
       <GooglePlacesAutocomplete
         apiKey={process.env.REACT_APP_GOOGLE_API_KEY}
         selectProps={{
@@ -37,15 +37,16 @@ function Search({ distance, setDistance, queryPhrase, setQueryPhrase, setCurrent
         }}
       />
 
-      <Form.Group>
+      <Form.Group className="mb-3 search-radius">
+        <Form.Label>Distance radius (miles):</Form.Label>
         <Form.Select value={distance} onChange={(e) => setDistance(e.target.value)}>
-          <option value={10}>10 miles</option>
-          <option value={25}>25 miles</option>
-          <option value={50}>50 miles</option>
-          <option value={75}>75 miles</option>
-          <option value={100}>100 miles</option>
-          <option value={150}>150 miles</option>
-          <option value={200}>200 miles</option>
+          <option value={10}>10</option>
+          <option value={25}>25</option>
+          <option value={50}>50</option>
+          <option value={75}>75</option>
+          <option value={100}>100</option>
+          <option value={150}>150</option>
+          <option value={200}>200</option>
         </Form.Select>
       </Form.Group>
     </section>

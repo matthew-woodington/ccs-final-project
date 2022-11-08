@@ -47,10 +47,3 @@ class ClientListDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsTrainer,)
     queryset = ClientList.objects.all()
     serializer_class = ClientListDetailReadSerializer
-
-    # def get_serializer_class(self):
-    #     method = self.request.method
-    #     if method == 'PUT' or method == 'PATCH':
-    #         return ClientListDetailWriteSerializer
-    #     else:
-    #         return ClientListDetailReadSerializer

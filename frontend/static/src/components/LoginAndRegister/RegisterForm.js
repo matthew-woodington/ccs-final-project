@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { handleError } from "../../re-usable-func";
+import appLogo from "../../Images/reps-logo.png";
 
 function RegisterForm({ userState, setUserState }) {
   const [state, setState] = useState({
@@ -91,7 +92,8 @@ function RegisterForm({ userState, setUserState }) {
     <div className="form-display">
       <Form className="form-box" onSubmit={checkSamePass}>
         <div className="form-head">
-          <h1>Register</h1>
+          <img className="form-app-logo" src={appLogo} alt="" />
+          <h1 className="form-title">Register</h1>
         </div>
         <Form.Group className="mb-3" controlId="username">
           <Form.Label>Username</Form.Label>
@@ -154,7 +156,7 @@ function RegisterForm({ userState, setUserState }) {
           />
         </Form.Group>
         <div className="form-footer">
-          <Button variant="dark" type="submit">
+          <Button className="form-button" type="submit">
             Register
           </Button>
         </div>

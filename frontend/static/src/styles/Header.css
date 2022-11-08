@@ -1,5 +1,6 @@
 .navbar {
     background-color: #0C1A2D;
+    border-bottom: 1px solid #182B45;
 }
 
 .app-logo {
@@ -27,11 +28,12 @@
 
 .profile-picture {
     position: relative;
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     object-fit: cover;
     object-position: top;
+    border: 1px solid #fffaff;
 }
 
 .noti {

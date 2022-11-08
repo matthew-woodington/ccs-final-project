@@ -75,7 +75,7 @@ function Home() {
 
   return (
     <section className="display-area">
-      <aside>
+      <aside className="search-sidebar">
         <Search
           setDistance={setDistance}
           distance={distance}
@@ -84,12 +84,12 @@ function Home() {
           setCurrentLocation={setCurrentLocation}
         />
       </aside>
-      <article>
+      <article className="profiles-mainbar">
         {/* <ul className="list">{trainerProfileList}</ul> */}
         {filteredProfiles.length === 0 ? (
           <p>Oops! No profiles match that search, try again.</p>
         ) : (
-          <div className="list">
+          <div className="list profile-card-list">
             {filteredProfiles.map((profile) => (
               <TrainerProfileCard key={profile.id} profile={profile} />
             ))}

@@ -1,9 +1,11 @@
+import "../../styles/Form.css";
 import { useState } from "react";
 import Cookies from "js-cookie";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { handleError } from "../../re-usable-func";
 import { useNavigate, Link } from "react-router-dom";
+import appLogo from "../../Images/reps-logo.png";
 
 function LoginForm({ userState, setUserState }) {
   const [state, setState] = useState({
@@ -37,7 +39,6 @@ function LoginForm({ userState, setUserState }) {
     } else {
       const data = await response.json();
       Cookies.set("Authorization", `Token ${data.key}`);
-      // console.log(data);
       navigate("/");
       setUserState({
         ...userState,
@@ -57,7 +58,8 @@ function LoginForm({ userState, setUserState }) {
     <div className="form-display">
       <Form className="form-box" onSubmit={handleSubmit}>
         <div className="form-head">
-          <h1>Login</h1>
+          <img className="form-app-logo" src={appLogo} alt="" />
+          <h1 className="form-title">Login</h1>
         </div>
         <Form.Group className="mb-3" controlId="username">
           <Form.Label>Username</Form.Label>
@@ -80,11 +82,15 @@ function LoginForm({ userState, setUserState }) {
           />
         </Form.Group>
         <div className="form-footer">
-          <Button variant="dark" type="submit">
+          <Button className="form-button" type="submit">
             Login
           </Button>
           <p>
-            Don't have an account? Click <Link to={"/register"}>here</Link> to create one.
+            Don't have an account? Click{" "}
+            <Link className="register-link" to={"/register"}>
+              here
+            </Link>{" "}
+            to create one.
           </p>
         </div>
       </Form>

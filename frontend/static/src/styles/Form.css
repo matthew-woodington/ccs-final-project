@@ -1,12 +1,22 @@
+
 .form-display {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    background-color: #0c1a2d;
+    color: #fffaff;
+    min-height: 100vh;
+} 
+
+.form-app-logo {
+    width: 400px;
+    margin-top: 80px;
 }
 
 .form-box {
-    width: 60%;
+    width: 40%;
+    margin-bottom: 50px;
 }
 
 .form-head {
@@ -16,26 +26,56 @@
     align-items: center;
 }
 
+.form-title {
+    margin-top: 20px;
+}
+
 .form-footer {
     text-align: center;
 }
 
+.register-link {
+    text-decoration: none;
+    color: #3071df;
+}
+
 .form-button {
     margin: 5px;
+    background-color: #fdb035;
+    border-color: #fdb035;
+}
+
+.form-button:hover {
+    background-color: #df8a00;
+    border-color: #df8a00;
+}
+
+.form-button:active {
+    background-color: #df8a00 !important;
+    border-color: #df8a00 !important;
 }
 
 .image-container {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    border: 1px solid #212529;
+    border: 1px solid #fffaff;
     overflow: hidden;
-    background-color: #bbb;
+    background-color: #182B45;
 }
 
 .form-image {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
     object-position: center;
+    border: 1px solid #fffaff;
+}
+
+.trainer-create-title {
+    margin-bottom: 20px;
+}
+
+.bar {
+    margin-bottom: 20px;
 }

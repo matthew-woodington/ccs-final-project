@@ -134,9 +134,9 @@ function TrainerProfileCreate({ userState, setUserState }) {
     <section className="form-display">
       <div className="form-box">
         <div className="form-head">
-          <h1>Create Profile</h1>
+          <h1 className="trainer-create-title">Create Profile</h1>
         </div>
-        <ProgressBar now={step * (100 / 3)} />
+        <ProgressBar now={step * (100 / 3)} className="bar" />
         <div>{html()}</div>
       </div>
     </section>

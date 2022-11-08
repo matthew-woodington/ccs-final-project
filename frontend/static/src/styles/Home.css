@@ -2,13 +2,18 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    margin-top: 20px;
+    color: #fffaff;
 }
 
 .profile-card {
     display: flex;
     flex-direction: row;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     cursor: pointer;
+    color: #fffaff;
+    background-color: #081D3A;
+    border: 2px solid #182B45;
 }
 
 .image-cont {
@@ -24,4 +29,33 @@
     object-fit: contain;
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
+}
+
+.search-sidebar {
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+    /* border-right: 1px solid #182B45; */
+}
+
+.search-section {
+    width: 80%;
+}
+
+.search-radius {
+    margin-top: 10px;
+}
+
+.profiles-mainbar {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-card-list {
+    width: 70%;
+}
+
+.card-title {
+    color: #fdb035;
 }

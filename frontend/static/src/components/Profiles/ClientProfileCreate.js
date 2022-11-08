@@ -13,7 +13,7 @@ const INITIAL_CLIENT_PROFILE_STATE = {
   last_name: "",
 };
 
-function ClientProfileCreate() {
+function ClientProfileCreate({ userState, setUserState }) {
   const [state, setState] = useState(INITIAL_CLIENT_PROFILE_STATE);
   const [preview, setPreview] = useState(defaultProfileImage);
 
@@ -64,6 +64,10 @@ function ClientProfileCreate() {
       const data = await response.json();
       console.log(data);
       setState(INITIAL_CLIENT_PROFILE_STATE);
+      setUserState({
+        ...userState,
+        client_avatar: data.avatar,
+      });
       navigate("/");
     }
   };
@@ -107,7 +111,7 @@ function ClientProfileCreate() {
           />
         </Form.Group>
 
-        <div>
+        <div className="form-footer">
           <Button className="form-button" type="submit" variant="dark">
             Save
           </Button>
