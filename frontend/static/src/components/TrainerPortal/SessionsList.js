@@ -1,6 +1,5 @@
 import Card from "react-bootstrap/Card";
 import { FiEdit } from "react-icons/fi";
-import { FiDelete } from "react-icons/fi";
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -9,8 +8,9 @@ import Cookies from "js-cookie";
 import { handleError } from "../../re-usable-func";
 import moment from "moment";
 
-function SessionsList({ filter, sessions, setSessions }) {
+function SessionsList({ sessions, setSessions }) {
   const [modalData, setModalData] = useState({
+    client_details: {},
     trainer_profile: "",
     clientprofile: "",
     date: "",
@@ -70,8 +70,8 @@ function SessionsList({ filter, sessions, setSessions }) {
           <Card key={session.id}>
             <Card.Header className="session-head">
               <div className="client-info">
-                <img className="client-profile-img" src={session.clientprofile.avatar} />
-                {session.clientprofile.first_name} {session.clientprofile.last_name}
+                <img className="client-profile-img" src={session.client_details.avatar} />
+                {session.client_details.first_name} {session.client_details.last_name}
               </div>
               <div>
                 <FiEdit className="session-action" onClick={() => setActive(session.id)} />
@@ -79,7 +79,9 @@ function SessionsList({ filter, sessions, setSessions }) {
                 {modalData && (
                   <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
-                      <Modal.Title>Edit {modalData.clientprofile.first_name}'s Session</Modal.Title>
+                      <Modal.Title>
+                        Edit {modalData.client_details.first_name}'s Session
+                      </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                       <Form.Control

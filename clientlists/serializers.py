@@ -29,13 +29,6 @@ class ClientListReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClientList
         exclude = ('user',)
-        # depth = 1
-
-
-# class ClientListDetailWriteSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = ClientList
-#         exclude = ('user',)
 
 
 class ClientListDetailReadSerializer(serializers.ModelSerializer):
@@ -48,13 +41,14 @@ class ClientListDetailReadSerializer(serializers.ModelSerializer):
 
 class SessionReadSerializer(serializers.ModelSerializer):
     clientprofile = ClientProfileSerializer()
+    client_details = ClientProfileSerializer(read_only=True)
 
     class Meta:
         model = Session
         fields = '__all__'
 
 
-class ClientSessionReadSerializer(serializers.ModelSerializer):
+class ClientSessionSerializer(serializers.ModelSerializer):
     clientprofile = ClientProfileSerializer()
     trainerprofile = TrainerClientViewSerializer()
 
@@ -64,6 +58,18 @@ class ClientSessionReadSerializer(serializers.ModelSerializer):
 
 
 class SessionWriteSerializer(serializers.ModelSerializer):
+    client_details = ClientProfileSerializer(
+        source='clientprofile', read_only=True)
+
+    class Meta:
+        model = Session
+        fields = '__all__'
+
+
+class SessionSerializer(serializers.ModelSerializer):
+    client_details = ClientProfileSerializer(
+        source='clientprofile', read_only=True)
+
     class Meta:
         model = Session
         fields = '__all__'

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { handleError } from "../../re-usable-func";
 import TrainerEdit from "./TrainerEdit";
 
-function TrainerMyProfile({ userState }) {
+function TrainerMyProfile({ userState, setUserState }) {
   const [myProfile, setMyProfile] = useState();
 
   useEffect(() => {
@@ -16,10 +16,19 @@ function TrainerMyProfile({ userState }) {
     };
 
     getMyProfile(userState.trainer_profile);
-  }, [userState]);
+  }, [userState, myProfile]);
 
   return (
-    <section className="profile-view">{myProfile && <TrainerEdit myProfile={myProfile} />}</section>
+    <section className="profile-view">
+      {myProfile && (
+        <TrainerEdit
+          userState={userState}
+          setUserState={setUserState}
+          myProfile={myProfile}
+          setMyProfile={setMyProfile}
+        />
+      )}
+    </section>
   );
 }
 

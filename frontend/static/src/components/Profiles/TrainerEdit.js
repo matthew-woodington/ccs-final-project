@@ -9,7 +9,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Cookies from "js-cookie";
 
-function TrainerEdit({ myProfile }) {
+function TrainerEdit({ userState, setUserState, myProfile, setMyProfile }) {
   const [state, setState] = useState(myProfile);
   const [isEdit, setIsEdit] = useState(false);
   const [preview, setPreview] = useState(state.avatar);
@@ -68,6 +68,10 @@ function TrainerEdit({ myProfile }) {
     } else {
       const data = await response.json();
       console.log(data);
+      setUserState({
+        ...userState,
+        trainer_avatar: data.avatar,
+      });
       setIsEdit(false);
     }
   };
@@ -129,7 +133,7 @@ function TrainerEdit({ myProfile }) {
       <Form onSubmit={handleSubmit}>
         <h1>Edit Profile</h1>
         <div className="image-container">
-          <img className="form-image" src={state.avatar} alt="" />
+          <img className="form-image" src={preview} alt="" />
           {/* {state.avatar && <img className="form-image" src={preview} alt="" />} */}
         </div>
         <Form.Group className="mb-3" controlId="image">

@@ -43,7 +43,6 @@ class CustomRegisterSerializer(RegisterSerializer):
 
 
 class TrainerProfileSerializer(serializers.ModelSerializer):
-    date_joined = serializers.ReadOnlyField(source='user.date_joined')
 
     class Meta:
         model = TrainerProfile

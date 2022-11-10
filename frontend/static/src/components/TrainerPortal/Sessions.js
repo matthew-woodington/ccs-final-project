@@ -40,22 +40,6 @@ function Sessions({ userState, clients }) {
     }
   };
 
-  //   useEffect(() => {
-  //     const getSessions = async () => {
-  //       const response = await fetch(`/api/v1/sessions/trainer/${userState.trainer_profile}/`).catch(
-  //         handleError
-  //       );
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok!");
-  //       }
-
-  //       const data = await response.json();
-  //       setSessions(data);
-  //     };
-
-  //     getSessions();
-  //   }, [userState]);
-
   useEffect(() => {
     if (filter === 0) {
       const getSessions = async () => {
@@ -86,7 +70,8 @@ function Sessions({ userState, clients }) {
     }
   }, [userState, filter]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const options = {
       method: "POST",
       headers: {
@@ -168,37 +153,45 @@ function Sessions({ userState, clients }) {
           </>
         ) : (
           <>
-            <Form.Control
-              required
-              type="date"
-              name="date"
-              value={newSession.date}
-              onChange={handleInput}
-            />
-            <Form.Control
-              required
-              type="time"
-              name="time"
-              value={newSession.time}
-              onChange={handleInput}
-            />
-            <div className="new-session">
-              <div>
-                <textarea
-                  placeholder="Details..."
-                  rows="1"
-                  className="form-control"
-                  name="details"
-                  value={newSession.details}
+            <Form onSubmit={handleSubmit}>
+              <Form.Group>
+                <Form.Control
+                  required
+                  type="date"
+                  name="date"
+                  value={newSession.date}
                   onChange={handleInput}
                 />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  required
+                  type="time"
+                  name="time"
+                  value={newSession.time}
+                  onChange={handleInput}
+                />
+              </Form.Group>
+              <div className="new-session">
+                <div>
+                  <Form.Group>
+                    <textarea
+                      placeholder="Details..."
+                      rows="1"
+                      className="form-control"
+                      name="details"
+                      value={newSession.details}
+                      onChange={handleInput}
+                    />
+                  </Form.Group>
+                </div>
+                <div>
+                  <Button className="form-button" type="submit">
+                    New Session
+                  </Button>
+                </div>
               </div>
-              <div>
-                <Button className="form-button" onClick={handleSubmit}>
-                  New Session
-                </Button>
-              </div>
-            </div>
+            </Form>
           </>
         )}
       </section>

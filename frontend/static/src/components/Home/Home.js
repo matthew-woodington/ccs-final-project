@@ -6,14 +6,18 @@ import TrainerProfileCard from "./TrainerProfileCard";
 import Fuse from "fuse.js";
 import { geocodeByLatLng } from "react-google-places-autocomplete";
 
-function Home() {
+function Home({ userState }) {
   const [trainerProfiles, setTrainerProfiles] = useState([]);
   const [filteredProfiles, setFilteredProfiles] = useState([]);
   const [queryPhrase, setQueryPhrase] = useState("");
   const [distance, setDistance] = useState(50);
-  const [currentLocation, setCurrentLocation] = useState("");
+  const [currentLocation, setCurrentLocation] = useState(window.localStorage.currentLocation || "");
 
   // const noEnteredLocation = [null, undefined, ""].includes(currentLocation);
+
+  useEffect(() => {
+    window.localStorage.setItem("currentLocation", JSON.stringify(currentLocation));
+  }, [currentLocation]);
 
   useEffect(() => {
     const getPosition = async () => {
@@ -32,20 +36,36 @@ function Home() {
     getPosition();
   }, []);
 
+  // useEffect(() => {
+  //   const getTrainerProfiles = async () => {
+  //     const response = await fetch("/api/v1/profiles/trainers/").catch(handleError);
+  //     if (!response.ok) {
+  //       throw new Error("Network response was not ok!");
+  //     }
+
+  //     const data = await response.json();
+  //     setTrainerProfiles(data);
+  //     setFilteredProfiles(data);
+  //   };
+
+  //   getTrainerProfiles();
+  // }, []);
+
   useEffect(() => {
     const getTrainerProfiles = async () => {
-      const response = await fetch("/api/v1/profiles/trainers/").catch(handleError);
+      const response = await fetch(
+        `/api/v1/profiles/filter/?origin=${currentLocation}&distance=${distance}`
+      ).catch(handleError);
       if (!response.ok) {
         throw new Error("Network response was not ok!");
       }
-
       const data = await response.json();
       setTrainerProfiles(data);
       setFilteredProfiles(data);
     };
 
     getTrainerProfiles();
-  }, []);
+  }, [currentLocation, distance]);
 
   useEffect(() => {
     if (!trainerProfiles) {
@@ -68,10 +88,6 @@ function Home() {
     };
     setFilteredProfiles(searchAndFilter());
   }, [queryPhrase, trainerProfiles]);
-
-  // const trainerProfileList = filteredProfiles.map((profile) => (
-  //   <TrainerProfileCard key={profile.id} profile={profile} />
-  // ));
 
   return (
     <section className="display-area">

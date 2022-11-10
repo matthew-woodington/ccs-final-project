@@ -1,7 +1,7 @@
 from rest_framework import generics
 from django.db.models import Q
 from .models import Request, ClientList, Session
-from .serializers import RequestSerializer, ClientListReadSerializer, ClientListWriteSerializer, ClientListDetailReadSerializer, SessionReadSerializer, SessionWriteSerializer, ClientSessionReadSerializer
+from .serializers import SessionSerializer, RequestSerializer, ClientListReadSerializer, ClientListWriteSerializer, ClientListDetailReadSerializer, SessionReadSerializer, ClientSessionSerializer
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsAuthorOrTrainer, IsTrainer, IsTrainerOrReadOnly
 
@@ -52,25 +52,21 @@ class ClientListDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 class SessionListAPIView(generics.ListCreateAPIView):
     permission_classes = (IsTrainer,)
-
-    def get_serializer_class(self):
-        method = self.request.method
-        if method == 'PUT' or method == 'POST':
-            return SessionWriteSerializer
-        else:
-            return SessionReadSerializer
+    serializer_class = SessionSerializer
 
     def get_queryset(self):
         trainerprofile = self.kwargs['trainerprofile']
         return Session.objects.filter(trainerprofile=trainerprofile).order_by('date', 'time')
 
     def perform_create(self, serializer):
+        # import pdb
+        # pdb.set_trace()
         serializer.save(user=self.request.user)
 
 
 class ClientSessionListAPIView(generics.ListAPIView):
     permission_classes = (IsTrainerOrReadOnly,)
-    serializer_class = ClientSessionReadSerializer
+    serializer_class = ClientSessionSerializer
 
     def get_queryset(self):
         clientprofile = self.kwargs['clientprofile']
@@ -79,13 +75,14 @@ class ClientSessionListAPIView(generics.ListAPIView):
 
 class SessionListFilteredAPIView(generics.ListCreateAPIView):
     permission_classes = (IsTrainer,)
+    serializer_class = SessionSerializer
 
-    def get_serializer_class(self):
-        method = self.request.method
-        if method == 'PUT' or method == 'POST':
-            return SessionWriteSerializer
-        else:
-            return SessionReadSerializer
+    # def get_serializer_class(self):
+    #     method = self.request.method
+    #     if method == 'PUT' or method == 'POST':
+    #         return SessionWriteSerializer
+    #     else:
+    #         return SessionReadSerializer
 
     def get_queryset(self):
         trainerprofile = self.kwargs['trainerprofile']
