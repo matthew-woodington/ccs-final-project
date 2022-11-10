@@ -70,7 +70,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.count("effect");
     const getRequests = async () => {
       const response = await fetch(`/api/v1/requests/trainer/${userState.trainer_profile}/`).catch(
         handleError

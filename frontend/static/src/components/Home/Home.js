@@ -7,49 +7,58 @@ import Fuse from "fuse.js";
 import { geocodeByLatLng } from "react-google-places-autocomplete";
 
 function Home({ userState }) {
-  const [trainerProfiles, setTrainerProfiles] = useState([]);
-  const [filteredProfiles, setFilteredProfiles] = useState([]);
+  const [trainerProfiles, setTrainerProfiles] = useState(null);
+  const [filteredProfiles, setFilteredProfiles] = useState(null);
   const [queryPhrase, setQueryPhrase] = useState("");
   const [distance, setDistance] = useState(50);
-  const [currentLocation, setCurrentLocation] = useState(window.localStorage.currentLocation || "");
+  const [currentLocation, setCurrentLocation] = useState(
+    JSON.parse(localStorage.getItem("currentLocation"))
+  );
 
-  // const noEnteredLocation = [null, undefined, ""].includes(currentLocation);
+  const defaultLocationPhrase = "Select location...";
+  const noEnteredLocation = [defaultLocationPhrase, null, undefined, ""].includes(currentLocation);
+
+  // useEffect(() => {
+  //   window.localStorage.setItem("currentLocation", JSON.stringify(currentLocation));
+  // }, [currentLocation]);
+
+  const clearFilters = () => {
+    if (window.localStorage.currentLocation) {
+      // setCurrentLocation(window.localStorage.currentLocation);
+      setCurrentLocation(JSON.parse(localStorage.getItem("currentLocation")));
+    } else {
+      setCurrentLocation(defaultLocationPhrase);
+    }
+    setDistance(50);
+    setQueryPhrase("");
+  };
 
   useEffect(() => {
-    window.localStorage.setItem("currentLocation", JSON.stringify(currentLocation));
-  }, [currentLocation]);
-
-  useEffect(() => {
+    console.count("effect");
     const getPosition = async () => {
-      window.navigator.geolocation.getCurrentPosition((position) =>
-        geocodeByLatLng({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        }).then((results) => {
-          const address = results.find((result) =>
-            result.types.includes("postal_code")
-          ).formatted_address;
-          setCurrentLocation(address);
-        })
+      window.navigator.geolocation.getCurrentPosition(
+        (position) =>
+          geocodeByLatLng({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          }).then((results) => {
+            const address = results.find((result) =>
+              result.types.includes("postal_code")
+            ).formatted_address;
+            setCurrentLocation(address);
+            window.localStorage.setItem("currentLocation", JSON.stringify(address));
+          })
+        // .catch((error) => {
+        //   console.error(error);
+        //   setCurrentLocation(defaultLocationPhrase);
+        // })
       );
+      if (!currentLocation) {
+        setCurrentLocation(defaultLocationPhrase);
+      }
     };
     getPosition();
   }, []);
-
-  // useEffect(() => {
-  //   const getTrainerProfiles = async () => {
-  //     const response = await fetch("/api/v1/profiles/trainers/").catch(handleError);
-  //     if (!response.ok) {
-  //       throw new Error("Network response was not ok!");
-  //     }
-
-  //     const data = await response.json();
-  //     setTrainerProfiles(data);
-  //     setFilteredProfiles(data);
-  //   };
-
-  //   getTrainerProfiles();
-  // }, []);
 
   useEffect(() => {
     const getTrainerProfiles = async () => {
@@ -65,7 +74,7 @@ function Home({ userState }) {
     };
 
     getTrainerProfiles();
-  }, [currentLocation, distance]);
+  }, [currentLocation, distance, noEnteredLocation]);
 
   useEffect(() => {
     if (!trainerProfiles) {
@@ -97,13 +106,33 @@ function Home({ userState }) {
           distance={distance}
           queryPhrase={queryPhrase}
           setQueryPhrase={setQueryPhrase}
+          currentLocation={currentLocation}
           setCurrentLocation={setCurrentLocation}
+          clearFilters={clearFilters}
         />
       </aside>
       <article className="profiles-mainbar">
-        {/* <ul className="list">{trainerProfileList}</ul> */}
-        {filteredProfiles.length === 0 ? (
+        {/* {filteredProfiles.length === 0 ? (
           <p>Oops! No profiles match that search, try again.</p>
+        ) : (
+          <div className="list profile-card-list">
+            {filteredProfiles.map((profile) => (
+              <TrainerProfileCard key={profile.id} profile={profile} />
+            ))}
+          </div>
+        )} */}
+        {!currentLocation ? (
+          <p className="search-label">
+            REPS would like to use your current location to find trainers near you!
+          </p>
+        ) : currentLocation === defaultLocationPhrase ? (
+          <p className="search-label">
+            Enable location services or select a location from the search menu to find a trainer!
+          </p>
+        ) : filteredProfiles === null ? (
+          <p className="search-label">Loading...</p>
+        ) : filteredProfiles.length === 0 ? (
+          <p className="search-label">Oops! No profiles match that search, try again.</p>
         ) : (
           <div className="list profile-card-list">
             {filteredProfiles.map((profile) => (

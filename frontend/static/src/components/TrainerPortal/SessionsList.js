@@ -63,6 +63,19 @@ function SessionsList({ sessions, setSessions }) {
     }
   };
 
+  const convertTime = (date, time) => {
+    const options = {
+      timeStyle: "short",
+      hour12: true,
+    };
+    const string = date + "T" + time;
+    const newtime = new Date(string);
+
+    const timeString = newtime.toLocaleString("en-US", options);
+
+    return timeString;
+  };
+
   return (
     <>
       {sessions.length > 0 ? (
@@ -120,7 +133,7 @@ function SessionsList({ sessions, setSessions }) {
             </Card.Header>
             <Card.Body>
               <Card.Title>
-                {moment(session.date).format("L")} | {session.time}
+                {moment(session.date).format("l")} | {convertTime(session.date, session.time)}
               </Card.Title>
               <Card.Text>{session.details}</Card.Text>
             </Card.Body>

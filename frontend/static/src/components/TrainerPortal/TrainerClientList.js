@@ -60,12 +60,61 @@ function TrainerClientList({ userState, clients, setClients }) {
   };
 
   return (
+    // <>
+    //   <section>
+    //     {clients ? (
+    //       clients.map((client) => (
+    //         <Accordion key={client.id}>
+    //           <Accordion.Item eventKey={client.id}>
+    //             <Accordion.Header>
+    //               <img className="client-profile-img" src={client.clientprofile.avatar} />
+    //               {client.clientprofile.first_name} {client.clientprofile.last_name}
+    //             </Accordion.Header>
+    //             <Accordion.Body>
+    //               <p>Contact: {client.clientprofile.email}</p>
+    //               <div className="note-head">
+    //                 <p>Note:</p>
+    //                 <FiEdit onClick={() => setActive(client.id)} />
+    //               </div>
+    //               {modalData && (
+    //                 <Modal show={show} onHide={handleClose}>
+    //                   <Modal.Header closeButton>
+    //                     <Modal.Title>{modalData.clientprofile.first_name} Note</Modal.Title>
+    //                   </Modal.Header>
+    //                   <Modal.Body>
+    //                     <textarea
+    //                       required
+    //                       placeholder="Note..."
+    //                       rows="2"
+    //                       className="form-control"
+    //                       name="note"
+    //                       value={modalData.note}
+    //                       onChange={handleInput}
+    //                     />
+    //                   </Modal.Body>
+    //                   <Modal.Footer>
+    //                     <Button variant="primary" onClick={editNote}>
+    //                       Save
+    //                     </Button>
+    //                   </Modal.Footer>
+    //                 </Modal>
+    //               )}
+    //               {client.note && client.note}
+    //             </Accordion.Body>
+    //           </Accordion.Item>
+    //         </Accordion>
+    //       ))
+    //     ) : (
+    //       <div>When you add clients they will show here.</div>
+    //     )}
+    //   </section>
+    // </>
     <>
       <section>
         {clients ? (
-          clients.map((client) => (
-            <Accordion key={client.id}>
-              <Accordion.Item eventKey={client.id}>
+          <Accordion>
+            {clients.map((client) => (
+              <Accordion.Item key={client.id} eventKey={client.id}>
                 <Accordion.Header>
                   <img className="client-profile-img" src={client.clientprofile.avatar} />
                   {client.clientprofile.first_name} {client.clientprofile.last_name}
@@ -102,8 +151,8 @@ function TrainerClientList({ userState, clients, setClients }) {
                   {client.note && client.note}
                 </Accordion.Body>
               </Accordion.Item>
-            </Accordion>
-          ))
+            ))}
+          </Accordion>
         ) : (
           <div>When you add clients they will show here.</div>
         )}

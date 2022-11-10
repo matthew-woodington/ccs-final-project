@@ -6,7 +6,15 @@ import { IoClose } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 
-function Search({ distance, setDistance, queryPhrase, setQueryPhrase, setCurrentLocation }) {
+function Search({
+  distance,
+  setDistance,
+  queryPhrase,
+  setQueryPhrase,
+  currentLocation,
+  setCurrentLocation,
+  clearFilters,
+}) {
   const clearText = (e) => {
     e.preventDefault();
     setQueryPhrase("");
@@ -23,22 +31,24 @@ function Search({ distance, setDistance, queryPhrase, setQueryPhrase, setCurrent
           value={queryPhrase}
           onChange={(e) => setQueryPhrase(e.target.value)}
         />
-        <Button variant="dark" id="button-addon2" type="button">
+        <Button className="query-search-button" id="button-addon2" type="button">
           {queryPhrase.length === 0 && <IoSearch />}
           {queryPhrase.length > 0 && <IoClose onClick={(e) => clearText(e)} />}
         </Button>
       </InputGroup>
-      <p>Enable location services or choose a location below:</p>
+      {/* <p className="search-label">Enable location services or choose a location below:</p> */}
       <GooglePlacesAutocomplete
+        className="autocomplete-search"
         apiKey={process.env.REACT_APP_GOOGLE_API_KEY}
         selectProps={{
-          placeholder: "Select a location...",
+          placeholder: currentLocation,
+          value: currentLocation,
           onChange: (e) => setCurrentLocation(e.label),
         }}
       />
 
       <Form.Group className="mb-3 search-radius">
-        <Form.Label>Distance radius (miles):</Form.Label>
+        <Form.Label className="search-label">Distance radius (miles):</Form.Label>
         <Form.Select value={distance} onChange={(e) => setDistance(e.target.value)}>
           <option value={10}>10</option>
           <option value={25}>25</option>
@@ -49,6 +59,10 @@ function Search({ distance, setDistance, queryPhrase, setQueryPhrase, setCurrent
           <option value={200}>200</option>
         </Form.Select>
       </Form.Group>
+
+      <Button className="form-button" type="button" onClick={() => clearFilters()}>
+        Clear Search Filters
+      </Button>
     </section>
   );
 }

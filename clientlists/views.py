@@ -1,7 +1,7 @@
 from rest_framework import generics
 from django.db.models import Q
 from .models import Request, ClientList, Session
-from .serializers import SessionSerializer, RequestSerializer, ClientListReadSerializer, ClientListWriteSerializer, ClientListDetailReadSerializer, SessionReadSerializer, ClientSessionSerializer
+from .serializers import SessionSerializer, RequestSerializer, ClientListReadSerializer, ClientListWriteSerializer, ClientListDetailReadSerializer, ClientSessionSerializer
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsAuthorOrTrainer, IsTrainer, IsTrainerOrReadOnly
 
@@ -96,4 +96,4 @@ class SessionListFilteredAPIView(generics.ListCreateAPIView):
 class SessionDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsTrainer,)
     queryset = Session.objects.all()
-    serializer_class = SessionReadSerializer
+    serializer_class = SessionSerializer

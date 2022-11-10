@@ -22,6 +22,19 @@ function ClientSessions({ userState }) {
     getSessions();
   }, [userState]);
 
+  const convertTime = (date, time) => {
+    const options = {
+      timeStyle: "short",
+      hour12: true,
+    };
+    const string = date + "T" + time;
+    const newtime = new Date(string);
+
+    const timeString = newtime.toLocaleString("en-US", options);
+
+    return timeString;
+  };
+
   return (
     <>
       <section>
@@ -36,7 +49,7 @@ function ClientSessions({ userState }) {
               </Card.Header>
               <Card.Body>
                 <Card.Title>
-                  {moment(session.date).format("L")} | {session.time}
+                  {moment(session.date).format("L")} | {convertTime(session.date, session.time)}
                 </Card.Title>
                 <Card.Text>{session.details}</Card.Text>
               </Card.Body>
