@@ -1,7 +1,7 @@
 from rest_framework import generics
 from django.db.models import Q
 from .models import Request, ClientList, Session
-from .serializers import SessionSerializer, RequestSerializer, ClientListReadSerializer, ClientListWriteSerializer, ClientListDetailReadSerializer, ClientSessionSerializer
+from .serializers import SessionSerializer, RequestSerializer, ClientListSerializer, ClientListDetailReadSerializer, ClientSessionSerializer
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsAuthorOrTrainer, IsTrainer, IsTrainerOrReadOnly
 
@@ -28,13 +28,14 @@ class RequestDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 class ClientListAPIView(generics.ListCreateAPIView):
     permission_classes = (IsTrainer,)
+    serializer_class = ClientListSerializer
 
-    def get_serializer_class(self):
-        method = self.request.method
-        if method == 'PUT' or method == 'POST':
-            return ClientListWriteSerializer
-        else:
-            return ClientListReadSerializer
+    # def get_serializer_class(self):
+    #     method = self.request.method
+    #     if method == 'PUT' or method == 'POST':
+    #         return ClientListWriteSerializer
+    #     else:
+    #         return ClientListReadSerializer
 
     def get_queryset(self):
         trainerprofile = self.kwargs['trainerprofile']
@@ -76,13 +77,6 @@ class ClientSessionListAPIView(generics.ListAPIView):
 class SessionListFilteredAPIView(generics.ListCreateAPIView):
     permission_classes = (IsTrainer,)
     serializer_class = SessionSerializer
-
-    # def get_serializer_class(self):
-    #     method = self.request.method
-    #     if method == 'PUT' or method == 'POST':
-    #         return SessionWriteSerializer
-    #     else:
-    #         return SessionReadSerializer
 
     def get_queryset(self):
         trainerprofile = self.kwargs['trainerprofile']

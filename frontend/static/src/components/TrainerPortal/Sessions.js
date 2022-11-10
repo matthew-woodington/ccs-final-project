@@ -107,8 +107,8 @@ function Sessions({ userState, clients }) {
           <option value={0}>All</option>
           {clients &&
             clients.map((client) => (
-              <option key={client.id} value={client.clientprofile.id}>
-                {client.clientprofile.first_name} {client.clientprofile.last_name}
+              <option key={client.id} value={client.clientprofile}>
+                {client.client_details.first_name} {client.client_details.last_name}
               </option>
             ))}
         </Form.Select>

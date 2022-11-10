@@ -59,7 +59,13 @@ function TrainerPortal({ userState, requests, setRequests }) {
         )}
         {filter === "sessions" && <Sessions userState={userState} clients={clients} />}
         {filter === "messages" && (
-          <TrainerRequests userState={userState} requests={requests} setRequests={setRequests} />
+          <TrainerRequests
+            userState={userState}
+            requests={requests}
+            setRequests={setRequests}
+            clients={clients}
+            setClients={setClients}
+          />
         )}
       </section>
     </>

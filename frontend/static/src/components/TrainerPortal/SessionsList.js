@@ -140,7 +140,7 @@ function SessionsList({ sessions, setSessions }) {
           </Card>
         ))
       ) : (
-        <p>No sessions logged for this client.</p>
+        <p className="search-label">No sessions logged for this client.</p>
       )}
     </>
   );

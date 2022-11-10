@@ -5,6 +5,7 @@ import Search from "../Search/Search";
 import TrainerProfileCard from "./TrainerProfileCard";
 import Fuse from "fuse.js";
 import { geocodeByLatLng } from "react-google-places-autocomplete";
+import Spinner from "react-bootstrap/Spinner";
 
 function Home({ userState }) {
   const [trainerProfiles, setTrainerProfiles] = useState(null);
@@ -17,10 +18,6 @@ function Home({ userState }) {
 
   const defaultLocationPhrase = "Select location...";
   const noEnteredLocation = [defaultLocationPhrase, null, undefined, ""].includes(currentLocation);
-
-  // useEffect(() => {
-  //   window.localStorage.setItem("currentLocation", JSON.stringify(currentLocation));
-  // }, [currentLocation]);
 
   const clearFilters = () => {
     if (window.localStorage.currentLocation) {
@@ -112,15 +109,6 @@ function Home({ userState }) {
         />
       </aside>
       <article className="profiles-mainbar">
-        {/* {filteredProfiles.length === 0 ? (
-          <p>Oops! No profiles match that search, try again.</p>
-        ) : (
-          <div className="list profile-card-list">
-            {filteredProfiles.map((profile) => (
-              <TrainerProfileCard key={profile.id} profile={profile} />
-            ))}
-          </div>
-        )} */}
         {!currentLocation ? (
           <p className="search-label">
             REPS would like to use your current location to find trainers near you!
@@ -130,7 +118,9 @@ function Home({ userState }) {
             Enable location services or select a location from the search menu to find a trainer!
           </p>
         ) : filteredProfiles === null ? (
-          <p className="search-label">Loading...</p>
+          <Spinner animation="border" variant="warning" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
         ) : filteredProfiles.length === 0 ? (
           <p className="search-label">Oops! No profiles match that search, try again.</p>
         ) : (

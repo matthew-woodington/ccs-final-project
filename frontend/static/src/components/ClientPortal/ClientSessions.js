@@ -38,7 +38,7 @@ function ClientSessions({ userState }) {
   return (
     <>
       <section>
-        {sessions &&
+        {sessions ? (
           sessions.map((session) => (
             <Card key={session.id}>
               <Card.Header className="session-head">
@@ -54,7 +54,12 @@ function ClientSessions({ userState }) {
                 <Card.Text>{session.details}</Card.Text>
               </Card.Body>
             </Card>
-          ))}
+          ))
+        ) : (
+          <p className="search-label">
+            When a trainer creates a session for you it will show here.
+          </p>
+        )}
       </section>
     </>
   );

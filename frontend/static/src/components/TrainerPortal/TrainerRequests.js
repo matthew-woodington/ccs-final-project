@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Cookies from "js-cookie";
 import { handleError } from "../../re-usable-func";
 
-function TrainerRequests({ userState, requests, setRequests }) {
+function TrainerRequests({ userState, requests, setRequests, setClients, clients }) {
   const deleteRequest = async (id) => {
     const response = await fetch(`/api/v1/requests/${id}/`, {
       method: "DELETE",
@@ -42,6 +42,7 @@ function TrainerRequests({ userState, requests, setRequests }) {
     } else {
       const data = await response.json();
       console.log(data);
+      setClients([...clients, data]);
       deleteRequest(id);
     }
   };

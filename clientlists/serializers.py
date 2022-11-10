@@ -23,8 +23,16 @@ class ClientListWriteSerializer(serializers.ModelSerializer):
         exclude = ('user',)
 
 
-class ClientListReadSerializer(serializers.ModelSerializer):
-    clientprofile = ClientProfileSerializer()
+# class ClientListReadSerializer(serializers.ModelSerializer):
+#     clientprofile = ClientProfileSerializer()
+
+#     class Meta:
+#         model = ClientList
+#         exclude = ('user',)
+
+class ClientListSerializer(serializers.ModelSerializer):
+    client_details = ClientProfileSerializer(
+        source='clientprofile', read_only=True)
 
     class Meta:
         model = ClientList
@@ -32,20 +40,12 @@ class ClientListReadSerializer(serializers.ModelSerializer):
 
 
 class ClientListDetailReadSerializer(serializers.ModelSerializer):
-    clientprofile = ClientProfileSerializer()
+    client_details = ClientProfileSerializer(
+        source='clientprofile', read_only=True)
 
     class Meta:
         model = ClientList
         exclude = ('user',)
-
-
-class SessionReadSerializer(serializers.ModelSerializer):
-    clientprofile = ClientProfileSerializer()
-    client_details = ClientProfileSerializer(read_only=True)
-
-    class Meta:
-        model = Session
-        fields = '__all__'
 
 
 class ClientSessionSerializer(serializers.ModelSerializer):
