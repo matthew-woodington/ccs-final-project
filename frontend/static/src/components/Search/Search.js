@@ -31,9 +31,14 @@ function Search({
           value={queryPhrase}
           onChange={(e) => setQueryPhrase(e.target.value)}
         />
-        <Button className="query-search-button" id="button-addon2" type="button">
-          {queryPhrase.length === 0 && <IoSearch />}
-          {queryPhrase.length > 0 && <IoClose onClick={(e) => clearText(e)} />}
+        <Button
+          className="query-search-button"
+          id="button-addon2"
+          type="button"
+          onClick={(e) => clearText(e)}
+        >
+          {queryPhrase.length === 0 && <IoSearch className="search-icon" />}
+          {queryPhrase.length > 0 && <IoClose className="search-icon" />}
         </Button>
       </InputGroup>
       {/* <p className="search-label">Enable location services or choose a location below:</p> */}

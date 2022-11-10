@@ -80,7 +80,7 @@ function TrainerClientList({ userState, clients, setClients }) {
                   {modalData && (
                     <Modal show={show} onHide={handleClose}>
                       <Modal.Header closeButton>
-                        <Modal.Title>{modalData.client_details.first_name} Note</Modal.Title>
+                        <Modal.Title>{modalData.client_details.first_name}'s Note</Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
                         <textarea

@@ -44,6 +44,26 @@
     width: 80%;
 }
 
+.query-search-button {
+    background-color: #fdb035;
+    border-color: #fdb035;
+}
+
+.query-search-button:hover {
+    background-color: #df8a00;
+    border-color: #df8a00;
+}
+
+.query-search-button:active {
+    background-color: #df8a00 !important;
+    border-color: #df8a00 !important;
+}
+
+.query-search-button:disabled {
+    background-color: #df8a00 !important;
+    border-color: #df8a00 !important;
+}
+
 .search-label {
     color: #fffaff;
 }
