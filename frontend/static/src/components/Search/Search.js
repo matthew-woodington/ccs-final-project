@@ -65,7 +65,7 @@ function Search({
         </Form.Select>
       </Form.Group>
 
-      <Button className="form-button" type="button" onClick={() => clearFilters()}>
+      <Button className="form-button clear-search" type="button" onClick={() => clearFilters()}>
         Clear Search Filters
       </Button>
     </section>

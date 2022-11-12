@@ -6,6 +6,12 @@ import { useNavigate } from "react-router-dom";
 import Badge from "react-bootstrap/Badge";
 import appLogo from "../../Images/reps-logo.png";
 
+import { IoLogInOutline } from "react-icons/io5";
+import { IoLogOutOutline } from "react-icons/io5";
+import { FaUserEdit } from "react-icons/fa";
+import { HiOutlineClipboardDocumentCheck } from "react-icons/hi2";
+import { IoCalendarOutline } from "react-icons/io5";
+
 function Header({ userState, logoutUser, requests }) {
   const navigate = useNavigate();
 
@@ -69,6 +75,54 @@ function Header({ userState, logoutUser, requests }) {
           </div>
         </Container>
       </Navbar>
+
+      <div className="mobile-nav">
+        <Nav className="me-auto mobile-icons">
+          {!userState.auth && (
+            <>
+              <Nav.Link className="nav-mobile-link" href="/login">
+                <IoLogInOutline />
+                Login
+              </Nav.Link>
+            </>
+          )}
+          {userState.is_trainer && (
+            <>
+              <Nav.Link className="nav-mobile-link" href="/trainer/portal">
+                <HiOutlineClipboardDocumentCheck />
+                <div>
+                  Trainer Portal
+                  {requests && (
+                    <Badge className="noti" pill>
+                      {requests.length}
+                    </Badge>
+                  )}
+                </div>
+              </Nav.Link>
+              <Nav.Link className="nav-mobile-link" href="/trainer/my-profile">
+                <FaUserEdit />
+                My Profile
+              </Nav.Link>
+            </>
+          )}
+          {userState.is_client && (
+            <>
+              <Nav.Link className="nav-mobile-link" href="/client/my-sessions">
+                <IoCalendarOutline />
+                My Sessions
+              </Nav.Link>
+            </>
+          )}
+          {userState.auth && (
+            <>
+              <Nav.Link className="nav-mobile-link" href="/" onClick={(e) => logout(e)}>
+                <IoLogOutOutline />
+                Logout
+              </Nav.Link>
+            </>
+          )}
+        </Nav>
+      </div>
     </>
   );
 }

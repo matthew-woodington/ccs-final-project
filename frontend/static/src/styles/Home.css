@@ -64,6 +64,11 @@
     border-color: #df8a00 !important;
 }
 
+.clear-search {
+    width: 100%;
+    margin: 0;
+}
+
 .search-label {
     color: #fffaff;
 }

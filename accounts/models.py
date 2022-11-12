@@ -46,6 +46,25 @@ class TrainerProfile(models.Model):
         return self.first_name + ' ' + self.last_name
 
 
+class HeadlinePost(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE, blank=True)
+    trainerprofile = models.ForeignKey(
+        TrainerProfile, on_delete=models.CASCADE, blank=True)
+    post_image1 = models.ImageField(upload_to='posts/', null=True)
+    post_title1 = models.CharField(max_length=225, null=True)
+    post_caption1 = models.CharField(max_length=225, null=True)
+    post_image2 = models.ImageField(upload_to='posts/', null=True)
+    post_title2 = models.CharField(max_length=225, null=True)
+    post_caption2 = models.CharField(max_length=225, null=True)
+    post_image3 = models.ImageField(upload_to='posts/', null=True)
+    post_title3 = models.CharField(max_length=225, null=True)
+    post_caption3 = models.CharField(max_length=225, null=True)
+
+    def __str__(self) -> str:
+        return self.user.username
+
+
 class ClientProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE, blank=True)
