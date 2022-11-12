@@ -4,6 +4,7 @@ import TrainerEdit from "./TrainerEdit";
 
 function TrainerMyProfile({ userState, setUserState }) {
   const [myProfile, setMyProfile] = useState();
+  const [headlinePost, setHeadlinePost] = useState();
 
   useEffect(() => {
     const getMyProfile = async (id) => {
@@ -16,7 +17,21 @@ function TrainerMyProfile({ userState, setUserState }) {
     };
 
     getMyProfile(userState.trainer_profile);
-  }, [userState, myProfile]);
+  }, [userState]);
+
+  useEffect(() => {
+    const getHeadlinePost = async (id) => {
+      const response = await fetch(`/api/v1/profiles/trainers/${id}/headlinepost/`).catch(
+        handleError
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok!");
+      }
+      const data = await response.json();
+      setHeadlinePost(data);
+    };
+    getHeadlinePost(userState.trainer_profile);
+  }, [userState]);
 
   return (
     <section className="profile-view">
@@ -26,6 +41,7 @@ function TrainerMyProfile({ userState, setUserState }) {
           setUserState={setUserState}
           myProfile={myProfile}
           setMyProfile={setMyProfile}
+          headlinePost={headlinePost}
         />
       )}
     </section>

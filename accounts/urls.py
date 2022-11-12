@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ClientProfileDetailAPIView, ClientProfileListAPIView, TrainerProfileDetailAPIView, TrainerProfileListAPIView, UserListAPIView, TrainerReviewsListAPIView, verify_trainer, get_filtered_profiles
+from .views import ClientProfileDetailAPIView, ClientProfileListAPIView, TrainerProfileDetailAPIView, TrainerProfileListAPIView, UserListAPIView, TrainerReviewsListAPIView, HeadlinePostListAPIView, verify_trainer, get_filtered_profiles
 
 app_name = 'accounts'
 
@@ -16,4 +16,6 @@ urlpatterns = [
          TrainerReviewsListAPIView.as_view()),
     path('profiles/trainers/<int:pk>/verify/', verify_trainer),
     path('profiles/filter/', get_filtered_profiles, name='filtered_trainer_list'),
+    path('profiles/trainers/<int:trainerprofile>/headlinepost/',
+         HeadlinePostListAPIView.as_view(), name='headline_post')
 ]

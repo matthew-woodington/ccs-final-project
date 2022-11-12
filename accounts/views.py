@@ -5,8 +5,8 @@ import json
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
-from .models import TrainerProfile, ClientProfile, User, Review
-from .serializers import TrainerProfileSerializer, ClientProfileSerializer, CustomUserDetailsSerializer, ReviewSerializer
+from .models import TrainerProfile, ClientProfile, User, Review, HeadlinePost
+from .serializers import TrainerProfileSerializer, ClientProfileSerializer, CustomUserDetailsSerializer, ReviewSerializer, HeadlinePostSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser, AllowAny
 from .permissions import IsUserOrReadOnly
 
@@ -28,7 +28,7 @@ def filter_trainer_profiles_distance(trainerprofiles, origin, distance_radius):
 
     # payload = {}
     # headers = {}
- 
+
     response = requests.request("GET", url, headers={}, data={})
     # print('response', response)
     data = json.loads(response.text)
@@ -126,6 +126,18 @@ class TrainerReviewsListAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         trainerprofile = self.kwargs['trainerprofile']
         return Review.objects.filter(trainerprofile=trainerprofile)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class HeadlinePostListAPIView(generics.ListCreateAPIView):
+    permission_classes = (IsUserOrReadOnly,)
+    serializer_class = HeadlinePostSerializer
+
+    def get_queryset(self):
+        trainerprofile = self.kwargs['trainerprofile']
+        return HeadlinePost.objects.filter(trainerprofile=trainerprofile)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

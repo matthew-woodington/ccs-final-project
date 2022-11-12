@@ -2,7 +2,7 @@ from rest_framework import serializers
 from dj_rest_auth.models import TokenModel
 from dj_rest_auth.serializers import UserDetailsSerializer
 from dj_rest_auth.registration.serializers import RegisterSerializer
-from .models import TrainerProfile, ClientProfile, Review
+from .models import TrainerProfile, ClientProfile, Review, HeadlinePost
 
 
 class CustomUserDetailsSerializer(UserDetailsSerializer):
@@ -72,3 +72,9 @@ class TrainerClientViewSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrainerProfile
         fields = ('avatar', 'first_name', 'last_name',)
+
+
+class HeadlinePostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HeadlinePost
+        fields = '__all__'

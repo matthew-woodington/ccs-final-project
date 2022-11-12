@@ -7,8 +7,9 @@ import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import { handleError } from "../../../re-usable-func";
 import Cookies from "js-cookie";
+import HeadlinePost from "./HeadlinePost";
 
-function ProfileInfo({ state, userState }) {
+function ProfileInfo({ state, userState, headlinePost }) {
   const [newRequest, setNewRequest] = useState({
     text: "",
     trainerprofile: state.id,
@@ -124,6 +125,7 @@ function ProfileInfo({ state, userState }) {
         )}
       </aside>
       <article>
+        {headlinePost && <HeadlinePost headlinePost={headlinePost} />}
         <h2>About {state.first_name}</h2>
         <p>{state.bio}</p>
         <p>Business: {state.business}</p>

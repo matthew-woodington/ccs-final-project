@@ -8,6 +8,7 @@ import Reviews from "./Reviews";
 function TrainerDetailView({ userState }) {
   const [state, setState] = useState();
   const [reviews, setReviews] = useState();
+  const [headlinePost, setHeadlinePost] = useState();
 
   const { id } = useParams();
 
@@ -25,7 +26,7 @@ function TrainerDetailView({ userState }) {
 
   useEffect(() => {
     const getReviews = async (id) => {
-      const response = await fetch(`/api/v1/profiles/trainers/${id}/reviews`).catch(handleError);
+      const response = await fetch(`/api/v1/profiles/trainers/${id}/reviews/`).catch(handleError);
       if (!response.ok) {
         throw new Error("Network response was not ok!");
       }
@@ -35,10 +36,24 @@ function TrainerDetailView({ userState }) {
     getReviews(id);
   }, []);
 
+  useEffect(() => {
+    const getHeadlinePost = async (id) => {
+      const response = await fetch(`/api/v1/profiles/trainers/${id}/headlinepost/`).catch(
+        handleError
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok!");
+      }
+      const data = await response.json();
+      setHeadlinePost(data);
+    };
+    getHeadlinePost(id);
+  }, []);
+
   return (
     <>
       <section className="profile-view">
-        {state && <ProfileInfo state={state} userState={userState} />}
+        {state && <ProfileInfo state={state} userState={userState} headlinePost={headlinePost} />}
       </section>
       <section>
         {reviews && (

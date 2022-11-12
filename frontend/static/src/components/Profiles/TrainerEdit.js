@@ -7,9 +7,10 @@ import { BsFacebook } from "react-icons/bs";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import HeadlinePost from "../Home/ProfileDetail/HeadlinePost";
 import Cookies from "js-cookie";
 
-function TrainerEdit({ userState, setUserState, myProfile, setMyProfile }) {
+function TrainerEdit({ userState, setUserState, myProfile, setMyProfile, headlinePost }) {
   const [state, setState] = useState(myProfile);
   const [isEdit, setIsEdit] = useState(false);
   const [preview, setPreview] = useState(state.avatar);
@@ -116,6 +117,7 @@ function TrainerEdit({ userState, setUserState, myProfile, setMyProfile }) {
         {state.personal_site && <a href={state.personal_site}>Personal Website</a>}
       </aside>
       <article>
+        {headlinePost && <HeadlinePost headlinePost={headlinePost} />}
         <h2>About {state.first_name}</h2>
         <p>{state.bio}</p>
         <p>Business: {state.business}</p>
