@@ -85,7 +85,7 @@ function TrainerProfileCreate({ userState, setUserState }) {
         trainer_avatar: data.avatar,
         trainer_profile: data.id,
       });
-      navigate("/");
+      navigate("/create-trainer-headline");
     }
   };
 

@@ -62,7 +62,7 @@ function Reviews({ reviews, setReviews, id, userState }) {
   };
 
   return (
-    <section>
+    <section className="reviews">
       <div className="reviews-head">
         <h3>Reviews</h3>
         {userState.is_client && (

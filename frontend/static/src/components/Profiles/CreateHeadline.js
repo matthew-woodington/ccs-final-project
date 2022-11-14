@@ -1,48 +1,30 @@
-import "../../styles/ProfileDetail.css";
+import "../../styles/Form.css";
 import { useState } from "react";
 import { handleError } from "../../re-usable-func";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Cookies from "js-cookie";
 import noImage from "../../Images/no-photo.webp";
+import { useNavigate } from "react-router-dom";
 
-function EditHeadline({ userState, setEditHeadline, headlinePost, setHeadlinePost }) {
-  const [post, setPost] = useState(headlinePost);
-  const [postPreviewOne, setPostPreviewOne] = useState(headlinePost.post_image1 || noImage);
-  const [postPreviewTwo, setPostPreviewTwo] = useState(headlinePost.post_image2 || noImage);
-  const [postPreviewThree, setPostPreviewThree] = useState(headlinePost.post_image3 || noImage);
+function CreateHeadline({ userState }) {
+  const [post, setPost] = useState({
+    trainerprofile: userState.trainer_profile,
+    post_image1: null,
+    post_image2: null,
+    post_image3: null,
+    post_title1: null,
+    post_title2: null,
+    post_title3: null,
+    post_caption1: null,
+    post_caption2: null,
+    post_caption3: null,
+  });
+  const [postPreviewOne, setPostPreviewOne] = useState(noImage);
+  const [postPreviewTwo, setPostPreviewTwo] = useState(noImage);
+  const [postPreviewThree, setPostPreviewThree] = useState(noImage);
 
-  const handleCancel = () => {
-    setEditHeadline(false);
-    setPost(headlinePost);
-  };
-
-  const clearSlideOne = () => {
-    setPost({
-      ...post,
-      post_image1: "",
-      post_title1: "",
-      post_caption1: "",
-    });
-  };
-
-  const clearSlideTwo = () => {
-    setPost({
-      ...post,
-      post_image2: "",
-      post_title2: "",
-      post_caption2: "",
-    });
-  };
-
-  const clearSlideThree = () => {
-    setPost({
-      ...post,
-      post_image3: "",
-      post_title3: "",
-      post_caption3: undefined,
-    });
-  };
+  const navigate = useNavigate();
 
   const handlePostInput = (e) => {
     const { name, value } = e.target;
@@ -78,53 +60,53 @@ function EditHeadline({ userState, setEditHeadline, headlinePost, setHeadlinePos
     const formData = new FormData();
 
     const editPost = { ...post };
-    if (editPost.post_image1 === headlinePost.post_image1) {
+    if (!(editPost.post_image1 instanceof File)) {
       delete editPost.post_image1;
     }
-    if (editPost.post_image2 === headlinePost.post_image2) {
+    if (!(editPost.post_image2 instanceof File)) {
       delete editPost.post_image2;
     }
-    if (editPost.post_image3 === headlinePost.post_image3) {
+    if (!(editPost.post_image3 instanceof File)) {
       delete editPost.post_image3;
     }
 
-    // for (const key in editPost) {
-    //   if (editPost[key]) {
-    //     formData.append(key, editPost[key]);
-    //   }
-    // }
-
     for (const key in editPost) {
-      formData.append(key, editPost[key]);
+      if (editPost[key]) {
+        formData.append(key, editPost[key]);
+      }
     }
 
     const options = {
-      method: "PUT",
+      method: "POST",
       headers: {
         "X-CSRFToken": Cookies.get("csrftoken"),
       },
       body: formData,
     };
 
-    const response = await fetch(
-      `/api/v1/profiles/trainers/${userState.trainer_profile}/headlinepost/`,
-      options
-    ).catch(handleError);
+    const response = await fetch(`/api/v1/profiles/trainers/headlineposts/`, options).catch(
+      handleError
+    );
     if (!response.ok) {
       throw new Error("Network response was not OK");
     } else {
       const data = await response.json();
       console.log(data);
-      setHeadlinePost(data);
-      setEditHeadline(false);
     }
+    navigate("/");
   };
-
   return (
     <section className="form-display">
       <div className="form-box">
         <Form onSubmit={handlePostSubmit}>
-          <h1>Edit Headline Post</h1>
+          <h1>Create Headline Post</h1>
+          <p>
+            Add up to three posts to be seen at the top of your profile page or{" "}
+            <span className="skip-link" onClick={(e) => handlePostSubmit(e)}>
+              skip for now
+            </span>{" "}
+            and edit later.
+          </p>
           <h3>Slide One</h3>
           <div className="headline-preview">
             <img className="headline-image" src={postPreviewOne} alt="" />
@@ -155,14 +137,6 @@ function EditHeadline({ userState, setEditHeadline, headlinePost, setHeadlinePos
               onChange={handlePostInput}
             />
           </Form.Group>
-          <Button
-            className="form-button"
-            type="button"
-            variant="dark"
-            onClick={() => clearSlideOne()}
-          >
-            Clear Slide One
-          </Button>
 
           <h3>Slide Two</h3>
           <div className="headline-preview">
@@ -190,18 +164,11 @@ function EditHeadline({ userState, setEditHeadline, headlinePost, setHeadlinePos
               placeholder="Caption..."
               type="text"
               name="post_caption2"
+              headline
               value={post.post_caption2}
               onChange={handlePostInput}
             />
           </Form.Group>
-          <Button
-            className="form-button"
-            type="button"
-            variant="dark"
-            onClick={() => clearSlideTwo()}
-          >
-            Clear Slide Two
-          </Button>
 
           <h3>Slide Three</h3>
           <div className="headline-preview">
@@ -233,25 +200,9 @@ function EditHeadline({ userState, setEditHeadline, headlinePost, setHeadlinePos
               onChange={handlePostInput}
             />
           </Form.Group>
-          <Button
-            className="form-button"
-            type="button"
-            variant="dark"
-            onClick={() => clearSlideThree()}
-          >
-            Clear Slide Three
-          </Button>
 
-          <Button
-            className="form-button"
-            type="button"
-            variant="dark"
-            onClick={() => handleCancel()}
-          >
-            Cancel
-          </Button>
-          <Button className="form-button" type="submit" variant="dark">
-            Save
+          <Button className="form-button" type="submit">
+            Save & Submit
           </Button>
         </Form>
       </div>
@@ -259,4 +210,4 @@ function EditHeadline({ userState, setEditHeadline, headlinePost, setHeadlinePos
   );
 }
 
-export default EditHeadline;
+export default CreateHeadline;

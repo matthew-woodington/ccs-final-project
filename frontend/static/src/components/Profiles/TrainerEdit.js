@@ -191,6 +191,13 @@ function TrainerEdit({
   //   }
   // };
 
+  const checkAllHeadline = () => {
+    if (headlinePost.post_image1 || headlinePost.post_image2 || headlinePost.post_image3) {
+      return true;
+    }
+    return false;
+  };
+
   const previewHTML = (
     <>
       <aside>
@@ -237,7 +244,7 @@ function TrainerEdit({
         <Button type="button" variant="dark" onClick={() => setEditHeadline(true)}>
           Edit Headline Post
         </Button>
-        <HeadlinePost headlinePost={headlinePost} />
+        {headlinePost && checkAllHeadline() && <HeadlinePost headlinePost={headlinePost} />}
         <h2>About {myProfile.first_name}</h2>
         <p>{myProfile.bio}</p>
         <p>Business: {myProfile.business}</p>

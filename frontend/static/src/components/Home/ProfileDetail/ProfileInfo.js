@@ -16,6 +16,13 @@ function ProfileInfo({ state, userState, headlinePost }) {
   });
   const [show, setShow] = useState(false);
 
+  const checkAllHeadline = () => {
+    if (headlinePost.post_image1 || headlinePost.post_image2 || headlinePost.post_image3) {
+      return true;
+    }
+    return false;
+  };
+
   const handleInput = (e) => {
     const { name, value } = e.target;
     setNewRequest((prevState) => ({
@@ -80,8 +87,8 @@ function ProfileInfo({ state, userState, headlinePost }) {
   );
 
   return (
-    <>
-      <aside>
+    <section className="profile-info">
+      <aside className="info-aside">
         <div className="profile-image-container">
           <img className="profile-image" src={state.avatar} alt="" />
         </div>
@@ -119,20 +126,20 @@ function ProfileInfo({ state, userState, headlinePost }) {
         {state.personal_site && <a href={state.personal_site}>Personal Website</a>}
         {modal}
         {userState.is_client && (
-          <Button variant="dark" onClick={() => setShow(true)}>
+          <Button className="form-button" onClick={() => setShow(true)}>
             Contact
           </Button>
         )}
       </aside>
-      <article>
-        {headlinePost && headlinePost.post_image1 && <HeadlinePost headlinePost={headlinePost} />}
+      <article className="profile-main">
+        {headlinePost && checkAllHeadline() && <HeadlinePost headlinePost={headlinePost} />}
         <h2>About {state.first_name}</h2>
         <p>{state.bio}</p>
         <p>Business: {state.business}</p>
         <p>Location: {state.location}</p>
         <p>Offered training: {state.training_type}</p>
       </article>
-    </>
+    </section>
   );
 }
 

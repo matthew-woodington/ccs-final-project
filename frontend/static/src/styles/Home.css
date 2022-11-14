@@ -38,10 +38,16 @@
     position: sticky;
     top: 0;
     padding-top: 20px;
+    z-index: 30;
+    background-color: #0c1a2d;
 }
 
 .search-section {
     width: 80%;
+}
+
+.mobile-search {
+    display: none;
 }
 
 .query-search-button {
@@ -94,4 +100,72 @@
 
 .card-title {
     color: #fdb035;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-review-modal-body {
+    height: 50vh;
+    overflow-y: auto;
+}
+
+@media (max-width: 992px) {
+    .display-area {
+        flex-direction: column;
+    }
+
+    .search-sidebar {
+        width: 100%;
+    }
+
+    .search-section {
+        width: 100%;
+    }
+
+    .profiles-mainbar {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .desk-search {
+        display: none;
+    }
+
+    .mobile-search {
+        position: relative;
+        display: block;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-card {
+        flex-direction: column;
+    }
+    
+    .image-cont {
+        height: 300px;
+        width: auto;
+    }
+    
+    .profile-card-img {
+        object-fit: contain;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .profile-card-list {
+        width: 80%;
+    }
+}
+
+@media (max-width: 576px) {
+    .image-cont {
+        height: 250px;
+    }
+
+    .profile-card-list {
+        width: 90%;
+    }
 }

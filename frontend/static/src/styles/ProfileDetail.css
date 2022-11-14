@@ -1,3 +1,27 @@
+.profile-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    color: #fffaff;
+    margin-top: 20px;
+}
+
+.profile-info {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.info-aside {
+    width: 30%;
+}
+
+.profile-main {
+    width: 65%;
+}
+
 .profile-image-container {
     width: 300px;
     height: 300px;
@@ -5,6 +29,7 @@
     border: 1px solid #212529;
     overflow: hidden;
     background-color: #bbb;
+    border: 1px solid #182B45;
 }
 
 .profile-image {
@@ -14,10 +39,25 @@
     object-position: center;
 }
 
-.profile-view {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+.headline-frame {
+    height: 500px;
+    border-radius: 10px;
+}
+
+.headline-img {
+    height: 500px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #182B45;
+}
+
+.headline-text {
+    background-color: rgba(0, 0, 0, 0.55);
+    border-radius: 10px;
+}
+
+.reviews {
+    width: 80%;
 }
 
 .reviews-head {

@@ -40,7 +40,7 @@ function Header({ userState, logoutUser, requests }) {
                 <>
                   <Nav.Link className="nav-bar-link" href="/trainer/portal">
                     Trainer Portal
-                    {requests && (
+                    {requests && requests.length > 0 && (
                       <Badge className="noti" pill>
                         {requests.length}
                       </Badge>
@@ -91,7 +91,7 @@ function Header({ userState, logoutUser, requests }) {
               <Nav.Link className="nav-mobile-link" href="/trainer/portal">
                 <HiOutlineClipboardDocumentCheck />
                 <div>
-                  Trainer Portal
+                  Portal
                   {requests && (
                     <Badge className="noti" pill>
                       {requests.length}

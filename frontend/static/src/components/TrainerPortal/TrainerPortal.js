@@ -44,7 +44,7 @@ function TrainerPortal({ userState, requests, setRequests }) {
           <Nav.Item>
             <Nav.Link eventKey="link-3" onClick={() => setFilter("messages")}>
               Messages
-              {requests && (
+              {requests && requests.length > 0 && (
                 <Badge className="noti" pill>
                   {requests.length}
                 </Badge>
