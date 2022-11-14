@@ -10,33 +10,97 @@
 .profile-info {
     width: 90%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-start;
 }
 
 .info-aside {
     width: 30%;
+    background-color: #081D3A;
+    border: 1px solid #182B45;
+    border-radius: 10px;
+    margin-top: 50px;
+    padding: 0px 20px;
+}
+
+.profile-aside-head {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.aside-name {
+    color: #fdb035;
+    margin-top: -30px;
+    margin-bottom: 0px;
+}
+
+.certs {
+    color: #3071df;
+    display: block;
+    margin-bottom: 20px;
 }
 
 .profile-main {
     width: 65%;
 }
 
-.profile-image-container {
-    width: 300px;
+/* .profile-image-container {
+    width: 80%;
     height: 300px;
+    aspect-ratio : 1 / 1;
     border-radius: 50%;
     border: 1px solid #212529;
     overflow: hidden;
     background-color: #bbb;
     border: 1px solid #182B45;
-}
+    transform: translate(0px, -50px);
+} */
 
 .profile-image {
-    width: 100%;
-    height: auto;
+    width: 80%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    border: 1px solid #fffaff;
+    overflow: hidden;
     object-fit: cover;
-    object-position: center;
+    object-position: top;
+    transform: translate(0px, -50px);
+}
+
+.social-ul {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-li {
+    width: 40px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #182B45;
+    border: 1px solid #182B45;
+    color: #fdb035;
+}
+
+.social-link:hover {
+    background-color: #fdb035;
+    color: #0C1A2D;
+}
+
+.social-icon {
+    font-size: 25px;
 }
 
 .headline-frame {
@@ -56,8 +120,26 @@
     border-radius: 10px;
 }
 
+.bio-info {
+    background-color: #081D3A;
+    border: 1px solid #182B45;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.section-title {
+    color: #fdb035;
+}
+
 .reviews {
     width: 80%;
+}
+
+.review-card {
+    background-color: #081D3A;
+    border: 1px solid #182B45;
+    margin-bottom: 10px;
 }
 
 .reviews-head {
@@ -73,13 +155,15 @@
     border-radius: 50%;
     object-fit: cover;
     object-position: top;
+    border: 1px solid #fffaff;
 }
 
 .review-title {
     display: flex;
     justify-content: flex-start;
+    margin-bottom: 10px;
 }
 .review-user {
     margin-bottom: 0;
-    margin-left: 5px;
+    margin-left: 10px;
 }

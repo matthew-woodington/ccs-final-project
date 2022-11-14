@@ -1,4 +1,4 @@
-import { AiFillInstagram } from "react-icons/ai";
+import { AiOutlineInstagram } from "react-icons/ai";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { BsFacebook } from "react-icons/bs";
 import Button from "react-bootstrap/Button";
@@ -89,36 +89,38 @@ function ProfileInfo({ state, userState, headlinePost }) {
   return (
     <section className="profile-info">
       <aside className="info-aside">
-        <div className="profile-image-container">
+        <div className="profile-aside-head">
+          {/* <div className="profile-image-container"> */}
           <img className="profile-image" src={state.avatar} alt="" />
+          {/* </div> */}
         </div>
-        <h1>
+        <h1 className="aside-name">
           {state.first_name} {state.last_name}
         </h1>
-        <span>{state.certs}</span>
+        <span className="certs">{state.certs}</span>
         <h4>Specialties:</h4>
         <p>{state.specialties}</p>
         <h4>Contact me:</h4>
         <p>{state.email}</p>
-        <ul className="list">
+        <ul className="list social-ul">
           {state.instagram && (
-            <li>
-              <a href={`https://www.instagram.com/${state.instagram}/`}>
-                <AiFillInstagram />
+            <li className="social-li">
+              <a className="social-link" href={`https://www.instagram.com/${state.instagram}/`}>
+                <AiOutlineInstagram className="social-icon" />
               </a>
             </li>
           )}
           {state.twitter && (
-            <li>
-              <a href={`https://www.twitter.com/${state.twitter}/`}>
-                <AiOutlineTwitter />
+            <li className="social-li">
+              <a className="social-link" href={`https://www.twitter.com/${state.twitter}/`}>
+                <AiOutlineTwitter className="social-icon" />
               </a>
             </li>
           )}
           {state.facebook && (
-            <li>
-              <a href={`https://www.facebook.com/${state.facebook}/`}>
-                <BsFacebook />
+            <li className="social-li">
+              <a className="social-link" href={`https://www.facebook.com/${state.facebook}/`}>
+                <BsFacebook className="social-icon" />
               </a>
             </li>
           )}
@@ -133,11 +135,13 @@ function ProfileInfo({ state, userState, headlinePost }) {
       </aside>
       <article className="profile-main">
         {headlinePost && checkAllHeadline() && <HeadlinePost headlinePost={headlinePost} />}
-        <h2>About {state.first_name}</h2>
-        <p>{state.bio}</p>
-        <p>Business: {state.business}</p>
-        <p>Location: {state.location}</p>
-        <p>Offered training: {state.training_type}</p>
+        <section className="bio-info">
+          <h2 className="section-title">About {state.first_name}</h2>
+          <p>{state.bio}</p>
+          <p>Business: {state.business}</p>
+          <p>Location: {state.location}</p>
+          <p>Offered training: {state.training_type}</p>
+        </section>
       </article>
     </section>
   );

@@ -1,6 +1,7 @@
 .navbar {
     background-color: #0C1A2D;
     border-bottom: 1px solid #182B45;
+    height: 100px;
 }
 
 .app-logo {

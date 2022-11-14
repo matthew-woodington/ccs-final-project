@@ -100,7 +100,7 @@ function Reviews({ reviews, setReviews, id, userState }) {
       </Modal>
 
       {reviews.map((review) => (
-        <Card key={review.id}>
+        <Card key={review.id} className="review-card">
           <Card.Body>
             <div className="review-title">
               <img className="review-img" src={review.author_avatar} alt="" />
