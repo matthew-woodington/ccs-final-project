@@ -38,9 +38,9 @@ function EditHeadline({ userState, setEditHeadline, headlinePost, setHeadlinePos
   const clearSlideThree = () => {
     setPost({
       ...post,
-      post_image3: null,
-      post_title3: null,
-      post_caption3: null,
+      post_image3: "",
+      post_title3: "",
+      post_caption3: "",
     });
   };
 

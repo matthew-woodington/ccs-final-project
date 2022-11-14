@@ -1,14 +1,10 @@
 import "../../styles/ProfileDetail.css";
 import { useState } from "react";
-import { handleError } from "../../re-usable-func";
 import { AiFillInstagram } from "react-icons/ai";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { BsFacebook } from "react-icons/bs";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import HeadlinePost from "../Home/ProfileDetail/HeadlinePost";
-import Cookies from "js-cookie";
 import EditProfile from "./EditProfile";
 import EditHeadline from "./EditHeadline";
 
@@ -20,7 +16,7 @@ function TrainerEdit({
   headlinePost,
   setHeadlinePost,
 }) {
-  const [state, setState] = useState(myProfile);
+  // const [state, setState] = useState(myProfile);
   const [isEdit, setIsEdit] = useState(false);
   const [editHeadline, setEditHeadline] = useState(false);
   // const [preview, setPreview] = useState(state.avatar);
@@ -199,40 +195,40 @@ function TrainerEdit({
     <>
       <aside>
         <div className="profile-image-container">
-          <img className="profile-image" src={state.avatar} alt="" />
+          <img className="profile-image" src={myProfile.avatar} alt="" />
         </div>
         <h1>
-          {state.first_name} {state.last_name}
+          {myProfile.first_name} {myProfile.last_name}
         </h1>
-        <span>{state.certs}</span>
+        <span>{myProfile.certs}</span>
         <h4>Specialties:</h4>
-        <p>{state.specialties}</p>
+        <p>{myProfile.specialties}</p>
         <h4>Contact me:</h4>
-        <p>{state.email}</p>
+        <p>{myProfile.email}</p>
         <ul className="list">
-          {state.instagram && (
+          {myProfile.instagram && (
             <li>
-              <a href={`https://www.instagram.com/${state.instagram}/`}>
+              <a href={`https://www.instagram.com/${myProfile.instagram}/`}>
                 <AiFillInstagram />
               </a>
             </li>
           )}
-          {state.twitter && (
+          {myProfile.twitter && (
             <li>
-              <a href={`https://www.twitter.com/${state.twitter}/`}>
+              <a href={`https://www.twitter.com/${myProfile.twitter}/`}>
                 <AiOutlineTwitter />
               </a>
             </li>
           )}
-          {state.facebook && (
+          {myProfile.facebook && (
             <li>
-              <a href={`https://www.facebook.com/${state.facebook}/`}>
+              <a href={`https://www.facebook.com/${myProfile.facebook}/`}>
                 <BsFacebook />
               </a>
             </li>
           )}
         </ul>
-        {state.personal_site && <a href={state.personal_site}>Personal Website</a>}
+        {myProfile.personal_site && <a href={myProfile.personal_site}>Personal Website</a>}
       </aside>
       <article>
         <Button type="button" variant="dark" onClick={() => setIsEdit(true)}>
@@ -242,11 +238,11 @@ function TrainerEdit({
           Edit Headline Post
         </Button>
         <HeadlinePost headlinePost={headlinePost} />
-        <h2>About {state.first_name}</h2>
-        <p>{state.bio}</p>
-        <p>Business: {state.business}</p>
-        <p>Location: {state.location}</p>
-        <p>Offered training: {state.training_type}</p>
+        <h2>About {myProfile.first_name}</h2>
+        <p>{myProfile.bio}</p>
+        <p>Business: {myProfile.business}</p>
+        <p>Location: {myProfile.location}</p>
+        <p>Offered training: {myProfile.training_type}</p>
       </article>
     </>
   );
@@ -578,7 +574,7 @@ function TrainerEdit({
 
   return (
     <>
-      {state && headlinePost && (
+      {myProfile && headlinePost && (
         <>
           {isEdit ? (
             <EditProfile

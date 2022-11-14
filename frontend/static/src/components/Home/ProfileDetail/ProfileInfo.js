@@ -125,7 +125,7 @@ function ProfileInfo({ state, userState, headlinePost }) {
         )}
       </aside>
       <article>
-        {headlinePost && <HeadlinePost headlinePost={headlinePost} />}
+        {headlinePost && headlinePost.post_image1 && <HeadlinePost headlinePost={headlinePost} />}
         <h2>About {state.first_name}</h2>
         <p>{state.bio}</p>
         <p>Business: {state.business}</p>

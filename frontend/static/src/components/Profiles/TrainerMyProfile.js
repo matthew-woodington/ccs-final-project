@@ -17,7 +17,7 @@ function TrainerMyProfile({ userState, setUserState }) {
     };
 
     getMyProfile(userState.trainer_profile);
-  }, [userState, myProfile]);
+  }, [userState]);
 
   useEffect(() => {
     const getHeadlinePost = async (id) => {
