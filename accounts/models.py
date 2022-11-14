@@ -49,7 +49,7 @@ class TrainerProfile(models.Model):
 class HeadlinePost(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE, blank=True)
-    trainerprofile = models.ForeignKey(
+    trainerprofile = models.OneToOneField(
         TrainerProfile, on_delete=models.CASCADE, blank=True)
     post_image1 = models.ImageField(upload_to='posts/', null=True, blank=True)
     post_title1 = models.CharField(max_length=225, null=True, blank=True)

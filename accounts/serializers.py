@@ -78,3 +78,4 @@ class HeadlinePostSerializer(serializers.ModelSerializer):
     class Meta:
         model = HeadlinePost
         fields = '__all__'
+        lookup_field = 'trainerprofile'

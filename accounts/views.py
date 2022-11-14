@@ -134,13 +134,20 @@ class TrainerReviewsListAPIView(generics.ListCreateAPIView):
 class HeadlinePostListAPIView(generics.ListCreateAPIView):
     permission_classes = (IsUserOrReadOnly,)
     serializer_class = HeadlinePostSerializer
+    queryset = HeadlinePost.objects.all()
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class HeadlinePostDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsUserOrReadOnly,)
+    serializer_class = HeadlinePostSerializer
+    lookup_field = 'trainerprofile'
 
     def get_queryset(self):
         trainerprofile = self.kwargs['trainerprofile']
         return HeadlinePost.objects.filter(trainerprofile=trainerprofile)
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
 
 
 @ api_view(['POST'])

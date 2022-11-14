@@ -17,7 +17,7 @@ function TrainerMyProfile({ userState, setUserState }) {
     };
 
     getMyProfile(userState.trainer_profile);
-  }, [userState]);
+  }, [userState, myProfile]);
 
   useEffect(() => {
     const getHeadlinePost = async (id) => {
@@ -42,6 +42,7 @@ function TrainerMyProfile({ userState, setUserState }) {
           myProfile={myProfile}
           setMyProfile={setMyProfile}
           headlinePost={headlinePost}
+          setHeadlinePost={setHeadlinePost}
         />
       )}
     </section>
