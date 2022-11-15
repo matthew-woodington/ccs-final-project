@@ -6,7 +6,7 @@ function SocialsForm({ state, handleInput, lastStep, handleSubmit }) {
   return (
     <>
       <div className="form-head">
-        <h3>Contact Information</h3>
+        <h3 className="create-profile-title">Contact Information</h3>
       </div>
       <Form.Group className="mb-3" controlId="email">
         <Form.Label>Preferred email</Form.Label>
@@ -80,11 +80,16 @@ function SocialsForm({ state, handleInput, lastStep, handleSubmit }) {
       </Form.Group>
 
       <div className="form-footer">
-        <Button className="form-button" type="button" variant="dark" onClick={() => lastStep()}>
+        <Button
+          className="form-button split-bottom-button"
+          type="button"
+          variant="dark"
+          onClick={() => lastStep()}
+        >
           Back
         </Button>
         <Button
-          className="form-button"
+          className="form-button split-bottom-button"
           type="submit"
           variant="dark"
           onClick={(e) => handleSubmit(e)}

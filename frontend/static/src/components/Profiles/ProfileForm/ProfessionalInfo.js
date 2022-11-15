@@ -5,7 +5,7 @@ function ProfessionalInfoForm({ state, handleInput, nextStep, lastStep }) {
   return (
     <>
       <div className="form-head">
-        <h3>Professional Information</h3>
+        <h3 className="create-profile-title">Professional Information</h3>
       </div>
       <Form.Group className="mb-3" controlId="certs">
         <Form.Label>Enter all certifications</Form.Label>
@@ -84,10 +84,20 @@ function ProfessionalInfoForm({ state, handleInput, nextStep, lastStep }) {
         />
       </Form.Group>
       <div className="form-footer">
-        <Button className="form-button" type="button" variant="dark" onClick={() => lastStep()}>
+        <Button
+          className="form-button split-bottom-button"
+          type="button"
+          variant="dark"
+          onClick={() => lastStep()}
+        >
           Back
         </Button>
-        <Button className="form-button" type="button" variant="dark" onClick={() => nextStep()}>
+        <Button
+          className="form-button split-bottom-button"
+          type="button"
+          variant="dark"
+          onClick={() => nextStep()}
+        >
           Next
         </Button>
       </div>

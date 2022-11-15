@@ -93,7 +93,7 @@ function RegisterForm({ userState, setUserState }) {
     <div className="form-display">
       <Form className="form-box" onSubmit={checkSamePass}>
         <div className="form-head">
-          <img className="form-app-logo" src={appLogo} alt="" />
+          <img className="form-app-logo" src={appLogo} alt="" onClick={() => navigate("/")} />
           <h1 className="form-title">Register</h1>
         </div>
         <Form.Group className="mb-3" controlId="username">
@@ -157,7 +157,7 @@ function RegisterForm({ userState, setUserState }) {
           />
         </Form.Group>
         <div className="form-footer">
-          <Button className="form-button" type="submit">
+          <Button className="form-button bottom-button" type="submit">
             Register
           </Button>
         </div>

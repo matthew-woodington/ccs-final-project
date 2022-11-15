@@ -5,7 +5,7 @@ function PersonalInfoForm({ state, preview, handleImage, handleInput, nextStep }
   return (
     <div>
       <div className="form-head">
-        <h3>Personal Information</h3>
+        <h3 className="create-profile-title">Personal Information</h3>
         <div className="image-container">
           <img className="form-image" src={preview} alt="" />
           {/* {state.avatar && <img className="form-image" src={preview} alt="" />} */}
@@ -40,7 +40,12 @@ function PersonalInfoForm({ state, preview, handleImage, handleInput, nextStep }
         />
       </Form.Group>
       <div className="form-footer">
-        <Button className="form-button" type="button" variant="dark" onClick={() => nextStep()}>
+        <Button
+          className="form-button bottom-button"
+          type="button"
+          variant="dark"
+          onClick={() => nextStep()}
+        >
           Next
         </Button>
       </div>

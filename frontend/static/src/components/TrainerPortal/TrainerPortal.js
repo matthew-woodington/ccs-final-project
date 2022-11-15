@@ -29,20 +29,32 @@ function TrainerPortal({ userState, requests, setRequests }) {
 
   return (
     <>
-      <section>
-        <Nav justify variant="tabs" defaultActiveKey="link-1">
-          <Nav.Item>
-            <Nav.Link eventKey="link-1" onClick={() => setFilter("clientlist")}>
+      <section className="portal-nav">
+        <Nav justify variant="button" defaultActiveKey="link-1" className="nav-tab-list">
+          <Nav.Item className="nav-tab-item">
+            <Nav.Link
+              className="nav-tab-link"
+              eventKey="link-1"
+              onClick={() => setFilter("clientlist")}
+            >
               My Clients
             </Nav.Link>
           </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="link-2" onClick={() => setFilter("sessions")}>
+          <Nav.Item className="nav-tab-item">
+            <Nav.Link
+              className="nav-tab-link"
+              eventKey="link-2"
+              onClick={() => setFilter("sessions")}
+            >
               Sessions
             </Nav.Link>
           </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="link-3" onClick={() => setFilter("messages")}>
+          <Nav.Item className="nav-tab-item">
+            <Nav.Link
+              className="nav-tab-link"
+              eventKey="link-3"
+              onClick={() => setFilter("messages")}
+            >
               Messages
               {requests && requests.length > 0 && (
                 <Badge className="noti" pill>
@@ -53,7 +65,7 @@ function TrainerPortal({ userState, requests, setRequests }) {
           </Nav.Item>
         </Nav>
       </section>
-      <section>
+      <section className="portal-display-area">
         {filter === "clientlist" && (
           <TrainerClientList userState={userState} clients={clients} setClients={setClients} />
         )}

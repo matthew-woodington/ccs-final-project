@@ -76,7 +76,7 @@ function ClientProfileCreate({ userState, setUserState }) {
     <section className="form-display">
       <Form className="form-box" onSubmit={handleSubmit}>
         <div className="form-head">
-          <h1>Create Profile</h1>
+          <h1 className="form-profile-title">Create Profile</h1>
           <div className="image-container">
             <img className="form-image" src={preview} alt="" />
             {/* {state.avatar && <img className="form-image" src={preview} alt="" />} */}
@@ -112,7 +112,7 @@ function ClientProfileCreate({ userState, setUserState }) {
         </Form.Group>
 
         <div className="form-footer">
-          <Button className="form-button" type="submit" variant="dark">
+          <Button className="form-button bottom-button" type="submit" variant="dark">
             Save
           </Button>
         </div>

@@ -10,6 +10,11 @@ function EditProfile({ userState, setUserState, myProfile, setIsEdit, setMyProfi
   const [state, setState] = useState(myProfile);
   const [preview, setPreview] = useState(state.avatar);
 
+  const handleCancel = () => {
+    setIsEdit(false);
+    setState(myProfile);
+  };
+
   const handleInput = (e) => {
     const { name, value } = e.target;
     setState((prevState) => ({
@@ -260,7 +265,15 @@ function EditProfile({ userState, setUserState, myProfile, setIsEdit, setMyProfi
         </Form.Group>
 
         <div className="form-footer">
-          <Button className="form-button" type="submit" variant="dark">
+          <Button
+            className="form-button split-bottom-button"
+            type="button"
+            variant="dark"
+            onClick={() => handleCancel()}
+          >
+            Cancel
+          </Button>
+          <Button className="form-button split-bottom-button" type="submit" variant="dark">
             Save
           </Button>
         </div>

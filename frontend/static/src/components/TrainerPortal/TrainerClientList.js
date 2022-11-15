@@ -62,7 +62,7 @@ function TrainerClientList({ userState, clients, setClients }) {
 
   return (
     <>
-      <section>
+      <section className="portal-display-box">
         {clients ? (
           <Accordion>
             {clients.map((client) => (

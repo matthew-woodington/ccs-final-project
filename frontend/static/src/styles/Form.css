@@ -12,6 +12,7 @@
 .form-app-logo {
     width: 400px;
     margin-top: 80px;
+    cursor: pointer;
 }
 
 .form-box {
@@ -24,6 +25,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
+}
+
+
+
+.create-profile-title {
+    color: #3071df;
+    margin-bottom: 10px;
 }
 
 .form-title {
@@ -70,6 +79,34 @@
     color: #0c1a2d !important;
 }
 
+.clear-button {
+    background-color: #182B45;
+    border-color: #182B45;
+    color: #fdb035;
+    transition: all 500ms;
+}
+
+.clear-button:hover {
+    background-color: #df8a00;
+    border-color: #df8a00;
+    color: #0C1A2D;
+    font-weight: 500;
+}
+
+.clear-button:active {
+    background-color: #df8a00 !important;
+    border-color: #df8a00 !important;
+}
+
+.clear-button:disabled {
+    background-color: #df8a00 !important;
+    border-color: #df8a00 !important;
+}
+
+.bottom-button {
+    width: 60%;
+}
+
 .login-button {
     margin-bottom: 10px;
 }
@@ -105,10 +142,32 @@
     font-weight: 700;
 }
 
+.slide-box {
+    background-color: #081d3a;
+    border: 1px solid #182B45;
+    /* outline: 1px solid #182B45; */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.slide-box-head {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.headline-slide-title {
+    color: #3071df;
+    margin-bottom: 10px;
+}
+
 .headline-preview {
     width: 300px;
     height: 200px;
     border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 .headline-image {
@@ -118,4 +177,31 @@
     object-position: center;
     border: 1px solid #fffaff;
     border-radius: 5px;
+}
+
+.headline-slide-clear {
+    display: flex;
+    justify-content: center;
+}
+
+.split-bottom-button {
+    width: 30%;
+}
+
+@media (max-width: 992px) {
+    .form-box {
+        width: 60%;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-box {
+        width: 75%;
+    }
+}
+
+@media (max-width: 576px) {
+    .form-box {
+        width: 90%;
+    }
 }
