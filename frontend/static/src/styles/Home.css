@@ -110,6 +110,46 @@
     overflow-y: auto;
 }
 
+.modal-content {
+    background-color: #0c1a2d;
+    border: 1px solid #182B45;
+}
+
+.review-preview-head {
+    background-color: #0c1a2d;
+    border-bottom: 1px solid #182B45;
+    color: #fdb035;
+}
+
+.review-preview-button {
+    background-color: #081D3A;
+    color: #fdb035;
+    border: 1px solid #fdb035;
+    transition: all 500ms;
+}
+
+.review-preview-button:hover {
+    color: #081D3A;
+    background-color: #fdb035;
+    border: 1px solid #fdb035;
+}
+
+.review-preview-button:hover::before {
+    content: 'Reviews ';
+}
+
+.review-preview-button:active {
+    color: #081D3A !important;
+    background-color: #df8a00 !important;
+    border-color: #df8a00 !important;
+}
+
+.review-preview-button:disabled {
+    color: #081D3A !important;
+    background-color: #df8a00 !important;
+    border-color: #df8a00 !important;
+}
+
 @media (max-width: 992px) {
     .display-area {
         flex-direction: column;

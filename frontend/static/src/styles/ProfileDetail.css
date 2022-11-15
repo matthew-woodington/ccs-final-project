@@ -82,6 +82,10 @@
     margin: 5px;
 }
 
+.social-li:hover {
+    transform: translate(0px, -5px);
+}
+
 .social-link {
     display: flex;
     align-items: center;
@@ -97,6 +101,7 @@
 .social-link:hover {
     background-color: #fdb035;
     color: #0C1A2D;
+    transition: all 500ms;
 }
 
 .social-icon {
@@ -133,7 +138,13 @@
 }
 
 .reviews {
-    width: 80%;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.reviews-title {
+    color: #fdb035;
+    margin-left: 21px;
 }
 
 .review-card {
@@ -166,4 +177,13 @@
 .review-user {
     margin-bottom: 0;
     margin-left: 10px;
+    margin-right: 10px;
+}
+
+.review-text {
+    color: #fffaff;
+}
+
+.review-date {
+    color: #3071df;
 }

@@ -1,5 +1,6 @@
 import Card from "react-bootstrap/Card";
 import Rating from "@mui/material/Rating";
+import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -14,6 +15,15 @@ function Reviews({ reviews, setReviews, id, userState }) {
     rating: 0,
   });
   const [show, setShow] = useState(false);
+
+  const StyledRating = styled(Rating)({
+    "& .MuiRating-iconFilled": {
+      color: "#FDB035",
+    },
+    "& .MuiRating-iconEmpty": {
+      color: "#3071DF",
+    },
+  });
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -64,7 +74,7 @@ function Reviews({ reviews, setReviews, id, userState }) {
   return (
     <section className="reviews">
       <div className="reviews-head">
-        <h3>Reviews</h3>
+        <h2 className="reviews-title">Reviews</h2>
         {userState.is_client && (
           <Button variant="dark" onClick={() => setShow(true)}>
             New Review
@@ -77,7 +87,7 @@ function Reviews({ reviews, setReviews, id, userState }) {
           <Modal.Title>New Review</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Rating
+          <StyledRating
             name="rating"
             value={newReview.rating}
             onChange={(e, newValue) => handleReview(newValue)}
@@ -106,9 +116,9 @@ function Reviews({ reviews, setReviews, id, userState }) {
               <img className="review-img" src={review.author_avatar} alt="" />
               <Card.Title className="review-user">{review.username}</Card.Title>
             </div>
-            <Rating name="rating" value={review.rating} readOnly />
-            <Card.Text>{review.text}</Card.Text>
-            <span>{moment(review.created_on).fromNow()}</span>
+            <StyledRating className="rating" name="rating" value={review.rating} readOnly />
+            <Card.Text className="review-text">{review.text}</Card.Text>
+            <span className="review-date">{moment(review.created_on).fromNow()}</span>
           </Card.Body>
         </Card>
       ))}

@@ -74,12 +74,13 @@ function EditProfile({ userState, setUserState, myProfile, setIsEdit, setMyProfi
   };
 
   return (
-    <>
-      <Form onSubmit={handleSubmit}>
-        <h1>Edit Profile</h1>
-        <div className="image-container">
-          <img className="form-image" src={preview} alt="" />
-          {/* {state.avatar && <img className="form-image" src={preview} alt="" />} */}
+    <div className="form-display">
+      <Form className="form-box" onSubmit={handleSubmit}>
+        <div className="form-head">
+          <h1 className="form-profile-title">Edit Profile</h1>
+          <div className="image-container">
+            <img className="form-image" src={preview} alt="" />
+          </div>
         </div>
         <Form.Group className="mb-3" controlId="image">
           <Form.Label>Choose a profile picture</Form.Label>
@@ -258,13 +259,13 @@ function EditProfile({ userState, setUserState, myProfile, setIsEdit, setMyProfi
           />
         </Form.Group>
 
-        <div>
+        <div className="form-footer">
           <Button className="form-button" type="submit" variant="dark">
             Save
           </Button>
         </div>
       </Form>
-    </>
+    </div>
   );
 }
 

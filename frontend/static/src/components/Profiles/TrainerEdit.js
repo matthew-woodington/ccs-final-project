@@ -1,6 +1,6 @@
 import "../../styles/ProfileDetail.css";
 import { useState } from "react";
-import { AiFillInstagram } from "react-icons/ai";
+import { AiOutlineInstagram } from "react-icons/ai";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { BsFacebook } from "react-icons/bs";
 import Button from "react-bootstrap/Button";
@@ -199,45 +199,45 @@ function TrainerEdit({
   };
 
   const previewHTML = (
-    <>
-      <aside>
-        <div className="profile-image-container">
+    <section className="profile-info">
+      <aside className="info-aside">
+        <div className="profile-aside-head">
           <img className="profile-image" src={myProfile.avatar} alt="" />
         </div>
-        <h1>
+        <h1 className="aside-name">
           {myProfile.first_name} {myProfile.last_name}
         </h1>
-        <span>{myProfile.certs}</span>
+        <span className="certs">{myProfile.certs}</span>
         <h4>Specialties:</h4>
         <p>{myProfile.specialties}</p>
         <h4>Contact me:</h4>
         <p>{myProfile.email}</p>
-        <ul className="list">
+        <ul className="list social-ul">
           {myProfile.instagram && (
-            <li>
-              <a href={`https://www.instagram.com/${myProfile.instagram}/`}>
-                <AiFillInstagram />
+            <li className="social-li">
+              <a className="social-link" href={`https://www.instagram.com/${myProfile.instagram}/`}>
+                <AiOutlineInstagram className="social-icon" />
               </a>
             </li>
           )}
           {myProfile.twitter && (
-            <li>
-              <a href={`https://www.twitter.com/${myProfile.twitter}/`}>
-                <AiOutlineTwitter />
+            <li className="social-li">
+              <a className="social-link" href={`https://www.twitter.com/${myProfile.twitter}/`}>
+                <AiOutlineTwitter className="social-icon" />
               </a>
             </li>
           )}
           {myProfile.facebook && (
-            <li>
-              <a href={`https://www.facebook.com/${myProfile.facebook}/`}>
-                <BsFacebook />
+            <li className="social-li">
+              <a className="social-link" href={`https://www.facebook.com/${myProfile.facebook}/`}>
+                <BsFacebook className="social-icon" />
               </a>
             </li>
           )}
         </ul>
         {myProfile.personal_site && <a href={myProfile.personal_site}>Personal Website</a>}
       </aside>
-      <article>
+      <article className="profile-main">
         <Button type="button" variant="dark" onClick={() => setIsEdit(true)}>
           Edit Profile Information
         </Button>
@@ -245,13 +245,15 @@ function TrainerEdit({
           Edit Headline Post
         </Button>
         {headlinePost && checkAllHeadline() && <HeadlinePost headlinePost={headlinePost} />}
-        <h2>About {myProfile.first_name}</h2>
-        <p>{myProfile.bio}</p>
-        <p>Business: {myProfile.business}</p>
-        <p>Location: {myProfile.location}</p>
-        <p>Offered training: {myProfile.training_type}</p>
+        <section className="bio-info">
+          <h2 className="section-title">About {myProfile.first_name}</h2>
+          <p>{myProfile.bio}</p>
+          <p>Business: {myProfile.business}</p>
+          <p>Location: {myProfile.location}</p>
+          <p>Offered training: {myProfile.training_type}</p>
+        </section>
       </article>
-    </>
+    </section>
   );
 
   // const editHTML = (

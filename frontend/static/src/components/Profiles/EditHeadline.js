@@ -40,7 +40,7 @@ function EditHeadline({ userState, setEditHeadline, headlinePost, setHeadlinePos
       ...post,
       post_image3: "",
       post_title3: "",
-      post_caption3: undefined,
+      post_caption3: "",
     });
   };
 

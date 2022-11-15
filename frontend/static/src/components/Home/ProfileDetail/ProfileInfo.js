@@ -8,8 +8,9 @@ import { useState } from "react";
 import { handleError } from "../../../re-usable-func";
 import Cookies from "js-cookie";
 import HeadlinePost from "./HeadlinePost";
+import Reviews from "./Reviews";
 
-function ProfileInfo({ state, userState, headlinePost }) {
+function ProfileInfo({ state, userState, headlinePost, reviews, setReviews, id }) {
   const [newRequest, setNewRequest] = useState({
     text: "",
     trainerprofile: state.id,
@@ -141,6 +142,11 @@ function ProfileInfo({ state, userState, headlinePost }) {
           <p>Business: {state.business}</p>
           <p>Location: {state.location}</p>
           <p>Offered training: {state.training_type}</p>
+        </section>
+        <section>
+          {reviews && (
+            <Reviews reviews={reviews} setReviews={setReviews} id={id} userState={userState} />
+          )}
         </section>
       </article>
     </section>

@@ -53,12 +53,20 @@ function TrainerDetailView({ userState }) {
   return (
     <>
       <section className="profile-view">
-        {state && <ProfileInfo state={state} userState={userState} headlinePost={headlinePost} />}
+        {state && (
+          <ProfileInfo
+            state={state}
+            userState={userState}
+            headlinePost={headlinePost}
+            reviews={reviews}
+            id={id}
+          />
+        )}
         {/* </section> */}
         {/* <section className="provile-view"> */}
-        {reviews && (
+        {/* {reviews && (
           <Reviews reviews={reviews} setReviews={setReviews} id={id} userState={userState} />
-        )}
+        )} */}
       </section>
     </>
   );

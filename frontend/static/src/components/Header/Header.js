@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
 import Badge from "react-bootstrap/Badge";
-import appLogo from "../../Images/reps-logo.png";
+import appLogoNoTag from "../../Images/no-tag-logo.png";
 
 import { IoLogInOutline } from "react-icons/io5";
 import { IoLogOutOutline } from "react-icons/io5";
@@ -25,7 +25,7 @@ function Header({ userState, logoutUser, requests }) {
       <Navbar className="navbar" expand="lg">
         <Container>
           <Navbar.Brand href="/">
-            <img className="app-logo" src={appLogo} alt="app logo"></img>
+            <img className="app-logo" src={appLogoNoTag} alt="app logo"></img>
           </Navbar.Brand>
           <div className="desk-nav">
             <Nav className="me-auto">

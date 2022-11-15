@@ -8,12 +8,22 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Spinner from "react-bootstrap/Spinner";
 import Rating from "@mui/material/Rating";
+import { styled } from "@mui/material/styles";
 import moment from "moment";
 import { MdReviews } from "react-icons/md";
 
 function TrainerProfileCard({ profile }) {
   const [show, setShow] = useState(false);
   const [cardReviews, setCardReviews] = useState();
+
+  const StyledRating = styled(Rating)({
+    "& .MuiRating-iconFilled": {
+      color: "#FDB035",
+    },
+    "& .MuiRating-iconEmpty": {
+      color: "#3071DF",
+    },
+  });
 
   const handleClose = (e) => {
     e.stopPropagation();
@@ -39,8 +49,8 @@ function TrainerProfileCard({ profile }) {
 
   const modal = (
     <>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header>
+      <Modal show={show} onHide={handleClose} className="review-preview">
+        <Modal.Header className="review-preview-head">
           <Modal.Title>{profile.first_name}'s Reviews</Modal.Title>
           <CloseButton onClick={(e) => handleClose(e)} />
         </Modal.Header>
@@ -55,15 +65,16 @@ function TrainerProfileCard({ profile }) {
             <p>No reviews submitted for this trainer.</p>
           ) : (
             cardReviews.map((review) => (
-              <Card key={review.id}>
+              <Card key={review.id} className="review-card">
                 <Card.Body>
                   <div className="review-title">
                     <img className="review-img" src={review.author_avatar} alt="" />
                     <Card.Title className="review-user">{review.username}</Card.Title>
+                    <StyledRating name="rating" value={review.rating} readOnly />
                   </div>
-                  <Rating name="rating" value={review.rating} readOnly />
-                  <Card.Text>{review.text}</Card.Text>
-                  <span>{moment(review.created_on).fromNow()}</span>
+                  {/* <Rating name="rating" value={review.rating} readOnly /> */}
+                  <Card.Text className="review-text">{review.text}</Card.Text>
+                  <span className="review-date">{moment(review.created_on).fromNow()}</span>
                 </Card.Body>
               </Card>
             ))
@@ -82,7 +93,7 @@ function TrainerProfileCard({ profile }) {
         <Card.Body>
           <Card.Title className="card-title">
             {profile.first_name} {profile.last_name}
-            <Button className="form-button" onClick={(e) => handleShow(e, profile.id)}>
+            <Button className="review-preview-button" onClick={(e) => handleShow(e, profile.id)}>
               <MdReviews />
             </Button>
             {modal}
