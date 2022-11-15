@@ -16,180 +16,8 @@ function TrainerEdit({
   headlinePost,
   setHeadlinePost,
 }) {
-  // const [state, setState] = useState(myProfile);
   const [isEdit, setIsEdit] = useState(false);
   const [editHeadline, setEditHeadline] = useState(false);
-  // const [preview, setPreview] = useState(state.avatar);
-  // const [post, setPost] = useState(headlinePost);
-  // const [postPreviewOne, setPostPreviewOne] = useState(headlinePost.post_image1);
-  // const [postPreviewTwo, setPostPreviewTwo] = useState(headlinePost.post_image2);
-  // const [postPreviewThree, setPostPreviewThree] = useState(headlinePost.post_image3);
-
-  // const handleCancel = () => {
-  //   setEditHeadline(false);
-  //   setPost(headlinePost);
-  // };
-
-  // const clearSlideOne = () => {
-  //   setPost({
-  //     ...post,
-  //     post_image1: "",
-  //     post_title1: "",
-  //     post_caption1: "",
-  //   });
-  // };
-
-  // const clearSlideTwo = () => {
-  //   setPost({
-  //     ...post,
-  //     post_image2: "",
-  //     post_title2: "",
-  //     post_caption2: "",
-  //   });
-  // };
-
-  // const clearSlideThree = () => {
-  //   setPost({
-  //     ...post,
-  //     post_image3: null,
-  //     post_title3: null,
-  //     post_caption3: null,
-  //   });
-  // };
-
-  // const handleInput = (e) => {
-  //   const { name, value } = e.target;
-  //   setState((prevState) => ({
-  //     ...prevState,
-  //     [name]: value,
-  //   }));
-  // };
-
-  // const handleImage = (e) => {
-  //   const file = e.target.files[0];
-  //   setState({
-  //     ...state,
-  //     avatar: file,
-  //   });
-
-  //   const reader = new FileReader();
-
-  //   reader.onloadend = () => {
-  //     setPreview(reader.result);
-  //   };
-  //   reader.readAsDataURL(file);
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-
-  //   const user = { ...state };
-  //   if (!(user.avatar instanceof File)) {
-  //     delete user.avatar;
-  //   }
-
-  //   for (const key in user) {
-  //     if (user[key]) {
-  //       formData.append(key, user[key]);
-  //     }
-  //   }
-
-  //   const options = {
-  //     method: "PATCH",
-  //     headers: {
-  //       "X-CSRFToken": Cookies.get("csrftoken"),
-  //     },
-  //     body: formData,
-  //   };
-
-  //   const response = await fetch(`/api/v1/profiles/trainers/${state.id}/`, options).catch(
-  //     handleError
-  //   );
-  //   if (!response.ok) {
-  //     throw new Error("Network response was not OK");
-  //   } else {
-  //     const data = await response.json();
-  //     console.log(data);
-  //     setUserState({
-  //       ...userState,
-  //       trainer_avatar: data.avatar,
-  //     });
-  //     setIsEdit(false);
-  //   }
-  // };
-
-  // const handlePostInput = (e) => {
-  //   const { name, value } = e.target;
-  //   setPost((prevState) => ({
-  //     ...prevState,
-  //     [name]: value,
-  //   }));
-  // };
-
-  // const handlePostImage = (e) => {
-  //   const file = e.target.files[0];
-  //   setPost({
-  //     ...state,
-  //     [e.target.name]: file,
-  //   });
-
-  //   const reader = new FileReader();
-
-  //   reader.onloadend = () => {
-  //     if (e.target.name === "post_image1") {
-  //       setPostPreviewOne(reader.result);
-  //     } else if (e.target.name === "post_image2") {
-  //       setPostPreviewTwo(reader.result);
-  //     } else if (e.target.name === "post_image3") {
-  //       setPostPreviewThree(reader.result);
-  //     }
-  //   };
-  //   reader.readAsDataURL(file);
-  // };
-
-  // const handlePostSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-
-  //   const editPost = { ...post };
-  //   if (!(editPost.post_image1 instanceof File)) {
-  //     delete editPost.post_image1;
-  //   }
-  //   if (!(editPost.post_image2 instanceof File)) {
-  //     delete editPost.post_image2;
-  //   }
-  //   if (!(editPost.post_image3 instanceof File)) {
-  //     delete editPost.post_image3;
-  //   }
-
-  //   for (const key in editPost) {
-  //     if (editPost[key]) {
-  //       formData.append(key, editPost[key]);
-  //     }
-  //   }
-
-  //   const options = {
-  //     method: "PUT",
-  //     headers: {
-  //       "X-CSRFToken": Cookies.get("csrftoken"),
-  //     },
-  //     body: formData,
-  //   };
-
-  //   const response = await fetch(
-  //     `/api/v1/profiles/trainers/${userState.trainer_profile}/headlinepost/`,
-  //     options
-  //   ).catch(handleError);
-  //   if (!response.ok) {
-  //     throw new Error("Network response was not OK");
-  //   } else {
-  //     const data = await response.json();
-  //     console.log(data);
-  //     setHeadlinePost(data);
-  //     setEditHeadline(false);
-  //   }
-  // };
 
   const checkAllHeadline = () => {
     if (headlinePost.post_image1 || headlinePost.post_image2 || headlinePost.post_image3) {
@@ -201,49 +29,56 @@ function TrainerEdit({
   const previewHTML = (
     <section className="profile-info">
       <aside className="info-aside">
-        <div className="profile-aside-head">
-          <img className="profile-image" src={myProfile.avatar} alt="" />
-        </div>
-        <h1 className="aside-name">
-          {myProfile.first_name} {myProfile.last_name}
-        </h1>
-        <span className="certs">{myProfile.certs}</span>
-        <h4>Specialties:</h4>
-        <p>{myProfile.specialties}</p>
-        <h4>Contact me:</h4>
-        <p>{myProfile.email}</p>
-        <ul className="list social-ul">
-          {myProfile.instagram && (
-            <li className="social-li">
-              <a className="social-link" href={`https://www.instagram.com/${myProfile.instagram}/`}>
-                <AiOutlineInstagram className="social-icon" />
-              </a>
-            </li>
-          )}
-          {myProfile.twitter && (
-            <li className="social-li">
-              <a className="social-link" href={`https://www.twitter.com/${myProfile.twitter}/`}>
-                <AiOutlineTwitter className="social-icon" />
-              </a>
-            </li>
-          )}
-          {myProfile.facebook && (
-            <li className="social-li">
-              <a className="social-link" href={`https://www.facebook.com/${myProfile.facebook}/`}>
-                <BsFacebook className="social-icon" />
-              </a>
-            </li>
-          )}
-        </ul>
-        {myProfile.personal_site && <a href={myProfile.personal_site}>Personal Website</a>}
+        {/* <div className="profile-aside-head"> */}
+        <img className="profile-image" src={myProfile.avatar} alt="" />
+        {/* </div> */}
+        <section className="profile-aside-info">
+          <h1 className="aside-name">
+            {myProfile.first_name} {myProfile.last_name}
+          </h1>
+          <span className="certs">{myProfile.certs}</span>
+          <div className="edit-buttons">
+            <Button type="button" className="edit-button" onClick={() => setIsEdit(true)}>
+              Edit Profile Information
+            </Button>
+            <Button type="button" className="edit-button" onClick={() => setEditHeadline(true)}>
+              Edit Headline Post
+            </Button>
+          </div>
+          <h4>Specialties:</h4>
+          <p>{myProfile.specialties}</p>
+          <h4>Contact me:</h4>
+          <p>{myProfile.email}</p>
+          <ul className="list social-ul">
+            {myProfile.instagram && (
+              <li className="social-li">
+                <a
+                  className="social-link"
+                  href={`https://www.instagram.com/${myProfile.instagram}/`}
+                >
+                  <AiOutlineInstagram className="social-icon" />
+                </a>
+              </li>
+            )}
+            {myProfile.twitter && (
+              <li className="social-li">
+                <a className="social-link" href={`https://www.twitter.com/${myProfile.twitter}/`}>
+                  <AiOutlineTwitter className="social-icon" />
+                </a>
+              </li>
+            )}
+            {myProfile.facebook && (
+              <li className="social-li">
+                <a className="social-link" href={`https://www.facebook.com/${myProfile.facebook}/`}>
+                  <BsFacebook className="social-icon" />
+                </a>
+              </li>
+            )}
+          </ul>
+          {myProfile.personal_site && <a href={myProfile.personal_site}>Personal Website</a>}
+        </section>
       </aside>
       <article className="profile-main">
-        <Button type="button" variant="dark" onClick={() => setIsEdit(true)}>
-          Edit Profile Information
-        </Button>
-        <Button type="button" variant="dark" onClick={() => setEditHeadline(true)}>
-          Edit Headline Post
-        </Button>
         {headlinePost && checkAllHeadline() && <HeadlinePost headlinePost={headlinePost} />}
         <section className="bio-info">
           <h2 className="section-title">About {myProfile.first_name}</h2>

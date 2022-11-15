@@ -52,7 +52,7 @@ function TrainerProfileCard({ profile }) {
       <Modal show={show} onHide={handleClose} className="review-preview">
         <Modal.Header className="review-preview-head">
           <Modal.Title>{profile.first_name}'s Reviews</Modal.Title>
-          <CloseButton onClick={(e) => handleClose(e)} />
+          <CloseButton variant="white" onClick={(e) => handleClose(e)} />
         </Modal.Header>
         <Modal.Body className="card-review-modal-body">
           {!cardReviews ? (

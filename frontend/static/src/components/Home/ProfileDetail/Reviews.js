@@ -7,6 +7,7 @@ import Modal from "react-bootstrap/Modal";
 import moment from "moment";
 import Cookies from "js-cookie";
 import { handleError } from "../../../re-usable-func";
+import CloseButton from "react-bootstrap/CloseButton";
 
 function Reviews({ reviews, setReviews, id, userState }) {
   const [newReview, setNewReview] = useState({
@@ -76,15 +77,16 @@ function Reviews({ reviews, setReviews, id, userState }) {
       <div className="reviews-head">
         <h2 className="reviews-title">Reviews</h2>
         {userState.is_client && (
-          <Button variant="dark" onClick={() => setShow(true)}>
+          <Button className="form-button" onClick={() => setShow(true)}>
             New Review
           </Button>
         )}
       </div>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header className="new-review-head">
           <Modal.Title>New Review</Modal.Title>
+          <CloseButton variant="white" onClick={() => handleClose()} />
         </Modal.Header>
         <Modal.Body>
           <StyledRating
@@ -102,8 +104,8 @@ function Reviews({ reviews, setReviews, id, userState }) {
             onChange={handleInput}
           />
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleSubmit}>
+        <Modal.Footer className="new-review-foot">
+          <Button className="form-button" onClick={handleSubmit}>
             Submit
           </Button>
         </Modal.Footer>

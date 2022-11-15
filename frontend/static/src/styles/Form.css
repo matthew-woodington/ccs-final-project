@@ -49,21 +49,25 @@
     margin: 5px;
     background-color: #fdb035;
     border-color: #fdb035;
+    color: #0c1a2d;
 }
 
 .form-button:hover {
     background-color: #df8a00;
     border-color: #df8a00;
+    color: #0c1a2d;
 }
 
 .form-button:active {
     background-color: #df8a00 !important;
     border-color: #df8a00 !important;
+    color: #0c1a2d !important;
 }
 
 .form-button:disabled {
     background-color: #df8a00 !important;
     border-color: #df8a00 !important;
+    color: #0c1a2d !important;
 }
 
 .login-button {

@@ -150,6 +150,7 @@
     border-color: #df8a00 !important;
 }
 
+
 @media (max-width: 992px) {
     .display-area {
         flex-direction: column;
@@ -207,5 +208,9 @@
 
     .profile-card-list {
         width: 90%;
+    }
+
+    .review-preview-button:hover::before {
+        content: '';
     }
 }

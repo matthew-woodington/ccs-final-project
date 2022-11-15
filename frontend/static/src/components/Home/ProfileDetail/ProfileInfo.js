@@ -9,6 +9,7 @@ import { handleError } from "../../../re-usable-func";
 import Cookies from "js-cookie";
 import HeadlinePost from "./HeadlinePost";
 import Reviews from "./Reviews";
+import CloseButton from "react-bootstrap/CloseButton";
 
 function ProfileInfo({ state, userState, headlinePost, reviews, setReviews, id }) {
   const [newRequest, setNewRequest] = useState({
@@ -64,75 +65,84 @@ function ProfileInfo({ state, userState, headlinePost, reviews, setReviews, id }
 
   const modal = (
     <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton>
+      <Modal.Header className="new-message-head">
         <Modal.Title>New Message</Modal.Title>
+        <CloseButton variant="white" onClick={() => setShow(false)} />
       </Modal.Header>
-      <Modal.Body>
-        <Form.Label>Reach out to inquire about working with {state.first_name}.</Form.Label>
-        <textarea
-          required
-          placeholder="Message..."
-          rows="2"
-          className="form-control"
-          name="text"
-          value={newRequest.text}
-          onChange={handleInput}
-        />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="primary" onClick={handleSubmit}>
-          Send
-        </Button>
-      </Modal.Footer>
+      <Form onSubmit={handleSubmit}>
+        <Modal.Body>
+          <Form.Label className="new-message-label">
+            Reach out to inquire about working with {state.first_name}.
+          </Form.Label>
+          <textarea
+            required
+            placeholder="Message..."
+            rows="2"
+            className="form-control"
+            name="text"
+            value={newRequest.text}
+            onChange={handleInput}
+          />
+        </Modal.Body>
+        <Modal.Footer className="new-message-foot">
+          <Button className="form-button" type="submit">
+            Send
+          </Button>
+        </Modal.Footer>
+      </Form>
     </Modal>
   );
 
   return (
     <section className="profile-info">
       <aside className="info-aside">
-        <div className="profile-aside-head">
-          {/* <div className="profile-image-container"> */}
-          <img className="profile-image" src={state.avatar} alt="" />
-          {/* </div> */}
-        </div>
-        <h1 className="aside-name">
-          {state.first_name} {state.last_name}
-        </h1>
-        <span className="certs">{state.certs}</span>
-        <h4>Specialties:</h4>
-        <p>{state.specialties}</p>
-        <h4>Contact me:</h4>
-        <p>{state.email}</p>
-        <ul className="list social-ul">
-          {state.instagram && (
-            <li className="social-li">
-              <a className="social-link" href={`https://www.instagram.com/${state.instagram}/`}>
-                <AiOutlineInstagram className="social-icon" />
-              </a>
-            </li>
+        {/* <section className="profile-aside-head"> */}
+        {/* <div className="profile-image-container"> */}
+        <img className="profile-image" src={state.avatar} alt="" />
+        {/* </div> */}
+        {/* </section> */}
+        <section className="profile-aside-info">
+          <h1 className="aside-name">
+            {state.first_name} {state.last_name}
+          </h1>
+          <span className="certs">{state.certs}</span>
+          <h4>Specialties:</h4>
+          <p>{state.specialties}</p>
+          <h4>Contact me:</h4>
+          <p>{state.email}</p>
+          <ul className="list social-ul">
+            {state.instagram && (
+              <li className="social-li">
+                <a className="social-link" href={`https://www.instagram.com/${state.instagram}/`}>
+                  <AiOutlineInstagram className="social-icon" />
+                </a>
+              </li>
+            )}
+            {state.twitter && (
+              <li className="social-li">
+                <a className="social-link" href={`https://www.twitter.com/${state.twitter}/`}>
+                  <AiOutlineTwitter className="social-icon" />
+                </a>
+              </li>
+            )}
+            {state.facebook && (
+              <li className="social-li">
+                <a className="social-link" href={`https://www.facebook.com/${state.facebook}/`}>
+                  <BsFacebook className="social-icon" />
+                </a>
+              </li>
+            )}
+          </ul>
+          {state.personal_site && <a href={state.personal_site}>Personal Website</a>}
+          {modal}
+          {userState.is_client && (
+            <div className="aside-foot">
+              <Button className="contact-button" onClick={() => setShow(true)}>
+                Contact
+              </Button>
+            </div>
           )}
-          {state.twitter && (
-            <li className="social-li">
-              <a className="social-link" href={`https://www.twitter.com/${state.twitter}/`}>
-                <AiOutlineTwitter className="social-icon" />
-              </a>
-            </li>
-          )}
-          {state.facebook && (
-            <li className="social-li">
-              <a className="social-link" href={`https://www.facebook.com/${state.facebook}/`}>
-                <BsFacebook className="social-icon" />
-              </a>
-            </li>
-          )}
-        </ul>
-        {state.personal_site && <a href={state.personal_site}>Personal Website</a>}
-        {modal}
-        {userState.is_client && (
-          <Button className="form-button" onClick={() => setShow(true)}>
-            Contact
-          </Button>
-        )}
+        </section>
       </aside>
       <article className="profile-main">
         {headlinePost && checkAllHeadline() && <HeadlinePost headlinePost={headlinePost} />}

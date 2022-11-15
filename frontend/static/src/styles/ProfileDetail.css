@@ -21,12 +21,9 @@
     border-radius: 10px;
     margin-top: 50px;
     padding: 0px 20px;
-}
-
-.profile-aside-head {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
 }
 
 .aside-name {
@@ -38,24 +35,14 @@
 .certs {
     color: #3071df;
     display: block;
+    padding-bottom: 20px;
     margin-bottom: 20px;
+    border-bottom: 1px solid #182B45;
 }
 
 .profile-main {
     width: 65%;
 }
-
-/* .profile-image-container {
-    width: 80%;
-    height: 300px;
-    aspect-ratio : 1 / 1;
-    border-radius: 50%;
-    border: 1px solid #212529;
-    overflow: hidden;
-    background-color: #bbb;
-    border: 1px solid #182B45;
-    transform: translate(0px, -50px);
-} */
 
 .profile-image {
     width: 80%;
@@ -83,7 +70,7 @@
 }
 
 .social-li:hover {
-    transform: translate(0px, -5px);
+    transform: translate(0px, -2px);
 }
 
 .social-link {
@@ -116,7 +103,7 @@
 .headline-img {
     height: 500px;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 10px;
     border: 1px solid #182B45;
 }
 
@@ -145,6 +132,7 @@
 .reviews-title {
     color: #fdb035;
     margin-left: 21px;
+    margin-bottom: 0;
 }
 
 .review-card {
@@ -186,4 +174,181 @@
 
 .review-date {
     color: #3071df;
+}
+
+.aside-foot {
+    display: flex;
+    justify-content: center;
+}
+
+.contact-button {
+    background-color: #182B45;
+    border-color: #182B45;
+    color: #fdb035;
+    margin-bottom: 20px;
+    width: 70%;
+    transition: all 500ms;
+}
+
+.contact-button:hover {
+    background-color: #df8a00;
+    border-color: #df8a00;
+    color: #0C1A2D;
+    font-weight: 500;
+}
+
+.contact-button:active {
+    background-color: #df8a00 !important;
+    border-color: #df8a00 !important;
+}
+
+.contact-button:disabled {
+    background-color: #df8a00 !important;
+    border-color: #df8a00 !important;
+}
+
+.new-message-head {
+    border-bottom: 1px solid #182B45;
+    color: #fdb035;
+}
+
+.new-message-label {
+    color: #fffaff;
+}
+
+.new-message-foot {
+    border-top: 1px solid #182B45;
+}
+
+.new-review-head {
+    border-bottom: 1px solid #182B45;
+    color: #fdb035;
+}
+
+.new-review-foot {
+    border-top: 1px solid #182B45;
+}
+
+.edit-button {
+    background-color: #182B45;
+    border-color: #182B45;
+    color: #fdb035;
+    margin-bottom: 20px;
+    width: 100%;
+    transition: all 500ms;
+}
+
+.edit-button:hover {
+    background-color: #df8a00;
+    border-color: #df8a00;
+    color: #0C1A2D;
+    font-weight: 500;
+}
+
+.edit-button:active {
+    background-color: #df8a00 !important;
+    border-color: #df8a00 !important;
+}
+
+.edit-button:disabled {
+    background-color: #df8a00 !important;
+    border-color: #df8a00 !important;
+}
+
+@media (max-width: 992px) {
+    .profile-info {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .info-aside {
+        width: 85%;
+        margin-left: 5%;
+        margin-bottom: 20px;
+        flex-direction: row;
+        align-items: flex-start;
+        margin-top: 20px;
+    }
+
+    .profile-image {
+        margin-top: 20px;
+        width: 70%;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        border: 1px solid #fffaff;
+        overflow: hidden;
+        object-fit: cover;
+        object-position: top;
+        transform: translate(-60px, 0px);
+    }
+
+    .profile-aside-info {
+        margin-left: -30px;
+        width: 100%;
+    }
+
+    .aside-name {
+        margin-top: 20px;
+    }
+
+    .profile-main {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .info-aside {
+        width: 90%;
+        margin-left: 0;
+        flex-direction: column;
+        margin-top: 50px;
+        align-items: center;
+    }
+
+    .profile-image {
+        width: 60%;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        border: 1px solid #fffaff;
+        overflow: hidden;
+        object-fit: cover;
+        object-position: top;
+        transform: translate(0px, -50px);
+    }
+
+    .profile-aside-info {
+        margin-left: 0;
+        width: 90%;
+    }
+
+    .aside-name {
+        margin-top: -30px;
+    }
+
+    .contact-button {
+        width: 80%;
+    }
+
+    .headline-frame {
+        height: 400px;
+    }
+    
+    .headline-img {
+        height: 400px;
+    }
+}
+
+@media (max-width: 576px) {
+    .profile-image {
+        width: 80%;
+    }
+
+    .headline-frame {
+        height: 300px;
+    }
+    
+    .headline-img {
+        height: 300px;
+    }
 }
