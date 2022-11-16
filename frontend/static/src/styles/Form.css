@@ -109,6 +109,11 @@
 
 .login-button {
     margin-bottom: 10px;
+    margin-top: 15px;
+}
+
+.register-text {
+    margin-top: 15px;
 }
 
 .image-container {

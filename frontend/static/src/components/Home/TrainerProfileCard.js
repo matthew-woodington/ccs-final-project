@@ -98,9 +98,9 @@ function TrainerProfileCard({ profile }) {
             </Button>
             {modal}
           </Card.Title>
-          <span>{profile.training_type}</span>
+          <Card.Text>{profile.training_type}</Card.Text>
           <Card.Text>{profile.specialties}</Card.Text>
-          <Card.Text>{profile.location}</Card.Text>
+          <Card.Text className="mute-text">{profile.location}</Card.Text>
         </Card.Body>
       </Card>
     </li>

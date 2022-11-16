@@ -148,7 +148,7 @@ function RegisterForm({ userState, setUserState }) {
               {error}
             </p>
           ))}
-        <p>Are you registering as a Trainer or Client?</p>
+        <p className="register-text">Are you registering as a Trainer or Client?</p>
         <Form.Group className="mb-3" controlId="trainer-check">
           <Form.Check
             required
