@@ -273,6 +273,17 @@
     color: #3071df;
 }
 
+.delete-div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.delete-icon {
+    color: #fdb035;
+    margin: 10px 8px 0px 5px;
+    font-size: 20px;
+}
 
 
 @media (max-width: 992px) {

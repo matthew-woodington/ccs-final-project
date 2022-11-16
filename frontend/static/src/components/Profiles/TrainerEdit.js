@@ -46,9 +46,18 @@ function TrainerEdit({
             </Button>
           </div>
           <h4>Specialties:</h4>
-          <p>{myProfile.specialties}</p>
+          <p className="mute-text">{myProfile.specialties}</p>
           <h4>Contact me:</h4>
-          <p>{myProfile.email}</p>
+          <p className="mute-text">{myProfile.email}</p>
+          {myProfile.personal_site && (
+            <div className="personal-site-container">
+              <p className="personal-site">
+                <a className="website-link" href={myProfile.personal_site}>
+                  My Website
+                </a>
+              </p>
+            </div>
+          )}
           <ul className="list social-ul">
             {myProfile.instagram && (
               <li className="social-li">
@@ -75,7 +84,6 @@ function TrainerEdit({
               </li>
             )}
           </ul>
-          {myProfile.personal_site && <a href={myProfile.personal_site}>Personal Website</a>}
         </section>
       </aside>
       <article className="profile-main">

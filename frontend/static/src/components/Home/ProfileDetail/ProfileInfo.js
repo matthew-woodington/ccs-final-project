@@ -106,10 +106,19 @@ function ProfileInfo({ state, userState, headlinePost, reviews, setReviews, id }
             {state.first_name} {state.last_name}
           </h1>
           <span className="certs">{state.certs}</span>
-          <h4>Specialties:</h4>
-          <p>{state.specialties}</p>
-          <h4>Contact me:</h4>
-          <p>{state.email}</p>
+          <h4>Specialties</h4>
+          <p className="mute-text">{state.specialties}</p>
+          <h4>Contacts</h4>
+          <p className="mute-text">{state.email}</p>
+          {state.personal_site && (
+            <div className="personal-site-container">
+              <p className="personal-site">
+                <a className="website-link" href={state.personal_site}>
+                  My Website
+                </a>
+              </p>
+            </div>
+          )}
           <ul className="list social-ul">
             {state.instagram && (
               <li className="social-li">
@@ -133,7 +142,6 @@ function ProfileInfo({ state, userState, headlinePost, reviews, setReviews, id }
               </li>
             )}
           </ul>
-          {state.personal_site && <a href={state.personal_site}>Personal Website</a>}
           {modal}
           {userState.is_client && (
             <div className="aside-foot">

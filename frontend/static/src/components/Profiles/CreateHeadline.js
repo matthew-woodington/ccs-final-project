@@ -99,111 +99,127 @@ function CreateHeadline({ userState }) {
     <section className="form-display">
       <div className="form-box">
         <Form onSubmit={handlePostSubmit}>
-          <h1>Create Headline Post</h1>
-          <p>
-            Add up to three posts to be seen at the top of your profile page or{" "}
-            <span className="skip-link" onClick={(e) => handlePostSubmit(e)}>
-              skip for now
-            </span>{" "}
-            and edit later.
-          </p>
-          <h3>Slide One</h3>
-          <div className="headline-preview">
-            <img className="headline-image" src={postPreviewOne} alt="" />
+          <div className="form-head">
+            <h1 className="form-profile-title">Create Headline Post</h1>
+            <p className="create-headline-tip">
+              Add up to three posts to be seen at the top of your profile page or{" "}
+              <span className="skip-link" onClick={(e) => handlePostSubmit(e)}>
+                skip
+              </span>{" "}
+              for now and edit later.
+            </p>
           </div>
-          <Form.Group className="mb-3" controlId="post_image1">
-            <Form.Label>Choose a picture for slide one</Form.Label>
-            <Form.Control type="file" name="post_image1" onChange={(e) => handlePostImage(e)} />
-          </Form.Group>
+          <section className="slide-box">
+            <div className="slide-box-head">
+              <h3 className="headline-slide-title">Slide One</h3>
+              <div className="headline-preview">
+                <img className="headline-image" src={postPreviewOne} alt="" />
+              </div>
+            </div>
+            <Form.Group className="mb-3" controlId="post_image1">
+              <Form.Label>Choose a picture for slide one</Form.Label>
+              <Form.Control type="file" name="post_image1" onChange={(e) => handlePostImage(e)} />
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="post_title1">
-            <Form.Label>Slide one title</Form.Label>
-            <Form.Control
-              placeholder="Title..."
-              type="text"
-              name="post_title1"
-              value={post.post_title1}
-              onChange={handlePostInput}
-            />
-          </Form.Group>
+            <Form.Group className="mb-3" controlId="post_title1">
+              <Form.Label>Slide one title</Form.Label>
+              <Form.Control
+                placeholder="Title..."
+                type="text"
+                name="post_title1"
+                value={post.post_title1}
+                onChange={handlePostInput}
+              />
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="post_caption1">
-            <Form.Label>Slide one caption</Form.Label>
-            <Form.Control
-              placeholder="Caption..."
-              type="text"
-              name="post_caption1"
-              value={post.post_caption1}
-              onChange={handlePostInput}
-            />
-          </Form.Group>
+            <Form.Group className="mb-3" controlId="post_caption1">
+              <Form.Label>Slide one caption</Form.Label>
+              <Form.Control
+                placeholder="Caption..."
+                type="text"
+                name="post_caption1"
+                value={post.post_caption1}
+                onChange={handlePostInput}
+              />
+            </Form.Group>
+          </section>
 
-          <h3>Slide Two</h3>
-          <div className="headline-preview">
-            <img className="headline-image" src={postPreviewTwo} alt="" />
+          <section className="slide-box">
+            <div className="slide-box-head">
+              <h3 className="headline-slide-title">Slide Two</h3>
+              <div className="headline-preview">
+                <img className="headline-image" src={postPreviewTwo} alt="" />
+              </div>
+            </div>
+            <Form.Group className="mb-3" controlId="post_image2">
+              <Form.Label>Choose a picture for slide two</Form.Label>
+              <Form.Control type="file" name="post_image2" onChange={(e) => handlePostImage(e)} />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="post_title2">
+              <Form.Label>Slide one title</Form.Label>
+              <Form.Control
+                placeholder="Title..."
+                type="text"
+                name="post_title2"
+                value={post.post_title2}
+                onChange={handlePostInput}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="post_caption2">
+              <Form.Label>Slide two caption</Form.Label>
+              <Form.Control
+                placeholder="Caption..."
+                type="text"
+                name="post_caption2"
+                headline
+                value={post.post_caption2}
+                onChange={handlePostInput}
+              />
+            </Form.Group>
+          </section>
+
+          <section className="slide-box">
+            <div className="slide-box-head">
+              <h3 className="headline-slide-title">Slide Three</h3>
+              <div className="headline-preview">
+                <img className="headline-image" src={postPreviewThree} alt="" />
+              </div>
+            </div>
+            <Form.Group className="mb-3" controlId="post_image3">
+              <Form.Label>Choose a picture for slide three</Form.Label>
+              <Form.Control type="file" name="post_image3" onChange={(e) => handlePostImage(e)} />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="post_title3">
+              <Form.Label>Slide three title</Form.Label>
+              <Form.Control
+                placeholder="Title..."
+                type="text"
+                name="post_title3"
+                value={post.post_title3}
+                onChange={handlePostInput}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="post_caption3">
+              <Form.Label>Slide three caption</Form.Label>
+              <Form.Control
+                placeholder="Caption..."
+                type="text"
+                name="post_caption3"
+                value={post.post_caption3}
+                onChange={handlePostInput}
+              />
+            </Form.Group>
+          </section>
+
+          <div className="form-footer">
+            <Button className="form-button" type="submit">
+              Save & Submit
+            </Button>
           </div>
-          <Form.Group className="mb-3" controlId="post_image2">
-            <Form.Label>Choose a picture for slide two</Form.Label>
-            <Form.Control type="file" name="post_image2" onChange={(e) => handlePostImage(e)} />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="post_title2">
-            <Form.Label>Slide one title</Form.Label>
-            <Form.Control
-              placeholder="Title..."
-              type="text"
-              name="post_title2"
-              value={post.post_title2}
-              onChange={handlePostInput}
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="post_caption2">
-            <Form.Label>Slide two caption</Form.Label>
-            <Form.Control
-              placeholder="Caption..."
-              type="text"
-              name="post_caption2"
-              headline
-              value={post.post_caption2}
-              onChange={handlePostInput}
-            />
-          </Form.Group>
-
-          <h3>Slide Three</h3>
-          <div className="headline-preview">
-            <img className="headline-image" src={postPreviewThree} alt="" />
-          </div>
-          <Form.Group className="mb-3" controlId="post_image3">
-            <Form.Label>Choose a picture for slide three</Form.Label>
-            <Form.Control type="file" name="post_image3" onChange={(e) => handlePostImage(e)} />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="post_title3">
-            <Form.Label>Slide three title</Form.Label>
-            <Form.Control
-              placeholder="Title..."
-              type="text"
-              name="post_title3"
-              value={post.post_title3}
-              onChange={handlePostInput}
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="post_caption3">
-            <Form.Label>Slide three caption</Form.Label>
-            <Form.Control
-              placeholder="Caption..."
-              type="text"
-              name="post_caption3"
-              value={post.post_caption3}
-              onChange={handlePostInput}
-            />
-          </Form.Group>
-
-          <Button className="form-button" type="submit">
-            Save & Submit
-          </Button>
         </Form>
       </div>
     </section>

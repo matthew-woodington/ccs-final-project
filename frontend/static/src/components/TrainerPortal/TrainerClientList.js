@@ -156,8 +156,11 @@ function TrainerClientList({ userState, clients, setClients }) {
                     )}
                     {client.note && client.note}
                   </div>
-                  <div>
-                    <IoTrashBin onClick={() => setActiveDelete(client.id)} />
+                  <div className="delete-div">
+                    <IoTrashBin
+                      className="delete-icon"
+                      onClick={() => setActiveDelete(client.id)}
+                    />
 
                     <Modal size="sm" show={showConfirm} onHide={handleClose}>
                       <Modal.Header className="confirm-head">
