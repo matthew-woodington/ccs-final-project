@@ -3,6 +3,7 @@
     justify-content: center;
     align-items: flex-start;
     margin-top: 20px;
+    min-height: calc(100vh - 275px);
 }
 
 .profile-card {
@@ -13,6 +14,10 @@
     color: #fffaff;
     background-color: #081D3A;
     border: 2px solid #182B45;
+}
+
+.profile-card:hover {
+    border: 2px solid #fdb035;
 }
 
 .image-cont {

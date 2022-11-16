@@ -47,11 +47,13 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    min-height: calc(100vh - 325px);
 }
 
 .portal-display-box {
     width: 80%;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .note {
@@ -63,7 +65,7 @@
 .note-head {
     display: flex;
     justify-content: space-between;
-    color: #3071df;
+    color: #fdb035;
 }
 
 .client-list {
@@ -199,6 +201,7 @@
 .request-card {
     background-color: #081d3a;
     border: 1px solid #082b45;
+    margin-bottom: 10px;
 }
 
 .request-head {
@@ -243,6 +246,34 @@
     background-color: #df8a00 !important;
     border-color: #df8a00 !important;
 }
+
+.confirm-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #082b45;
+    color: #df8a00;
+}
+
+.confirm-icon {
+    font-size: 40px;
+    color: #df8a00;
+}
+
+.confirm-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.confirm-text {
+    color: #3071df;
+}
+
+
 
 @media (max-width: 992px) {
     .nav-tab-list {

@@ -6,6 +6,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Cookies from "js-cookie";
 import CloseButton from "react-bootstrap/CloseButton";
+import { IoTrashBin } from "react-icons/io5";
+import { IoWarning } from "react-icons/io5";
 
 function TrainerClientList({ userState, clients, setClients }) {
   const [modalData, setModalData] = useState({
@@ -15,9 +17,11 @@ function TrainerClientList({ userState, clients, setClients }) {
     note: "",
   });
   const [show, setShow] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const handleClose = (e) => {
     setShow(false);
+    setShowConfirm(false);
     setModalData({
       client_details: {},
       trainer_profile: "",
@@ -69,6 +73,45 @@ function TrainerClientList({ userState, clients, setClients }) {
     }
   };
 
+  const setActiveDelete = (id) => {
+    const index = clients.findIndex((client) => client.id === id);
+    setModalData(clients[index]);
+    setShowConfirm(true);
+  };
+
+  const removeFromList = (list_id, client_id) => {
+    console.log("list", list_id);
+    console.log("client", client_id);
+    deleteClient(list_id);
+    deleteClientSessions(client_id);
+    setShowConfirm(false);
+  };
+
+  const deleteClient = async (id) => {
+    const response = await fetch(`/api/v1/clientlists/${id}/`, {
+      method: "DELETE",
+      headers: {
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+    });
+    const index = clients.findIndex((client) => client.id === id);
+    const updatedClients = [...clients];
+    updatedClients.splice(index, 1);
+    setClients(updatedClients);
+  };
+
+  const deleteClientSessions = async (id) => {
+    const response = await fetch(
+      `/api/v1/sessions/trainer/${userState.trainer_profile}/client/${id}/`,
+      {
+        method: "DELETE",
+        headers: {
+          "X-CSRFToken": Cookies.get("csrftoken"),
+        },
+      }
+    );
+  };
+
   return (
     <>
       <section className="portal-display-box">
@@ -112,6 +155,36 @@ function TrainerClientList({ userState, clients, setClients }) {
                       </Modal>
                     )}
                     {client.note && client.note}
+                  </div>
+                  <div>
+                    <IoTrashBin onClick={() => setActiveDelete(client.id)} />
+
+                    <Modal size="sm" show={showConfirm} onHide={handleClose}>
+                      <Modal.Header className="confirm-head">
+                        <Modal.Title>
+                          <IoWarning className="confirm-icon" /> Delete Client?
+                        </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body className="confirm-body">
+                        <p className="confirm-text">
+                          This will delete all sessions related to the client.
+                        </p>
+                        <div className="form-foot">
+                          <Button variant="dark" className="form-button" onClick={handleClose}>
+                            Cancel
+                          </Button>
+                          <Button
+                            variant="dark"
+                            className="form-button"
+                            onClick={() =>
+                              removeFromList(modalData.id, modalData.client_details.id)
+                            }
+                          >
+                            Confirm
+                          </Button>
+                        </div>
+                      </Modal.Body>
+                    </Modal>
                   </div>
                 </Accordion.Body>
               </Accordion.Item>

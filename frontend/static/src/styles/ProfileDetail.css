@@ -5,6 +5,7 @@
     justify-content: flex-start;
     color: #fffaff;
     margin-top: 20px;
+    min-height: calc(100vh - 275px);
 }
 
 .profile-info {

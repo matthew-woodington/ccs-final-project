@@ -49,7 +49,7 @@ function TrainerProfileCard({ profile }) {
 
   const modal = (
     <>
-      <Modal show={show} onHide={handleClose} className="review-preview">
+      <Modal show={show} backdrop="static" onHide={handleClose} className="review-preview">
         <Modal.Header className="review-preview-head">
           <Modal.Title>{profile.first_name}'s Reviews</Modal.Title>
           <CloseButton variant="white" onClick={(e) => handleClose(e)} />

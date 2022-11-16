@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { handleError } from "../../re-usable-func";
 import appLogo from "../../Images/reps-logo.png";
+import { BiErrorAlt } from "react-icons/bi";
+import { IoWarningOutline } from "react-icons/io5";
 
 function RegisterForm({ userState, setUserState }) {
   const [state, setState] = useState({
@@ -16,6 +18,7 @@ function RegisterForm({ userState, setUserState }) {
     is_client: false,
   });
   const [userType, setUserType] = useState();
+  const [error, setError] = useState();
 
   useEffect(() => {
     if (userType === "trainer") {
@@ -43,15 +46,6 @@ function RegisterForm({ userState, setUserState }) {
     }));
   };
 
-  const checkSamePass = (e) => {
-    if (state.password1 !== state.password2) {
-      alert("Please enter matching passwords.");
-      return;
-    } else {
-      handleSubmit(e);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const options = {
@@ -63,10 +57,11 @@ function RegisterForm({ userState, setUserState }) {
       body: JSON.stringify(state),
     };
     const response = await fetch("/dj-rest-auth/registration/", options).catch(handleError);
+    const data = await response.json();
     if (!response.ok) {
+      setError(data);
       throw new Error("Network response was not OK");
     } else {
-      const data = await response.json();
       Cookies.set("Authorization", `Token ${data.key}`);
       // navigate("/");
       setUserState({
@@ -91,7 +86,7 @@ function RegisterForm({ userState, setUserState }) {
 
   return (
     <div className="form-display">
-      <Form className="form-box" onSubmit={checkSamePass}>
+      <Form className="form-box" onSubmit={handleSubmit}>
         <div className="form-head">
           <img className="form-app-logo" src={appLogo} alt="" onClick={() => navigate("/")} />
           <h1 className="form-title">Register</h1>
@@ -99,6 +94,7 @@ function RegisterForm({ userState, setUserState }) {
         <Form.Group className="mb-3" controlId="username">
           <Form.Label>Username</Form.Label>
           <Form.Control
+            required
             type="text"
             placeholder="Enter username"
             name="username"
@@ -109,6 +105,7 @@ function RegisterForm({ userState, setUserState }) {
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email Address</Form.Label>
           <Form.Control
+            required
             type="email"
             placeholder="Enter email"
             name="email"
@@ -119,6 +116,7 @@ function RegisterForm({ userState, setUserState }) {
         <Form.Group className="mb-3" controlId="password1">
           <Form.Label>Password</Form.Label>
           <Form.Control
+            required
             type="password"
             placeholder="Enter password"
             name="password1"
@@ -126,8 +124,9 @@ function RegisterForm({ userState, setUserState }) {
             onChange={handleInput}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="password2">
+        <Form.Group className="mb-1" controlId="password2">
           <Form.Control
+            required
             type="password"
             placeholder="Enter password again"
             name="password2"
@@ -135,6 +134,20 @@ function RegisterForm({ userState, setUserState }) {
             onChange={handleInput}
           />
         </Form.Group>
+        {error &&
+          error?.password1?.map((error) => (
+            <p className="warning-message">
+              <IoWarningOutline className="error-icon" />
+              {error}
+            </p>
+          ))}
+        {error &&
+          error?.non_field_errors?.map((error) => (
+            <p className="error-message">
+              <BiErrorAlt className="error-icon" />
+              {error}
+            </p>
+          ))}
         <p>Are you registering as a Trainer or Client?</p>
         <Form.Group className="mb-3" controlId="trainer-check">
           <Form.Check

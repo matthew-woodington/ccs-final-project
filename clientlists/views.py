@@ -1,9 +1,10 @@
-from rest_framework import generics
+from rest_framework import generics, status
 from django.db.models import Q
 from .models import Request, ClientList, Session
 from .serializers import SessionSerializer, RequestSerializer, ClientListSerializer, ClientListDetailReadSerializer, ClientSessionSerializer
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsAuthorOrTrainer, IsTrainer, IsTrainerOrReadOnly
+from rest_framework.response import Response
 
 # Create your views here.
 
@@ -85,6 +86,11 @@ class SessionListFilteredAPIView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+    def delete(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        queryset.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class SessionDetailAPIView(generics.RetrieveUpdateDestroyAPIView):

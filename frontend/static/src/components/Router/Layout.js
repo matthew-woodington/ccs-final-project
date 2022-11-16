@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import Footer from "../Header/Footer";
 import Header from "../Header/Header";
 
 function Layout({ userState, logoutUser, requests }) {
@@ -6,6 +7,7 @@ function Layout({ userState, logoutUser, requests }) {
     <>
       <Header userState={userState} logoutUser={logoutUser} requests={requests} />
       <Outlet />
+      <Footer />
     </>
   );
 }

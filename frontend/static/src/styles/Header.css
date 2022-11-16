@@ -75,6 +75,25 @@
     align-items: center;
 }
 
+.footer {
+    height: 100px;
+    border-top: 1px solid #182B45;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.end-tag {
+    color: #fdb035;
+}
+
+.copyright {
+    font-size: 12px;
+    color: #fffaff;
+}
+
 @media (max-width: 992px) {
     .nav-bar-link {
         display: none;
@@ -83,6 +102,10 @@
     .mobile-nav {
         display: block;
         
+    }
+
+    .footer {
+        display: none;
     }
 
 }
