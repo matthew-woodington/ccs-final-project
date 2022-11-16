@@ -15,6 +15,7 @@ import TrainerPortal from "../TrainerPortal/TrainerPortal";
 import ClientSessions from "../ClientPortal/ClientSessions";
 import CreateHeadline from "../Profiles/CreateHeadline";
 import ClientProfile from "../ClientPortal/ClientProfile";
+import ErrorPage from "../404/404page";
 
 const INITIAL_STATE = {
   auth: false,
@@ -137,6 +138,7 @@ function App() {
             path="register"
             element={<RegisterForm userState={userState} setUserState={setUserState} />}
           />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     </div>
