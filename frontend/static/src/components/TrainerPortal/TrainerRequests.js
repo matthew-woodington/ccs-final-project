@@ -49,16 +49,16 @@ function TrainerRequests({ userState, requests, setRequests, setClients, clients
 
   return (
     <>
-      <div>
-        {requests ? (
+      <section className="portal-display-box">
+        {requests && requests.length > 0 ? (
           requests.map((request) => (
-            <Card key={request.id}>
+            <Card key={request.id} className="request-card">
               <Card.Header className="request-head">
                 <img className="client-profile-img" src={request.author_avatar} alt="" />
                 {request.first_name} {request.last_name}
               </Card.Header>
               <Card.Body>
-                <Card.Text>{request.text}</Card.Text>
+                <Card.Text className="request-body">{request.text}</Card.Text>
               </Card.Body>
               <Card.Footer className="request-footer">
                 <div>{moment(request.created_on).calendar()}</div>
@@ -82,9 +82,9 @@ function TrainerRequests({ userState, requests, setRequests, setClients, clients
             </Card>
           ))
         ) : (
-          <p>Any messages you get will appear here.</p>
+          <p className="no-data-label">Any messages you get will appear here.</p>
         )}
-      </div>
+      </section>
     </>
   );
 }

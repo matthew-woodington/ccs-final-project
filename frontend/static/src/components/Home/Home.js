@@ -110,11 +110,11 @@ function Home({ userState }) {
       </aside>
       <article className="profiles-mainbar">
         {!currentLocation ? (
-          <p className="search-label">
+          <p className="no-data-label">
             REPS would like to use your current location to find trainers near you!
           </p>
         ) : currentLocation === defaultLocationPhrase ? (
-          <p className="search-label">
+          <p className="no-data-label">
             Enable location services or select a location from the search menu to find a trainer!
           </p>
         ) : filteredProfiles === null ? (
@@ -122,7 +122,7 @@ function Home({ userState }) {
             <span className="visually-hidden">Loading...</span>
           </Spinner>
         ) : filteredProfiles.length === 0 ? (
-          <p className="search-label">Oops! No profiles match that search, try again.</p>
+          <p className="no-data-label">Oops! No profiles match that search, try again.</p>
         ) : (
           <div className="list profile-card-list">
             {filteredProfiles.map((profile) => (

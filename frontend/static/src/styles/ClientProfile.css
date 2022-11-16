@@ -1,0 +1,69 @@
+.client-profile {
+    background-color: #081d3a;
+    border: 1px solid #182b45;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    margin-left: 5%;
+    margin-top: 50px;
+}
+
+.client-my-profile-img {
+    width: 50%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    border: 1px solid #fffaff;
+    overflow: hidden;
+    object-fit: cover;
+    object-position: top;
+    transform: translate(-50px, 0px);
+}
+
+.client-bio {
+    color: #fdb035;
+    width: 60%;
+    margin-left: -30px;
+}
+
+.client-name {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 992px) {
+    .client-profile {
+        width: 60%;
+    }
+}
+
+@media (max-width: 768px) {
+    .client-profile {
+        width: 60%;
+        flex-direction: column;
+        margin-left: 0;
+    }
+
+    .client-bio {
+        width: 80%;
+        margin-left: 0;
+        margin-top: -30px;
+    }
+
+    .client-my-profile-img {
+        width: 70%;
+        transform: translate(0px, -50px);
+    }
+}
+
+@media (max-width: 576px) {
+    .client-profile {
+        width: 90%;
+    }
+
+    .client-my-profile-img {
+        width: 80%;
+        transform: translate(0px, -50px);
+    }
+}

@@ -7,6 +7,7 @@ import Modal from "react-bootstrap/Modal";
 import Cookies from "js-cookie";
 import { handleError } from "../../re-usable-func";
 import moment from "moment";
+import CloseButton from "react-bootstrap/CloseButton";
 
 function SessionsList({ sessions, setSessions }) {
   const [modalData, setModalData] = useState({
@@ -19,7 +20,17 @@ function SessionsList({ sessions, setSessions }) {
   });
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = (e) => {
+    setShow(false);
+    setModalData({
+      client_details: {},
+      trainer_profile: "",
+      clientprofile: "",
+      date: "",
+      time: "",
+      details: "",
+    });
+  };
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -76,11 +87,25 @@ function SessionsList({ sessions, setSessions }) {
     return timeString;
   };
 
+  const deleteSession = async () => {
+    const response = await fetch(`/api/v1/sessions/${modalData.id}/`, {
+      method: "DELETE",
+      headers: {
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+    });
+    const index = sessions.findIndex((session) => session.id === modalData.id);
+    const updatedSessions = [...sessions];
+    updatedSessions.splice(index, 1);
+    setSessions(updatedSessions);
+    setShow(false);
+  };
+
   return (
     <>
       {sessions.length > 0 ? (
         sessions.map((session) => (
-          <Card key={session.id}>
+          <Card key={session.id} className="session-card">
             <Card.Header className="session-head">
               <div className="client-info">
                 <img className="client-profile-img" src={session.client_details.avatar} />
@@ -91,13 +116,15 @@ function SessionsList({ sessions, setSessions }) {
 
                 {modalData && (
                   <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
+                    <Modal.Header className="edit-session-head">
                       <Modal.Title>
                         Edit {modalData.client_details.first_name}'s Session
                       </Modal.Title>
+                      <CloseButton variant="white" onClick={(e) => handleClose(e)} />
                     </Modal.Header>
                     <Modal.Body>
                       <Form.Control
+                        className="session-input"
                         required
                         type="date"
                         name="date"
@@ -105,6 +132,7 @@ function SessionsList({ sessions, setSessions }) {
                         onChange={handleInput}
                       />
                       <Form.Control
+                        className="session-input"
                         required
                         type="time"
                         name="time"
@@ -120,8 +148,11 @@ function SessionsList({ sessions, setSessions }) {
                         onChange={handleInput}
                       />
                     </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="primary" onClick={editSession}>
+                    <Modal.Footer className="edit-session-foot">
+                      <Button className="form-button" onClick={() => deleteSession()}>
+                        Delete
+                      </Button>
+                      <Button className="form-button" onClick={editSession}>
                         Save
                       </Button>
                     </Modal.Footer>
@@ -132,15 +163,15 @@ function SessionsList({ sessions, setSessions }) {
               </div>
             </Card.Header>
             <Card.Body>
-              <Card.Title>
+              <Card.Title className="session-time">
                 {moment(session.date).format("l")} | {convertTime(session.date, session.time)}
               </Card.Title>
-              <Card.Text>{session.details}</Card.Text>
+              <Card.Text className="session-details">{session.details}</Card.Text>
             </Card.Body>
           </Card>
         ))
       ) : (
-        <p className="search-label">No sessions logged for this client.</p>
+        <p className="no-data-label">No sessions currently logged.</p>
       )}
     </>
   );

@@ -75,6 +75,11 @@
     margin: 0;
 }
 
+.search-accordion {
+    background-color: #081d3a;
+    border: 1px solid #082b45;
+}
+
 .search-label {
     color: #fffaff;
 }

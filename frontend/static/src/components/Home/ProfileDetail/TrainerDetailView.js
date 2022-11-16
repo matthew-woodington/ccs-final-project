@@ -59,6 +59,7 @@ function TrainerDetailView({ userState }) {
             userState={userState}
             headlinePost={headlinePost}
             reviews={reviews}
+            setReviews={setReviews}
             id={id}
           />
         )}

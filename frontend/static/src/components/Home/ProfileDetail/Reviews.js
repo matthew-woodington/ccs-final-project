@@ -68,8 +68,13 @@ function Reviews({ reviews, setReviews, id, userState }) {
     } else {
       const data = await response.json();
       setReviews([...reviews, data]);
-      handleClose();
     }
+    setNewReview({
+      trainerprofile: id,
+      text: "",
+      rating: 0,
+    });
+    setShow(false);
   };
 
   return (
@@ -110,20 +115,23 @@ function Reviews({ reviews, setReviews, id, userState }) {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      {reviews.map((review) => (
-        <Card key={review.id} className="review-card">
-          <Card.Body>
-            <div className="review-title">
-              <img className="review-img" src={review.author_avatar} alt="" />
-              <Card.Title className="review-user">{review.username}</Card.Title>
-            </div>
-            <StyledRating className="rating" name="rating" value={review.rating} readOnly />
-            <Card.Text className="review-text">{review.text}</Card.Text>
-            <span className="review-date">{moment(review.created_on).fromNow()}</span>
-          </Card.Body>
-        </Card>
-      ))}
+      {reviews && reviews.length > 0 ? (
+        reviews.map((review) => (
+          <Card key={review.id} className="review-card">
+            <Card.Body>
+              <div className="review-title">
+                <img className="review-img" src={review.author_avatar} alt="" />
+                <Card.Title className="review-user">{review.username}</Card.Title>
+              </div>
+              <StyledRating className="rating" name="rating" value={review.rating} readOnly />
+              <Card.Text className="review-text">{review.text}</Card.Text>
+              <span className="review-date">{moment(review.created_on).fromNow()}</span>
+            </Card.Body>
+          </Card>
+        ))
+      ) : (
+        <p className="no-review-data-label">No reviews submitted for this trainer.</p>
+      )}
     </section>
   );
 }

@@ -56,13 +56,13 @@ function TrainerProfileCard({ profile }) {
         </Modal.Header>
         <Modal.Body className="card-review-modal-body">
           {!cardReviews ? (
-            <p>No reviews submitted for this trainer.</p>
+            <p className="no-data-label">No reviews submitted for this trainer.</p>
           ) : cardReviews === null ? (
             <Spinner animation="border" variant="warning" role="status">
               <span className="visually-hidden">Loading...</span>
             </Spinner>
           ) : cardReviews.length === 0 ? (
-            <p>No reviews submitted for this trainer.</p>
+            <p className="no-data-label">No reviews submitted for this trainer.</p>
           ) : (
             cardReviews.map((review) => (
               <Card key={review.id} className="review-card">

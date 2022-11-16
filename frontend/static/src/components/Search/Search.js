@@ -73,7 +73,7 @@ function Search({
       </section>
 
       <Accordion className="mobile-search">
-        <Accordion.Item eventKey="0">
+        <Accordion.Item eventKey="0" className="search-accordion">
           <Accordion.Header>Search Filters</Accordion.Header>
           <Accordion.Body>
             <section className="search-section">

@@ -145,6 +145,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .review-img {
@@ -175,6 +176,15 @@
 .review-date {
     color: #3071df;
 }
+
+.no-review-data-label {
+    padding: 30px;
+    background-color: #081D3A;
+    border: 1px solid #182B45;
+    border-radius: 0.375rem;
+    text-align: center;
+}
+
 
 .aside-foot {
     display: flex;

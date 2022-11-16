@@ -56,6 +56,9 @@ function Header({ userState, logoutUser, requests }) {
                   <Nav.Link className="nav-bar-link" href="/client/my-sessions">
                     My Sessions
                   </Nav.Link>
+                  <Nav.Link className="nav-bar-link" href="/client/my-profile">
+                    My Profile
+                  </Nav.Link>
                 </>
               )}
               {userState.auth && (
@@ -110,6 +113,10 @@ function Header({ userState, logoutUser, requests }) {
               <Nav.Link className="nav-mobile-link" href="/client/my-sessions">
                 <IoCalendarOutline />
                 My Sessions
+              </Nav.Link>
+              <Nav.Link className="nav-mobile-link" href="/client/my-profile">
+                <FaUserEdit />
+                My Profile
               </Nav.Link>
             </>
           )}

@@ -36,11 +36,12 @@ function ClientSessions({ userState }) {
   };
 
   return (
-    <>
-      <section>
-        {sessions ? (
+    <section className="portal-display-area">
+      <div className="portal-display-box">
+        <h1 className="client-session-title">My Sessions</h1>
+        {sessions && sessions.length > 0 ? (
           sessions.map((session) => (
-            <Card key={session.id}>
+            <Card key={session.id} className="session-card">
               <Card.Header className="session-head">
                 <div className="client-info">
                   <img className="client-profile-img" src={session.trainerprofile.avatar} />
@@ -51,17 +52,17 @@ function ClientSessions({ userState }) {
                 <Card.Title>
                   {moment(session.date).format("L")} | {convertTime(session.date, session.time)}
                 </Card.Title>
-                <Card.Text>{session.details}</Card.Text>
+                <Card.Text className="session-details">{session.details}</Card.Text>
               </Card.Body>
             </Card>
           ))
         ) : (
-          <p className="search-label">
-            When a trainer creates a session for you it will show here.
+          <p className="no-data-label">
+            When a trainer creates a session for you it will be listed here.
           </p>
         )}
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 export default ClientSessions;

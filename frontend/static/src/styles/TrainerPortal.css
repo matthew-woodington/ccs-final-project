@@ -44,8 +44,9 @@
 .portal-display-area {
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .portal-display-box {
@@ -53,14 +54,48 @@
     margin-top: 20px;
 }
 
+.note {
+    background-color: #082b45;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 .note-head {
     display: flex;
     justify-content: space-between;
+    color: #3071df;
 }
 
-.request-head {
-    display: flex;
-    align-items: center;
+.client-list {
+    background-color: #081d3a;
+    color: #fffaff;
+    border: 1px solid #082b45;
+}
+
+.accordion-button {
+    background-color: #081d3a;
+    color: #fffaff;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #3071df;
+    background-color: #081d3a;
+    border-bottom: 1px solid #082b45;
+    box-shadow: none;
+}
+
+.note-modal-head {
+    color: #fdb035;
+    border-bottom: 1px solid #082b45;
+}
+
+.note-modal-foot {
+    border-top: 1px solid #082b45;
+}
+
+.accordion-button::after {
+    /* background: #fffaff; */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 }
 
 .client-profile-img {
@@ -70,17 +105,19 @@
     border-radius: 50%;
     object-fit: cover;
     object-position: top;
-    margin-right: 5px;
+    margin-right: 10px;
+    border: 1px solid #fffaff;
 }
 
-.request-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.client-session-title {
+    color: #fdb035;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.request-button {
-    margin: 0px 5px;
+.new-session-section {
+    background-color: #0c1a2d;
+    margin-bottom: 20px;
 }
 
 .new-session {
@@ -88,13 +125,168 @@
     align-items: center;
 }
 
+.details {
+    width: 80%;
+}
+
+.new-button {
+    width: 20%;
+    margin-left: 5px;
+}
+
+.session-button {
+    width: 100%;
+    margin: 0;
+}
+
 .session-head {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: #fffaff;
+    border-bottom: 1px solid #082b45;
+}
+
+.session-input {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.form-control:disabled {
+    background-color: #b3b3b3;
+    border-color: #b3b3b3;
+}
+
+.session-input-bottom {
+    width: 100%;
 }
 
 .session-action {
     margin-left: 10px;
     cursor: pointer;
+    color: #3071df;
+}
+
+.session-card {
+    background-color: #081d3a;
+    border: 1px solid #082b45;
+    margin-bottom: 10px;
+}
+
+.session-time {
+    color: #fdb035;
+}
+
+.session-details {
+    color: #3071df;
+}
+
+.no-data-label {
+    color: #fffaff;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.edit-session-head {
+    color: #fdb035;
+    border-bottom: 1px solid #082b45;
+}
+
+.edit-session-foot {
+    border-top: 1px solid #082b45;
+}
+
+.request-card {
+    background-color: #081d3a;
+    border: 1px solid #082b45;
+}
+
+.request-head {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #082b45;
+    color: #fffaff;
+}
+
+.request-body {
+    color: #fffaff;
+}
+
+.request-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #082b45;
+    color: #3071df;
+}
+
+.request-button {
+    background-color: #182B45;
+    border-color: #182B45;
+    color: #fdb035;
+    transition: all 500ms;
+    margin: 0px 5px;
+}
+
+.request-button:hover {
+    background-color: #df8a00;
+    border-color: #df8a00;
+    color: #0C1A2D;
+}
+
+.request-button:active {
+    background-color: #df8a00 !important;
+    border-color: #df8a00 !important;
+}
+
+.request-button:disabled {
+    background-color: #df8a00 !important;
+    border-color: #df8a00 !important;
+}
+
+@media (max-width: 992px) {
+    .nav-tab-list {
+        width: 85%;
+    }
+    
+    .portal-display-box {
+        width: 85%;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-tab-list {
+        width: 90%;
+    }
+    
+    .portal-display-box {
+        width: 90%;
+    }
+
+    .details {
+        width: 70%;
+    }
+    
+    .new-button {
+        width: 30%;
+    }
+}
+
+@media (max-width: 576px) {
+    .nav-tab-list {
+        width: 100%;
+    }
+    
+    .portal-display-box {
+        width: 100%;
+    }
+
+    .details {
+        width: 60%;
+    }
+    
+    .new-button {
+        width: 40%;
+    }
+
 }

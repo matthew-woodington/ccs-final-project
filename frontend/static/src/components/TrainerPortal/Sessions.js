@@ -101,104 +101,110 @@ function Sessions({ userState, clients }) {
   };
 
   return (
-    <>
-      <section>
-        <Form.Select onChange={(e) => handleSelectChange(e.target.value)}>
-          <option value={0}>All</option>
-          {clients &&
-            clients.map((client) => (
-              <option key={client.id} value={client.clientprofile}>
-                {client.client_details.first_name} {client.client_details.last_name}
-              </option>
-            ))}
-        </Form.Select>
-      </section>
-      <section>
-        {filter === 0 ? (
-          <>
-            <Form.Control
-              disabled
-              required
-              type="date"
-              name="date"
-              value={newSession.date}
-              onChange={handleInput}
-            />
-            <Form.Control
-              disabled
-              required
-              type="time"
-              name="time"
-              value={newSession.time}
-              onChange={handleInput}
-            />
-            <div className="new-session">
-              <div>
-                <textarea
-                  disabled
-                  placeholder="Details..."
-                  rows="1"
-                  className="form-control"
-                  name="details"
-                  value={newSession.details}
-                  onChange={handleInput}
-                />
-              </div>
-              <div>
-                <Button disabled className="form-button" onClick={handleSubmit}>
-                  New Session
-                </Button>
-              </div>
-            </div>
-          </>
-        ) : (
-          <>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group>
-                <Form.Control
-                  required
-                  type="date"
-                  name="date"
-                  value={newSession.date}
-                  onChange={handleInput}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  required
-                  type="time"
-                  name="time"
-                  value={newSession.time}
-                  onChange={handleInput}
-                />
-              </Form.Group>
-              <div className="new-session">
-                <div>
-                  <Form.Group>
-                    <textarea
-                      placeholder="Details..."
-                      rows="1"
-                      className="form-control"
-                      name="details"
-                      value={newSession.details}
-                      onChange={handleInput}
-                    />
-                  </Form.Group>
+    <section className="portal-display-box">
+      <div className="new-session-section">
+        <div className="session-input">
+          <Form.Select onChange={(e) => handleSelectChange(e.target.value)}>
+            <option value={0}>All</option>
+            {clients &&
+              clients.map((client) => (
+                <option key={client.id} value={client.clientprofile}>
+                  {client.client_details.first_name} {client.client_details.last_name}
+                </option>
+              ))}
+          </Form.Select>
+        </div>
+        <div>
+          {filter === 0 ? (
+            <>
+              <Form.Control
+                className="session-input"
+                disabled
+                required
+                type="date"
+                name="date"
+                value={newSession.date}
+                onChange={handleInput}
+              />
+              <Form.Control
+                className="session-input"
+                disabled
+                required
+                type="time"
+                name="time"
+                value={newSession.time}
+                onChange={handleInput}
+              />
+              <div className="new-session session-input">
+                <div className="details">
+                  <textarea
+                    disabled
+                    placeholder="Details..."
+                    rows="1"
+                    className="form-control"
+                    name="details"
+                    value={newSession.details}
+                    onChange={handleInput}
+                  />
                 </div>
-                <div>
-                  <Button className="form-button" type="submit">
+                <div className="new-button">
+                  <Button disabled className="form-button session-button" onClick={handleSubmit}>
                     New Session
                   </Button>
                 </div>
               </div>
-            </Form>
-          </>
-        )}
-      </section>
+            </>
+          ) : (
+            <>
+              <Form onSubmit={handleSubmit}>
+                <Form.Group>
+                  <Form.Control
+                    className="session-input"
+                    required
+                    type="date"
+                    name="date"
+                    value={newSession.date}
+                    onChange={handleInput}
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Control
+                    className="session-input"
+                    required
+                    type="time"
+                    name="time"
+                    value={newSession.time}
+                    onChange={handleInput}
+                  />
+                </Form.Group>
+                <div className="new-session session-input">
+                  <div className="details">
+                    <Form.Group>
+                      <textarea
+                        placeholder="Details..."
+                        rows="1"
+                        className="form-control"
+                        name="details"
+                        value={newSession.details}
+                        onChange={handleInput}
+                      />
+                    </Form.Group>
+                  </div>
+                  <div className="new-button">
+                    <Button className="form-button session-button" type="submit">
+                      New Session
+                    </Button>
+                  </div>
+                </div>
+              </Form>
+            </>
+          )}
+        </div>
+      </div>
       <section>
         {sessions && <SessionsList sessions={sessions} setSessions={setSessions} filter={filter} />}
       </section>
-    </>
+    </section>
   );
 }
 

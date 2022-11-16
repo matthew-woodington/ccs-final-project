@@ -14,6 +14,7 @@ import TrainerMyProfile from "../Profiles/TrainerMyProfile";
 import TrainerPortal from "../TrainerPortal/TrainerPortal";
 import ClientSessions from "../ClientPortal/ClientSessions";
 import CreateHeadline from "../Profiles/CreateHeadline";
+import ClientProfile from "../ClientPortal/ClientProfile";
 
 const INITIAL_STATE = {
   auth: false,
@@ -107,6 +108,10 @@ function App() {
             <Route
               path="create-client-profile"
               element={<ClientProfileCreate userState={userState} setUserState={setUserState} />}
+            />
+            <Route
+              path="client/my-profile"
+              element={<ClientProfile userState={userState} setUserState={setUserState} />}
             />
             <Route
               path="trainer/my-profile"
