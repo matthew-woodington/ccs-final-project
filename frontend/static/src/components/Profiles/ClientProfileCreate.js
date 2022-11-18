@@ -66,6 +66,7 @@ function ClientProfileCreate({ userState, setUserState }) {
       setState(INITIAL_CLIENT_PROFILE_STATE);
       setUserState({
         ...userState,
+        client_profile: data.id,
         client_avatar: data.avatar,
       });
       navigate("/");

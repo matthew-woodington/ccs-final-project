@@ -10,6 +10,13 @@ import { IoWarning } from "react-icons/io5";
 
 function TrainerRequests({ userState, requests, setRequests, setClients, clients }) {
   const [show, setShow] = useState(false);
+  const [modalData, setModalData] = useState();
+
+  const setActive = (id) => {
+    const index = requests.findIndex((request) => request.id === id);
+    setModalData(requests[index]);
+    setShow(true);
+  };
 
   const deleteRequest = async (id) => {
     const response = await fetch(`/api/v1/requests/${id}/`, {
@@ -69,36 +76,38 @@ function TrainerRequests({ userState, requests, setRequests, setClients, clients
               <Card.Footer className="request-footer">
                 <div>{moment(request.created_on).calendar()}</div>
                 <div className="request-action">
-                  <Button className="request-button" onClick={() => setShow(true)}>
+                  <Button className="request-button" onClick={() => setActive(request.id)}>
                     Remove
                   </Button>
 
-                  <Modal size="sm" show={show} onHide={() => setShow(false)}>
-                    <Modal.Header className="confirm-head">
-                      <Modal.Title>
-                        <IoWarning className="confirm-icon" />
-                      </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body className="confirm-body">
-                      <p className="confirm-text">Delete message?</p>
-                      <div className="form-foot">
-                        <Button
-                          variant="dark"
-                          className="form-button"
-                          onClick={() => setShow(false)}
-                        >
-                          Cancel
-                        </Button>
-                        <Button
-                          variant="dark"
-                          className="form-button"
-                          onClick={() => deleteRequest(request.id)}
-                        >
-                          Confirm
-                        </Button>
-                      </div>
-                    </Modal.Body>
-                  </Modal>
+                  {modalData && (
+                    <Modal size="sm" show={show} onHide={() => setShow(false)}>
+                      <Modal.Header className="confirm-head">
+                        <Modal.Title>
+                          <IoWarning className="confirm-icon" />
+                        </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body className="confirm-body">
+                        <p className="confirm-text">Delete message?</p>
+                        <div className="form-foot">
+                          <Button
+                            variant="dark"
+                            className="form-button"
+                            onClick={() => setShow(false)}
+                          >
+                            Cancel
+                          </Button>
+                          <Button
+                            variant="dark"
+                            className="form-button"
+                            onClick={() => deleteRequest(modalData.id)}
+                          >
+                            Confirm
+                          </Button>
+                        </div>
+                      </Modal.Body>
+                    </Modal>
+                  )}
 
                   <Button
                     variant="dark"
