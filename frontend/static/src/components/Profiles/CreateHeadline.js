@@ -13,13 +13,14 @@ function CreateHeadline({ userState }) {
     post_image1: null,
     post_image2: null,
     post_image3: null,
-    post_title1: null,
-    post_title2: null,
-    post_title3: null,
-    post_caption1: null,
-    post_caption2: null,
-    post_caption3: null,
+    post_title1: "",
+    post_title2: "",
+    post_title3: "",
+    post_caption1: "",
+    post_caption2: "",
+    post_caption3: "",
   });
+
   const [postPreviewOne, setPostPreviewOne] = useState(noImage);
   const [postPreviewTwo, setPostPreviewTwo] = useState(noImage);
   const [postPreviewThree, setPostPreviewThree] = useState(noImage);

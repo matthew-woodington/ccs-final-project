@@ -126,6 +126,13 @@
     font-size: 25px;
 }
 
+.verification {
+    width: 100%;
+    text-align: center;
+    color: #3071df;
+}
+
+
 .headline-frame {
     height: 500px;
     border-radius: 10px;

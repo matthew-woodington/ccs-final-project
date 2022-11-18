@@ -13,7 +13,7 @@ class User(AbstractUser):
 class TrainerProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE, blank=True)
-    is_verified = models.BooleanField(default=True)
+    is_verified = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to='profiles/', null=True)
     first_name = models.CharField(max_length=225, null=True)
     last_name = models.CharField(max_length=225, null=True)
@@ -52,14 +52,14 @@ class HeadlinePost(models.Model):
     trainerprofile = models.OneToOneField(
         TrainerProfile, on_delete=models.CASCADE, blank=True)
     post_image1 = models.ImageField(upload_to='posts/', null=True, blank=True)
-    post_title1 = models.CharField(max_length=225, null=True, blank=True)
-    post_caption1 = models.CharField(max_length=225, null=True, blank=True)
+    post_title1 = models.CharField(max_length=225, blank=True, default='')
+    post_caption1 = models.CharField(max_length=225, blank=True, default='')
     post_image2 = models.ImageField(upload_to='posts/', null=True, blank=True)
-    post_title2 = models.CharField(max_length=225, null=True, blank=True)
-    post_caption2 = models.CharField(max_length=225, null=True, blank=True)
+    post_title2 = models.CharField(max_length=225, blank=True, default='')
+    post_caption2 = models.CharField(max_length=225, blank=True, default='')
     post_image3 = models.ImageField(upload_to='posts/', null=True, blank=True)
-    post_title3 = models.CharField(max_length=225, null=True, blank=True)
-    post_caption3 = models.CharField(max_length=225, null=True, blank=True)
+    post_title3 = models.CharField(max_length=225, blank=True, default='')
+    post_caption3 = models.CharField(max_length=225, blank=True, default='')
 
     def __str__(self) -> str:
         return self.user.username

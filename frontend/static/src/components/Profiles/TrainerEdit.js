@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import HeadlinePost from "../Home/ProfileDetail/HeadlinePost";
 import EditProfile from "./EditProfile";
 import EditHeadline from "./EditHeadline";
+import { IoAlertCircle } from "react-icons/io5";
 
 function TrainerEdit({
   userState,
@@ -87,6 +88,14 @@ function TrainerEdit({
         </section>
       </aside>
       <article className="profile-main">
+        {!myProfile.is_verified && (
+          <div className="verification">
+            <p className="verification-alert">
+              <IoAlertCircle /> Your profile has been submitted for verification, once verified it
+              will be available to the public.
+            </p>
+          </div>
+        )}
         {headlinePost && checkAllHeadline() && <HeadlinePost headlinePost={headlinePost} />}
         <section className="bio-info">
           <h2 className="section-title">About {myProfile.first_name}</h2>

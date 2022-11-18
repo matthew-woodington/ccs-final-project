@@ -102,6 +102,12 @@ function RegisterForm({ userState, setUserState }) {
             onChange={handleInput}
           />
         </Form.Group>
+        {error &&
+          error?.username?.map((error) => (
+            <p className="error-message">
+              <BiErrorAlt className="error-icon" /> {error}
+            </p>
+          ))}
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email Address</Form.Label>
           <Form.Control
@@ -113,6 +119,12 @@ function RegisterForm({ userState, setUserState }) {
             onChange={handleInput}
           />
         </Form.Group>
+        {error &&
+          error?.email?.map((error) => (
+            <p className="error-message">
+              <BiErrorAlt className="error-icon" /> {error}
+            </p>
+          ))}
         <Form.Group className="mb-3" controlId="password1">
           <Form.Label>Password</Form.Label>
           <Form.Control

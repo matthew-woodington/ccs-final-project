@@ -92,7 +92,7 @@ function Sessions({ userState, clients }) {
       setSessions([...sessions, data]);
       setNewSession({
         trainerprofile: userState.trainer_profile,
-        clientprofile: null,
+        clientprofile: filter,
         date: "",
         time: "",
         details: "",
