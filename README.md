@@ -14,7 +14,9 @@ REPS is an app designed to aid personal trainers in their search for new cliente
  # Using the App
  
  When you first open the app you are taken to the home search screen where you can allow the browser to automatically filter by your current location or be prompted to enter a location in the search filters. From this screen, you can search and browse available verified trainers in your area and view their profiles and any review other users have left. 
+ 
  If you choose, you can log in or register for a new account where you will be prompted to choose either a trainer or client profile type. After registering you can customize your profile information. As a trainer, this information will be more in-depth allowing you to personalize what a user can see about you, as well as give you the option to create an initial headline post to go at the top of your profile.
+ 
  Once you are logged in as a trainer, you will be able to navigate your trainer portal, and as a client, you will be able to view any sessions that you may have scheduled with a trainer.
  
  # Tech Used
