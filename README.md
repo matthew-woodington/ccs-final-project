@@ -2,7 +2,9 @@
 
 REPS is an app designed to aid personal trainers in their search for new clientele. As a new trainer or a trainer without numerous personal connections in the surrounding community, it can be difficult to market yourself to potential clients in your area. REPS allows you to create and customize an account as a trainer and get your name out to clients around you as well as manage those clients and their schedules after you connect with them.
 
-#Features
+Here is a [**video walkthrough**](https://www.loom.com/share/13395b0c5ab14cf6a1347fd1c836559a) of the REPS application showing the user experience for both trainers and clients.
+
+## Features
 
  - View and search for trainers in your area as a potential client without logging in
  - Filter those search results through a keyword search as well as location and a distance radius
@@ -11,7 +13,7 @@ REPS is an app designed to aid personal trainers in their search for new cliente
  - As a logged-in trainer, customize your profile and add a headline post to appear at the top of your profile as an eye-catcher to draw in clients
  - As a logged-in trainer, manage your incoming request, client list, and session schedule through your trainer portal
  
- # Using the App
+ ## Using the App
  
  When you first open the app you are taken to the home search screen where you can allow the browser to automatically filter by your current location or be prompted to enter a location in the search filters. From this screen, you can search and browse available verified trainers in your area and view their profiles and any review other users have left. 
  
@@ -19,6 +21,12 @@ REPS is an app designed to aid personal trainers in their search for new cliente
  
  Once you are logged in as a trainer, you will be able to navigate your trainer portal, and as a client, you will be able to view any sessions that you may have scheduled with a trainer.
  
- # Tech Used
+ ## Tech Used
  
  Django, Django REST framework, React, React-Bootstrap, Google Maps Distance Matrix API, Google Maps Places API, Fuse.js, React Router, JS-Cookie, Google Places Autocomplete, Moment.js
+
+## Demo Information
+
+Login to the app using the following usernames/passwords to view the app fully:
+- Trainer: matt / safepass1
+- Client: amyw / safepass1
